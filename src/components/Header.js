@@ -15,7 +15,7 @@ const Header = () => {
       .then(() => {
         // Sign-out successful
         toast.success("Logged Out Succesfully", { theme: "dark" });
-        navigate("/login");
+        navigate("/"); // /login
       })
       .catch((error) => {
         // An error happened
