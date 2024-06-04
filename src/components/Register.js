@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import checkValidateData from "../utils/validate";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../utils/firebase";
+import { auth, storage } from "../utils/firebase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/userSlice";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,7 +24,32 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  // const imagesListRef = ref(storage, "images/");
+
+  const handlePhotoUpload = () => {
+    if (image == null) return;
+    const imageRef = ref(storage, `images/${image.name + Date.now()}`);
+    uploadBytes(imageRef, image)
+      .then((snapshot) => {
+        getDownloadURL(imageRef) // Get download URL of the uploaded image
+          .then((url) => {
+            setImageUrl(url); // Set the URL in state variable
+          })
+          .catch((error) => {
+            toast.error(`Error getting download URL: ${error}`);
+          });
+      })
+      .catch((error) => {
+        toast.error(`Error getting download URL: ${error}`);
+      });
+  };
+
+  useEffect(() => {
+    handlePhotoUpload();
+  }, [image]);
 
   const handleRegisterButton = () => {
     try {
@@ -27,7 +59,7 @@ const Register = () => {
       toast.warning(message, { theme: "dark" });
 
       if (message != null) return;
-      
+
       let user;
       createUserWithEmailAndPassword(auth, email, password) // all this api code is from firbase authentication docs  (https://firebase.google.com/docs/auth/web/password-auth)
         .then((userCredential) => {
@@ -35,17 +67,20 @@ const Register = () => {
 
           user = userCredential.user;
 
+          console.log(imageUrl);
           updateProfile(user, {
             displayName: name,
-            photoURL: "https://avatars.githubusercontent.com/u/101697066?v=4",
+            photoURL: imageUrl,
           })
             .then(() => {
               // Profile updated!
               // we will again dispatch the userSlice for name and photo
               dispatch(
                 addUser({
-                  displayName: auth.displayName, // we will get the data from auth because auth is the updated one
-                  photoURL: auth.photoURL,
+                  uid: user.uid,
+                  email: user.email,
+                  displayName: name,
+                  photoURL: imageUrl,
                 })
               );
               navigate("/browse");
@@ -54,7 +89,7 @@ const Register = () => {
               setErrorMessage(error.message);
               toast.error(errorMessage);
             });
-            
+
           console.log("user", user);
           // all the dispatches are there in app.js
           toast.success("Account created Successfully", { theme: "dark" });

@@ -37,7 +37,7 @@ const Header = () => {
             Howdy {user.displayName}!
             </div>
             <div>
-              <img className="mt-4 w-12 h-12" src={user.photoURL} alt="display-picture" />
+              <img className="mt-4 w-12 h-12 rounded-full" src={user.photoURL} alt="display-picture" />
             </div>
             <div className="m-4 pl-6 p-3">
               <button onClick={handleLogOut} className="font-bold text-red-600">
