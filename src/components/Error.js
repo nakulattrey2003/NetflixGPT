@@ -67,7 +67,7 @@ const ErrorPage = () => {
             </div>
           </div>
           <a
-            href="/" // /login
+            href="/login"
             rel="noopener noreferrer"
             className="box__button relative block bg-[#FF5E65] border border-transparent rounded-full h-[50px] text-center text-white leading-[50px] text-[18px] px-[70px] whitespace-nowrap mt-[25px] transition-[background_0.5s_ease] overflow-hidden hover:bg-transparent hover:border-white"
           >
