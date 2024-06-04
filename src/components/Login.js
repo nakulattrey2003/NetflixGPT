@@ -38,7 +38,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email Address"
           required
-          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full"
+          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
         />
         <input
           type="password"
@@ -46,7 +46,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
-          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full"
+          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
         />
         <p className="text-red-500 mt-3 ml-2">{errorMessage}</p>
         <button
