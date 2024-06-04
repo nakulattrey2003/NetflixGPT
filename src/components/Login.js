@@ -4,8 +4,12 @@ import checkValidateData from "../utils/validate";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -13,9 +17,7 @@ const Login = () => {
   const handleLoginButton = () => {
     const message = checkValidateData(email, password);
     setErrorMessage(message);
-    toast.warning(message, {
-      theme: "dark",
-    });
+    toast.warning(message, { theme: "dark" });
 
     if (message != null) return;
 
@@ -25,18 +27,16 @@ const Login = () => {
         const user = userCredential.user;
         console.log(user);
 
-        toast.success("Logged in Successfully", {
-          theme: "dark",
-        });
+        toast.success("Logged in Successfully", { theme: "dark" });
+
+        navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setErrorMessage(errorCode + " - " + errorMessage);
-        
-        toast.error("Login or Password Incorrect", {
-          theme: "dark",
-        });
+
+        toast.error("Login or Password Incorrect", { theme: "dark" });
       });
   };
 

@@ -1,51 +1,77 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import checkValidateData from "../utils/validate";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser } from "../redux/userSlice";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleRegisterButton = () => {
     try {
       const message = checkValidateData(email, password);
       setErrorMessage(message);
-      toast.warning(message, {
-        theme: "dark",
-      });
+
+      toast.warning(message, { theme: "dark" });
 
       if (message != null) return;
-
+      
+      let user;
       createUserWithEmailAndPassword(auth, email, password) // all this api code is from firbase authentication docs  (https://firebase.google.com/docs/auth/web/password-auth)
         .then((userCredential) => {
           // Signed up
-          const user = userCredential.user;
-          console.log("user", user);
 
-          toast.success("Logged in Successfully", {
-            theme: "dark",
-          });
+          user = userCredential.user;
+
+          updateProfile(user, {
+            displayName: name,
+            photoURL: "https://avatars.githubusercontent.com/u/101697066?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              // we will again dispatch the userSlice for name and photo
+              dispatch(
+                addUser({
+                  displayName: auth.displayName, // we will get the data from auth because auth is the updated one
+                  photoURL: auth.photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+              toast.error(errorMessage);
+            });
+            
+          console.log("user", user);
+          // all the dispatches are there in app.js
+          toast.success("Account created Successfully", { theme: "dark" });
+
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + " - " + errorMessage);
 
-          toast.error("Login or Password Incorrect", {
-            theme: "dark",
-          });
+          toast.error(errorMessage, { theme: "dark" });
         });
     } catch (error) {
       console.log("error", error.message);
-      
-      toast.error("Error in Creating Account", {
-        theme: "dark",
-      });
+      navigate("/error");
+      toast.error("Error in Creating Account", { theme: "dark" });
     }
   };
 
@@ -93,7 +119,15 @@ const Register = () => {
           placeholder="Password"
           className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
         />
-        <p className="text-red-500 mt-3 ml-2">{errorMessage}</p>
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
+          // required
+        />
+
         <button
           onClick={handleRegisterButton}
           className="p-2 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
