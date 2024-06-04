@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import checkValidateData from "../utils/validate";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +13,31 @@ const Login = () => {
   const handleLoginButton = () => {
     const message = checkValidateData(email, password);
     setErrorMessage(message);
+    toast.warning(message, {
+      theme: "dark",
+    });
+
+    if (message != null) return;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+
+        toast.success("Logged in Successfully", {
+          theme: "dark",
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMessage(errorCode + " - " + errorMessage);
+        
+        toast.error("Login or Password Incorrect", {
+          theme: "dark",
+        });
+      });
   };
 
   return (
@@ -48,7 +76,7 @@ const Login = () => {
           required
           className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
         />
-        <p className="text-red-500 mt-3 ml-2">{errorMessage}</p>
+        {/* <p className="text-red-500 mt-3 ml-2">{errorMessage}</p> */}
         <button
           className="p-2 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
           onClick={handleLoginButton}

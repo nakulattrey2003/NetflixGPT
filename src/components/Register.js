@@ -1,17 +1,52 @@
-import React, { useState } from 'react'
-import Header from './Header';
-import checkValidateData from '../utils/validate';
+import React, { useState } from "react";
+import Header from "./Header";
+import checkValidateData from "../utils/validate";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { toast } from "react-toastify";
 
 const Register = () => {
-    
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  
+
   const handleRegisterButton = () => {
-    const message = checkValidateData(email, password);
-    setErrorMessage(message);
+    try {
+      const message = checkValidateData(email, password);
+      setErrorMessage(message);
+      toast.warning(message, {
+        theme: "dark",
+      });
+
+      if (message != null) return;
+
+      createUserWithEmailAndPassword(auth, email, password) // all this api code is from firbase authentication docs  (https://firebase.google.com/docs/auth/web/password-auth)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log("user", user);
+
+          toast.success("Logged in Successfully", {
+            theme: "dark",
+          });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " - " + errorMessage);
+
+          toast.error("Login or Password Incorrect", {
+            theme: "dark",
+          });
+        });
+    } catch (error) {
+      console.log("error", error.message);
+      
+      toast.error("Error in Creating Account", {
+        theme: "dark",
+      });
+    }
   };
 
   return (
@@ -31,7 +66,7 @@ const Register = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute p-12 m-12 d-flex bg-black w-4/12 my-40 mx-auto right-0 left-0 text-white bg-opacity-70"
+        className="absolute p-12 m-10 d-flex bg-black w-4/12 my-32 mx-auto right-0 left-0 text-white bg-opacity-70"
       >
         <h1 className="mb-6 text-3xl font-bold">Register</h1>
         <input
@@ -75,6 +110,6 @@ const Register = () => {
       </form>
     </div>
   );
-}
+};
 
-export default Register
+export default Register;
