@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const Login = () => {
 
@@ -13,20 +14,22 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLoginButton = () => {
     const message = checkValidateData(email, password);
     setErrorMessage(message);
-    toast.warning(message, { theme: "dark" });
+    toast.warning(message);
 
     if (message != null) return;
+    setIsLoading(true);
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
 
-        toast.success("Logged in Successfully", { theme: "dark" });
+        toast.success("Logged in Successfully");
 
         navigate("/browse");
       })
@@ -35,7 +38,10 @@ const Login = () => {
         const errorMessage = error.message;
         setErrorMessage(errorCode + " - " + errorMessage);
 
-        toast.error("Login or Password Incorrect", { theme: "dark" });
+        toast.error("Login or Password Incorrect");
+      })
+      .finally(() => {
+        setIsLoading(false); // Set loading state to false
       });
   };
 
@@ -79,8 +85,13 @@ const Login = () => {
         <button
           className="p-2 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
           onClick={handleLoginButton}
+          disabled={isLoading}
         >
-          Sign in
+          {isLoading ? (
+            <Loader /> // Show spinner
+          ) : (
+            "Sign In"
+          )}
         </button>
         <p className="text-gray-400 mt-3 ml-2">
           New to Netflix?{" "}

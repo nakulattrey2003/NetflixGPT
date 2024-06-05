@@ -49,7 +49,7 @@ const Register = () => {
   const handleRegisterButton = () => {
     const message = checkValidateData(email, password);
     setErrorMessage(message);
-    toast.warning(message, { theme: "dark" });
+    toast.warning(message);
 
     if (message) return;
     setIsLoading(true);
@@ -72,7 +72,7 @@ const Register = () => {
                   photoURL: url,
                 })
               );
-              toast.success("Account created Successfully", { theme: "dark" });
+              toast.success("Account created Successfully");
               navigate("/browse");
             });
           }
@@ -82,7 +82,7 @@ const Register = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setErrorMessage(`${errorCode} - ${errorMessage}`);
-        toast.error(errorMessage, { theme: "dark" });
+        toast.error(errorMessage);
       })
       .finally(() => {
         setIsLoading(false); // Set loading state to false

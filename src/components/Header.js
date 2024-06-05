@@ -4,22 +4,50 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../redux/userSlice.js";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      // this api function is provided by the firebase which is called whenever user is logged in or logged out
+      // we have made this function here beacuse header component is present all over our app.
+      if (user) {
+        // User is signed in
+        dispatch(
+          addUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          })
+        );
+
+        navigate("/browse"); // if user is logged in than take it to browse page
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+      }
+    });
+  }, []); // empty dependency array to call the function only once when page reloads;
 
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful
-        toast.success("Logged Out Succesfully", { theme: "dark" });
+        toast.success("Logged Out Succesfully");
         navigate("/login");
       })
       .catch((error) => {
         // An error happened
-        toast.error("Error Logging Out", { theme: "dark" });
+        toast.error("Error Logging Out");
         navigate("/error");
       });
   };
@@ -31,22 +59,26 @@ const Header = () => {
         alt="netflix-logo"
       ></img>
 
-        {user && (
-          <div className="flex">
-            <div className="mt-4 font-bold font-white pl-3 pt-3 pb-3 pr-2">
+      {user && (
+        <div className="flex">
+          <div className="mt-4 font-bold font-white pl-3 pt-3 pb-3 pr-2">
             Howdy {user.displayName}!
-            </div>
-            <div>
-              <img className="mt-4 w-12 h-12 rounded-full object-cover" src={user.photoURL} alt="dp" />
-            </div>
-            <div className="m-4 pl-6 p-3">
-              <button onClick={handleLogOut} className="font-bold text-red-600">
-                Log Out
-              </button>
-            </div>
           </div>
-        )}
-      </div>
+          <div>
+            <img
+              className="mt-4 w-12 h-12 rounded-full object-cover"
+              src={user.photoURL}
+              alt="dp"
+            />
+          </div>
+          <div className="m-4 pl-6 p-3">
+            <button onClick={handleLogOut} className="font-bold text-red-600">
+              Log Out
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
