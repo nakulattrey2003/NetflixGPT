@@ -8,13 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/userSlice";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  listAll,
-  list,
-} from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -29,86 +23,148 @@ const Register = () => {
 
   // const imagesListRef = ref(storage, "images/");
 
+  // const handlePhotoUpload = () => {
+  //   if (image == null) return;
+  //   const imageRef = ref(storage, `images/${image.name + Date.now()}`);
+  //   uploadBytes(imageRef, image)
+  //     .then((snapshot) => {
+  //       getDownloadURL(imageRef) // Get download URL of the uploaded image
+  //         .then((url) => {
+  //           setImageUrl(url); // Set the URL in state variable
+  //         })
+  //         .catch((error) => {
+  //           toast.error(`Error getting download URL: ${error}`);
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       toast.error(`Error getting download URL: ${error}`);
+  //     });
+  // };
+
   const handlePhotoUpload = () => {
-    if (image == null) return;
-    const imageRef = ref(storage, `images/${image.name + Date.now()}`);
-    uploadBytes(imageRef, image)
-      .then((snapshot) => {
-        getDownloadURL(imageRef) // Get download URL of the uploaded image
-          .then((url) => {
-            setImageUrl(url); // Set the URL in state variable
-          })
-          .catch((error) => {
-            toast.error(`Error getting download URL: ${error}`);
-          });
-      })
-      .catch((error) => {
-        toast.error(`Error getting download URL: ${error}`);
-      });
-  };
+    return new Promise((resolve, reject) => {
+      if (!image) return resolve("");
 
-  useEffect(() => {
-    handlePhotoUpload();
-  }, [image]);
-
-  const handleRegisterButton = () => {
-    try {
-      const message = checkValidateData(email, password);
-      setErrorMessage(message);
-
-      toast.warning(message, { theme: "dark" });
-
-      if (message != null) return;
-
-      let user;
-      createUserWithEmailAndPassword(auth, email, password) // all this api code is from firbase authentication docs  (https://firebase.google.com/docs/auth/web/password-auth)
-        .then((userCredential) => {
-          // Signed up
-
-          user = userCredential.user;
-
-          console.log(imageUrl);
-          updateProfile(user, {
-            displayName: name,
-            photoURL: imageUrl,
-          })
-            .then(() => {
-              // Profile updated!
-              // we will again dispatch the userSlice for name and photo
-              dispatch(
-                addUser({
-                  uid: user.uid,
-                  email: user.email,
-                  displayName: name,
-                  photoURL: imageUrl,
-                })
-              );
-              navigate("/browse");
+      const imageRef = ref(storage, `images/${image.name + Date.now()}`);
+      uploadBytes(imageRef, image)
+        .then(() => {
+          getDownloadURL(imageRef)
+            .then((url) => {
+              resolve(url);
             })
             .catch((error) => {
-              setErrorMessage(error.message);
-              toast.error(errorMessage);
+              toast.error(`Error getting download URL: ${error}`);
+              reject(error);
             });
-
-          console.log("user", user);
-          // all the dispatches are there in app.js
-          toast.success("Account created Successfully", { theme: "dark" });
-
-          navigate("/browse");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(errorCode + " - " + errorMessage);
-
-          toast.error(errorMessage, { theme: "dark" });
+          toast.error(`Error uploading image: ${error}`);
+          reject(error);
         });
-    } catch (error) {
-      console.log("error", error.message);
-      navigate("/error");
-      toast.error("Error in Creating Account", { theme: "dark" });
-    }
+    });
   };
+
+  // useEffect(() => {
+  //   handlePhotoUpload();
+  // }, [image]);
+
+  // const handleRegisterButton = () => {
+  //   try {
+  //     const message = checkValidateData(email, password);
+  //     setErrorMessage(message);
+
+  //     toast.warning(message, { theme: "dark" });
+
+  //     if (message != null) return;
+
+  //     let user;
+  //     createUserWithEmailAndPassword(auth, email, password) // all this api code is from firbase authentication docs  (https://firebase.google.com/docs/auth/web/password-auth)
+  //       .then((userCredential) => {
+  //         // Signed up
+
+  //         user = userCredential.user;
+
+  //         console.log(imageUrl);
+  //         updateProfile(user, {
+  //           displayName: name,
+  //           photoURL: imageUrl,
+  //         })
+  //           .then(() => {
+  //             // Profile updated!
+  //             // we will again dispatch the userSlice for name and photo
+  //             dispatch(
+  //               addUser({
+  //                 uid: user.uid,
+  //                 email: user.email,
+  //                 displayName: name,
+  //                 photoURL: imageUrl,
+  //               })
+  //             );
+  //             navigate("/browse");
+  //           })
+  //           .catch((error) => {
+  //             setErrorMessage(error.message);
+  //             toast.error(errorMessage);
+  //           });
+
+  //         console.log("user", user);
+  //         // all the dispatches are there in app.js
+  //         toast.success("Account created Successfully", { theme: "dark" });
+
+  //         navigate("/browse");
+  //       })
+  //       .catch((error) => {
+  //         const errorCode = error.code;
+  //         const errorMessage = error.message;
+  //         setErrorMessage(errorCode + " - " + errorMessage);
+
+  //         toast.error(errorMessage, { theme: "dark" });
+  //       });
+  //   } catch (error) {
+  //     console.log("error", error.message);
+  //     navigate("/error");
+  //     toast.error("Error in Creating Account", { theme: "dark" });
+  //   }
+  // };
+
+   const handleRegisterButton = () => {
+     const message = checkValidateData(email, password);
+     setErrorMessage(message);
+     toast.warning(message, { theme: "dark" });
+
+     if (message) return;
+
+     handlePhotoUpload()
+       .then((url) => {
+         return createUserWithEmailAndPassword(auth, email, password).then(
+           (userCredential) => {
+             const user = userCredential.user;
+
+             return updateProfile(user, {
+               displayName: name,
+               photoURL: url,
+             }).then(() => {
+               dispatch(
+                 addUser({
+                   uid: user.uid,
+                   email: user.email,
+                   displayName: name,
+                   photoURL: url,
+                 })
+               );
+               toast.success("Account created Successfully", { theme: "dark" });
+               navigate("/browse");
+             });
+           }
+         );
+       })
+       .catch((error) => {
+         const errorCode = error.code;
+         const errorMessage = error.message;
+         setErrorMessage(`${errorCode} - ${errorMessage}`);
+         toast.error(errorMessage, { theme: "dark" });
+       });
+   };
 
   return (
     <div>
