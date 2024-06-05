@@ -9,6 +9,7 @@ import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/userSlice";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Loader from "./Loader";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -20,26 +21,7 @@ const Register = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  // const imagesListRef = ref(storage, "images/");
-
-  // const handlePhotoUpload = () => {
-  //   if (image == null) return;
-  //   const imageRef = ref(storage, `images/${image.name + Date.now()}`);
-  //   uploadBytes(imageRef, image)
-  //     .then((snapshot) => {
-  //       getDownloadURL(imageRef) // Get download URL of the uploaded image
-  //         .then((url) => {
-  //           setImageUrl(url); // Set the URL in state variable
-  //         })
-  //         .catch((error) => {
-  //           toast.error(`Error getting download URL: ${error}`);
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       toast.error(`Error getting download URL: ${error}`);
-  //     });
-  // };
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePhotoUpload = () => {
     return new Promise((resolve, reject) => {
@@ -64,107 +46,48 @@ const Register = () => {
     });
   };
 
-  // useEffect(() => {
-  //   handlePhotoUpload();
-  // }, [image]);
+  const handleRegisterButton = () => {
+    const message = checkValidateData(email, password);
+    setErrorMessage(message);
+    toast.warning(message, { theme: "dark" });
 
-  // const handleRegisterButton = () => {
-  //   try {
-  //     const message = checkValidateData(email, password);
-  //     setErrorMessage(message);
+    if (message) return;
+    setIsLoading(true);
 
-  //     toast.warning(message, { theme: "dark" });
+    handlePhotoUpload()
+      .then((url) => {
+        return createUserWithEmailAndPassword(auth, email, password).then(
+          (userCredential) => {
+            const user = userCredential.user;
 
-  //     if (message != null) return;
-
-  //     let user;
-  //     createUserWithEmailAndPassword(auth, email, password) // all this api code is from firbase authentication docs  (https://firebase.google.com/docs/auth/web/password-auth)
-  //       .then((userCredential) => {
-  //         // Signed up
-
-  //         user = userCredential.user;
-
-  //         console.log(imageUrl);
-  //         updateProfile(user, {
-  //           displayName: name,
-  //           photoURL: imageUrl,
-  //         })
-  //           .then(() => {
-  //             // Profile updated!
-  //             // we will again dispatch the userSlice for name and photo
-  //             dispatch(
-  //               addUser({
-  //                 uid: user.uid,
-  //                 email: user.email,
-  //                 displayName: name,
-  //                 photoURL: imageUrl,
-  //               })
-  //             );
-  //             navigate("/browse");
-  //           })
-  //           .catch((error) => {
-  //             setErrorMessage(error.message);
-  //             toast.error(errorMessage);
-  //           });
-
-  //         console.log("user", user);
-  //         // all the dispatches are there in app.js
-  //         toast.success("Account created Successfully", { theme: "dark" });
-
-  //         navigate("/browse");
-  //       })
-  //       .catch((error) => {
-  //         const errorCode = error.code;
-  //         const errorMessage = error.message;
-  //         setErrorMessage(errorCode + " - " + errorMessage);
-
-  //         toast.error(errorMessage, { theme: "dark" });
-  //       });
-  //   } catch (error) {
-  //     console.log("error", error.message);
-  //     navigate("/error");
-  //     toast.error("Error in Creating Account", { theme: "dark" });
-  //   }
-  // };
-
-   const handleRegisterButton = () => {
-     const message = checkValidateData(email, password);
-     setErrorMessage(message);
-     toast.warning(message, { theme: "dark" });
-
-     if (message) return;
-
-     handlePhotoUpload()
-       .then((url) => {
-         return createUserWithEmailAndPassword(auth, email, password).then(
-           (userCredential) => {
-             const user = userCredential.user;
-
-             return updateProfile(user, {
-               displayName: name,
-               photoURL: url,
-             }).then(() => {
-               dispatch(
-                 addUser({
-                   uid: user.uid,
-                   email: user.email,
-                   displayName: name,
-                   photoURL: url,
-                 })
-               );
-               toast.success("Account created Successfully", { theme: "dark" });
-               navigate("/browse");
-             });
-           }
-         );
-       })
-       .catch((error) => {
-         const errorCode = error.code;
-         const errorMessage = error.message;
-         setErrorMessage(`${errorCode} - ${errorMessage}`);
-         toast.error(errorMessage, { theme: "dark" });
-       });
-   };
+            return updateProfile(user, {
+              displayName: name,
+              photoURL: url,
+            }).then(() => {
+              dispatch(
+                addUser({
+                  uid: user.uid,
+                  email: user.email,
+                  displayName: name,
+                  photoURL: url,
+                })
+              );
+              toast.success("Account created Successfully", { theme: "dark" });
+              navigate("/browse");
+            });
+          }
+        );
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMessage(`${errorCode} - ${errorMessage}`);
+        toast.error(errorMessage, { theme: "dark" });
+      })
+      .finally(() => {
+        setIsLoading(false); // Set loading state to false
+      });
+  };
 
   return (
     <div>
@@ -222,8 +145,13 @@ const Register = () => {
         <button
           onClick={handleRegisterButton}
           className="p-2 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
+          disabled={isLoading}
         >
-          Register
+          {isLoading ? (
+            <Loader /> // Show spinner
+          ) : (
+            "Register"
+          )}
         </button>
 
         <p className="text-gray-400 mt-3 ml-2">
