@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
+import Header from "../components/Header";
 import checkValidateData from "../utils/validate";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, storage } from "../utils/firebase";
@@ -9,7 +9,7 @@ import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/userSlice";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Loader from "./Loader";
+import Loader from "../components/Loader";
 
 const Register = () => {
   const navigate = useNavigate();

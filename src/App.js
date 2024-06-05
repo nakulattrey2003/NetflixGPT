@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import Browse from "./components/Browse";
-import Register from "./components/Register";
+import Register from "./pages/Register";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../src/utils/firebase.js";
