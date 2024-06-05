@@ -25,7 +25,6 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
 
         toast.success("Logged in Successfully", { theme: "dark" });
 
