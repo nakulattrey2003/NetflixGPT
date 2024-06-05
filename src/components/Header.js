@@ -53,7 +53,7 @@ const Header = () => {
   };
   
   return (
-    <div className="absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
+    <div className="w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
       <img
         className="w-44"
         src="/NetflixGPT Res/Netflix Logo.png"
@@ -73,7 +73,7 @@ const Header = () => {
             />
           </div>
           <div className="m-4 pl-6 p-3">
-            <button onClick={handleLogOut} className="font-bold text-red-600">
+            <button onClick={handleLogOut} className="font-extrabold text-red-600">
               Log Out
             </button>
           </div>
