@@ -21,7 +21,7 @@ const Error = () => {
       </p>
       <img
         className="w-64 h-auto rounded-lg shadow-lg mb-8"
-        src="https://media1.tenor.com/m/yzpBuDN0JRkAAAAC/pointing-at-you-spider-man.gif"
+        src="/NetflixGPT Res/Spiderman gif.gif"
         alt="Spider-Man"
       />
       <button onClick={handleGoBack} class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-3">

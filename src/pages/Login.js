@@ -4,7 +4,7 @@ import checkValidateData from "../utils/validate";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 
 const Login = () => {
@@ -52,7 +52,7 @@ const Login = () => {
       <div className="absolute h-screen w-screen">
         <div className="absolute inset-0">
           <img
-            src="https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg"
+            src="/NetflixGPT Res/Netflix Background.jpg"
             alt="background"
             className="w-full h-full"
           />
@@ -95,9 +95,9 @@ const Login = () => {
         </button>
         <p className="text-gray-400 mt-3 ml-2">
           New to Netflix?{" "}
-          <a href="/register" className="text-white">
+          <Link to="/register" className="text-white">
             Sign up now.
-          </a>
+          </Link>
         </p>
       </form>
     </div>

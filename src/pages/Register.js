@@ -4,7 +4,7 @@ import checkValidateData from "../utils/validate";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, storage } from "../utils/firebase";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/userSlice";
@@ -96,7 +96,7 @@ const Register = () => {
       <div className="absolute h-screen w-screen">
         <div className="absolute inset-0">
           <img
-            src="https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg"
+            src="/NetflixGPT Res/Netflix Background.jpg"
             alt="background"
             className="w-full h-full"
           />
@@ -156,9 +156,9 @@ const Register = () => {
 
         <p className="text-gray-400 mt-3 ml-2">
           Already have an Account?{" "}
-          <a href="/login" className="text-white">
+          <Link to="/login" className="text-white">
             Sign In now.
-          </a>
+          </Link>
         </p>
       </form>
     </div>
