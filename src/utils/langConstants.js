@@ -12,3 +12,5 @@ const lang = {
     myName: "Nakul",
   }
 };
+
+export default lang;

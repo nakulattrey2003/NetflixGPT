@@ -9,12 +9,21 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../redux/userSlice.js";
 import GptSearchBar from "./GptSearchBar.js";
+import { SUPPORTED_LANGUAGES } from "../utils/constants.js";
+import UserAvatar from "./UserAvatar.js";
+import { changeLanguage } from "../redux/languageSlice.js";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+  const language = useSelector((state) => state.language.lang);
+  console.log('language', language);
+
+  const handleLogoClick = () => {
+    navigate("/browse");
+  };
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -52,36 +61,47 @@ const Header = () => {
         navigate("/error");
       });
   };
-  
+
+  const handleLanguageChange = (e) => {
+    console.log(e);
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
       <img
+        onClick={handleLogoClick}
         className="w-44"
         src="/NetflixGPT Res/Netflix Logo.png"
         alt="netflix-logo"
       ></img>
 
       {user && (
-        <div className="flex ml-64 w-full justify-between">
+        <div className="flex ml-48 w-full justify-between">
           <GptSearchBar />
           <div className="flex">
-          <div className="mt-4 font-semibold text-white pl-3 pt-3 pb-3 pr-2">
-            Howdy {user.displayName}!
-          </div>
-          <div>
-            <img
-              className="mt-4 w-12 h-12 rounded-full object-cover"
-              src={user.photoURL}
-              alt="dp"
-            />
-          </div>
-          <div className="m-3 pl-8 p-2">
-            <button
-              onClick={handleLogOut}
-              className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            <select
+              onChange={handleLanguageChange}
+              className="text-white p-2 m-2 outline-none border-none rounded bg-transparent mr-10"
             >
-              Log Out
-            </button>
+              {SUPPORTED_LANGUAGES.map((it) => (
+                <option
+                  className="bg-black opacity-100 p-2 m-2 text-white"
+                  key={it.identifier}
+                  value={it.identifier}
+                >
+                  {it.name}
+                </option>
+              ))}
+            </select>
+            <UserAvatar />
+            <div className="m-3 pl-8 p-2">
+              <button
+                onClick={handleLogOut}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Log Out
+              </button>
             </div>
           </div>
         </div>
