@@ -12,6 +12,7 @@ import GptSearchBar from "./GptSearchBar.js";
 import { SUPPORTED_LANGUAGES } from "../utils/constants.js";
 import UserAvatar from "./UserAvatar.js";
 import { changeLanguage } from "../redux/languageSlice.js";
+import langArray from "../utils/langConstants.js";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,7 +20,6 @@ const Header = () => {
 
   const user = useSelector((state) => state.user);
   const language = useSelector((state) => state.language.lang);
-  console.log('language', language);
 
   const handleLogoClick = () => {
     navigate("/browse");
@@ -63,7 +63,6 @@ const Header = () => {
   };
 
   const handleLanguageChange = (e) => {
-    console.log(e);
     dispatch(changeLanguage(e.target.value));
   };
 
@@ -79,6 +78,7 @@ const Header = () => {
       {user && (
         <div className="flex ml-24 w-full justify-between">
           <GptSearchBar />
+
           <div className="flex">
             <select
               onChange={handleLanguageChange}
@@ -94,13 +94,15 @@ const Header = () => {
                 </option>
               ))}
             </select>
+
             <UserAvatar />
+
             <div className="m-3 pl-8 p-2">
               <button
                 onClick={handleLogOut}
                 className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
               >
-                Log Out
+                {langArray[language].LogOut}
               </button>
             </div>
           </div>

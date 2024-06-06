@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { FaMicrophone, FaSearch } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import langArray from "../utils/langConstants";
 
 const GptSearchBar = () => {
   const navigate = useNavigate();
 
   const [searchInput, setSearchInput] = useState();
+
+  const language = useSelector((state) => state.language.lang);
 
   const handleSearch = () => {
     if (!searchInput || searchInput.length == 0) {
@@ -29,7 +33,7 @@ const GptSearchBar = () => {
         onChange={(e) => setSearchInput(e.target.value)}
         onKeyDown={handleKeyPress}
         type="text"
-        placeholder="Search for your next binge-worthy series..."
+        placeholder={langArray[language]?.GptSearchPlaceholder}
       />
       <FaMicrophone className="text-gray-300 ml-2 size-4 pointer" />
     </div>
