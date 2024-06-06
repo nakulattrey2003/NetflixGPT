@@ -6,6 +6,7 @@ import SecondaryContainer from "../components/SecondaryContainer";
 import usePopularMovies from "../hooks/usePopularMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
+import GptSearchBar from "../components/GptSearchBar";
 
 const Browse = () => {
   useNowPlayingMovies();

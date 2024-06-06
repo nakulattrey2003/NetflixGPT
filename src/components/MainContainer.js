@@ -8,8 +8,10 @@ const MainContainer = () => {
 
   if (movies == null) return;
 
-  const randomcount = Math.floor(Math.random() * (movies.length));
-  const mainMovie = movies[0];
+  // const randomcount = Math.floor(Math.random() * (movies.length));
+  // const mainMovie = movies[randomcount];
+
+  const mainMovie = movies[10];   // 10 for garfield and 7 for inside out 2
 
   const {
     original_title,

@@ -1,21 +1,22 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Login from "./pages/Login";
-import Browse from "./pages/Browse";
-import Register from "./pages/Register";
-import Error from "./components/Error.js";
+import LoginPage from "./pages/LoginPage";
+import BrowsePage from "./pages/BrowsePage";
+import RegisterPage from "./pages/RegisterPage";
+import ErrorPage from "./pages/ErrorPage.js";
+import GptSearchPage from "./pages/GptSearchPage.js";
 
 function App() {
-
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/browse" element={<Browse />} />
-          <Route path="/error" element={<Error />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/browse" element={<BrowsePage />} />
+          <Route path="/error" element={<ErrorPage />} />
+          <Route path="/search" element={<GptSearchPage />} />
         </Routes>
       </BrowserRouter>
     </div>

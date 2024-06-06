@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../redux/userSlice.js";
+import GptSearchBar from "./GptSearchBar.js";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Header = () => {
           })
         );
 
-        navigate("/browse"); // if user is logged in than take it to browse page
+        // navigate("/browse"); // if user is logged in than take it to browse page
       } else {
         // User is signed out
         dispatch(removeUser());
@@ -61,7 +62,9 @@ const Header = () => {
       ></img>
 
       {user && (
-        <div className="flex">
+        <div className="flex ml-64 w-full justify-between">
+          <GptSearchBar />
+          <div className="flex">
           <div className="mt-4 font-semibold text-white pl-3 pt-3 pb-3 pr-2">
             Howdy {user.displayName}!
           </div>
@@ -79,6 +82,7 @@ const Header = () => {
             >
               Log Out
             </button>
+            </div>
           </div>
         </div>
       )}

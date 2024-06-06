@@ -10,7 +10,7 @@ const MovieCard = ({ rating, date, language, movieName, posterPath }) => {
 
   return (
     <div className="relative ml-3 mb-20">
-      <div className="w-48">
+      <div className="w-52">
         <img
           className="rounded-lg"
           src={IMG_URL + posterPath}
