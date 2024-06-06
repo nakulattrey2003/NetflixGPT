@@ -25,7 +25,7 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
 
   return (
     <div>
-      <div className="pt-[14%] p-12 absolute text-white bg-gradient-to-r from-black w-screen aspect-video">
+      <div className="pt-[14%] p-12 absolute text-white bg-gradient-to-r from-black opacity-90 w-screen aspect-video">
         <div className="p-2 m-2 text-5xl font-black break-words w-6/12">
           {title}
         </div>

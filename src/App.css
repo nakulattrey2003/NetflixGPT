@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body, html {
-  overflow: hidden;
+
+::-webkit-scrollbar { /* to hide the scroll bar but keep the functionality  */
+    display: none;
 }

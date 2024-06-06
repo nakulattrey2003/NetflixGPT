@@ -9,7 +9,6 @@ const MainContainer = () => {
   if (movies == null) return;
 
   const randomcount = Math.floor(Math.random() * (movies.length));
-
   const mainMovie = movies[0];
 
   const {
