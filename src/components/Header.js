@@ -77,7 +77,7 @@ const Header = () => {
       ></img>
 
       {user && (
-        <div className="flex ml-48 w-full justify-between">
+        <div className="flex ml-24 w-full justify-between">
           <GptSearchBar />
           <div className="flex">
             <select
