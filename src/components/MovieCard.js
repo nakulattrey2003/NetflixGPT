@@ -3,7 +3,6 @@ import { IMG_URL } from "../utils/constants";
 import { GoDotFill } from "react-icons/go";
 
 const MovieCard = ({ rating, date, language, movieName, posterPath }) => {
-
   const uppercaseMovieName = movieName.toUpperCase();
   const year = date.split("-")[2];
   const uppercaseLanguage = language.toUpperCase();
@@ -17,7 +16,7 @@ const MovieCard = ({ rating, date, language, movieName, posterPath }) => {
           src={IMG_URL + posterPath}
           alt="Movie Card"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
         <div className="absolute bottom-10 left-2 text-white font-black text-lg p-2 w-full text-left rounded-t-lg">
           {uppercaseMovieName}
         </div>
