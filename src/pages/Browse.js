@@ -7,12 +7,13 @@ import SecondaryContainer from "../components/SecondaryContainer";
 const Browse = () => {
   
   useNowPlayingMovies();
+  
 
   return (
     <div>
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+      <MainContainer />      {/* the title and the video */}
+      <SecondaryContainer /> {/* the arrays of movies list*/}
     </div>
   );
 };

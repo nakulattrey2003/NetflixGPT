@@ -8,15 +8,29 @@ const MainContainer = () => {
 
   if (movies == null) return;
 
-  const mainMovie = movies[0];
-  console.log("mainMovie", mainMovie);
+  const randomcount = Math.floor(Math.random() * (movies.length));
 
-  const {original_title, overview} = mainMovie;
+  const mainMovie = movies[0];
+
+  const {
+    original_title,
+    overview,
+    original_language,
+    vote_average,
+    release_date,
+    id,
+  } = mainMovie;
 
   return (
     <div>
-      <VideoTitle title={original_title} overview={overview} />
-      <VideoBackground />
+      <VideoTitle
+        title={original_title}
+        overview={overview}
+        language={original_language}
+        rating={vote_average}
+        date={release_date}
+      />
+      <VideoBackground movieId={id} />
     </div>
   );
 };

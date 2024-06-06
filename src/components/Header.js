@@ -53,7 +53,7 @@ const Header = () => {
   };
   
   return (
-    <div className="w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
+    <div className="absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
       <img
         className="w-44"
         src="/NetflixGPT Res/Netflix Logo.png"
@@ -62,7 +62,7 @@ const Header = () => {
 
       {user && (
         <div className="flex">
-          <div className="mt-4 font-bold font-white pl-3 pt-3 pb-3 pr-2">
+          <div className="mt-4 font-semibold text-white pl-3 pt-3 pb-3 pr-2">
             Howdy {user.displayName}!
           </div>
           <div>
@@ -72,8 +72,11 @@ const Header = () => {
               alt="dp"
             />
           </div>
-          <div className="m-4 pl-6 p-3">
-            <button onClick={handleLogOut} className="font-extrabold text-red-600">
+          <div className="m-3 pl-8 p-2">
+            <button
+              onClick={handleLogOut}
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
               Log Out
             </button>
           </div>
