@@ -6,7 +6,6 @@ const VideoBackground = ({ movieId }) => {
   const [isMute, setIsMute] = useState(true);
 
   const trailerKey = useMovieTrailer(movieId);
-  console.log(trailerKey);
 
   const handleMute = () => {
     setIsMute(!isMute);
@@ -16,7 +15,7 @@ const VideoBackground = ({ movieId }) => {
     <div className="w-screen">
       <iframe
         className="w-screen aspect-video"
-        src={`https://www.youtube.com/embed/${trailerKey}?&autoplay=1&controls=0&loop=1${
+        src={`https://www.youtube.com/embed/${trailerKey}?&modestbranding=1&autohide=1&autoplay=1&controls=0&showinfo=0&loop=1${
           isMute ? "&mute=1" : ""
         }&playlist=${trailerKey}`}
         title="Youtube Video"
