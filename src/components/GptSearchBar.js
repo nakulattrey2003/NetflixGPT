@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaMicrophone, FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,18 +10,23 @@ const GptSearchBar = () => {
 
   const [searchInput, setSearchInput] = useState();
 
-  const language = useSelector((state) => state.language.lang);
+  const langKey = useSelector((state) => state.language.lang);
+  const [toastWarning, setToastWarning] = useState(langArray[langKey].Warning1);  // not working 
+
+   useEffect(() => {
+     setToastWarning(langArray[langKey].Warning1);
+   }, [langKey]);
 
   const handleSearch = () => {
     if (!searchInput || searchInput.length == 0) {
-      toast.warning("Please write something in Search Box");
+      toast.warning(toastWarning);
     } else navigate("/search");
   };
 
   const handleKeyPress = (e) => {
     if (e.key == "Enter") {
       if (!searchInput || searchInput.length == 0) {
-        toast.warning("Please write something in Search Box");
+        toast.warning(toastWarning);
       } else navigate("/search");
     }
   };
@@ -33,7 +38,7 @@ const GptSearchBar = () => {
         onChange={(e) => setSearchInput(e.target.value)}
         onKeyDown={handleKeyPress}
         type="text"
-        placeholder={langArray[language]?.GptSearchPlaceholder}
+        placeholder={langArray[langKey]?.GptSearchPlaceholder}
       />
       <FaMicrophone className="text-gray-300 ml-2 size-4 pointer" />
     </div>

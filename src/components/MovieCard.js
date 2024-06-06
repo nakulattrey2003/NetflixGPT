@@ -1,8 +1,12 @@
 import React from "react";
 import { IMG_URL } from "../utils/constants";
 import { GoDotFill } from "react-icons/go";
+import { useSelector } from "react-redux";
+import langArray from "../utils/langConstants";
 
 const MovieCard = ({ rating, date, language, movieName, posterPath }) => {
+  const langKey = useSelector((state) => state.language.lang);
+
   const uppercaseMovieName = movieName.toUpperCase();
   const year = date.split("-")[2];
   const uppercaseLanguage = language.toUpperCase();
@@ -21,7 +25,7 @@ const MovieCard = ({ rating, date, language, movieName, posterPath }) => {
           {uppercaseMovieName}
         </div>
         <div className="flex absolute bottom-4 left-2 text-gray-200 font-normal text-sm p-2 w-full text-left rounded-t-lg">
-          Rating: {roundedRating}
+          {langArray[langKey].Rating}: {roundedRating}
           <GoDotFill className="size-3 m-1" />
           20{year}
           <GoDotFill className="size-3 m-1" />

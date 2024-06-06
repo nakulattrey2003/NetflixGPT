@@ -4,8 +4,15 @@ import { FaPlay } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
+import { useSelector } from "react-redux";
+import langArray from "../utils/langConstants";
 
 const VideoTitle = ({ title, overview, language, rating, date }) => {
+  const langKey = useSelector((state) => state.language.lang);
+
+  const lessInfoText = langArray[langKey].LessInfo || "Less Info";
+  const moreInfoText = langArray[langKey].MoreInfo || "More Info";
+
   const [isExpanded, setIsExpanded] = useState(false);
 
   const splitOverview = (text, maxWords) => {
@@ -48,7 +55,7 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
         <div className="flex">
           <div>
             <button class="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-2 px-4 rounded">
-              <FaPlay className="mt-1 mr-2" /> Play
+              <FaPlay className="mt-1 mr-2" /> {langArray[langKey].Play}
             </button>
           </div>
           <div>
@@ -57,7 +64,7 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
               onClick={handleExpand}
             >
               <CiCircleInfo className="mr-2 h-6 w-6" />{" "}
-              {isExpanded ? "Less Info" : "More Info"}
+              {isExpanded ? lessInfoText : moreInfoText}
             </button>
           </div>
         </div>

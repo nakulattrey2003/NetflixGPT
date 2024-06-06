@@ -4,13 +4,13 @@ import langArray from "../utils/langConstants";
 
 const UserAvatar = () => {
 
-  const language = useSelector((state) => state.language.lang);
+  const langKey = useSelector((state) => state.language.lang);
     
   const user = useSelector((state) => state.user);
   return (
     <div className="flex">
       <div className="mt-4 font-semibold text-white pl-3 pt-3 pb-3 pr-2">
-        {langArray[language].Howdy} {user.displayName}!
+        {langArray[langKey].Howdy} {user.displayName}!
       </div>
       <div>
         <img

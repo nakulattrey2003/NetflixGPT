@@ -19,7 +19,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
-  const language = useSelector((state) => state.language.lang);
+  const langKey = useSelector((state) => state.language.lang);
 
   const handleLogoClick = () => {
     navigate("/browse");
@@ -102,7 +102,7 @@ const Header = () => {
                 onClick={handleLogOut}
                 className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
               >
-                {langArray[language].LogOut}
+                {langArray[langKey].LogOut}
               </button>
             </div>
           </div>
