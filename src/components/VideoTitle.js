@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import { FaPlay } from "react-icons/fa";
 
 const VideoTitle = ({ title, overview }) => {
 
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const splitOverview = (text, maxWords) => {
     const words = text.split(" ");
     if (words.length > maxWords) {
-      return words.slice(0, maxWords).join(" ") + " ...";
+      return words.slice(0, maxWords).join(" ") + "...";
     } else {
       return text;
     }
   };
+
+  const handleExpand = () => {
+    setIsExpanded(!isExpanded);
+  }
 
   return (
     <div>
@@ -20,8 +25,11 @@ const VideoTitle = ({ title, overview }) => {
         <div className="p-2 m-2 text-5xl font-black break-words w-6/12">
           {title}
         </div>
-        <div className="p-2 m-2 text-lg w-7/12 break-words text-slate-700">
-          {splitOverview(overview, 35)}
+        <div
+          className="p-2 m-2 text-lg w-7/12 break-words text-slate-700 cursor-pointer"
+          onClick={handleExpand}
+        >
+          {isExpanded ? overview : splitOverview(overview, 35)}
         </div>
         <div className="flex">
           <div>
@@ -30,8 +38,8 @@ const VideoTitle = ({ title, overview }) => {
             </button>
           </div>
           <div>
-            <button class="flex bg-transparent hover:bg-gray-200 text-gray-800 font-bold hover:text-white py-2 px-4 border border-gray-800 hover:border-transparent rounded">
-              <CiCircleInfo className="mr-2 h-6 w-6" /> More Info
+            <button class="flex bg-transparent hover:bg-gray-200 text-gray-800 font-bold hover:text-white py-2 px-4 border border-gray-800 hover:border-transparent rounded" onClick={handleExpand}>
+              <CiCircleInfo className="mr-2 h-6 w-6" /> {isExpanded ? "Less Info": "More Info"}
             </button>
           </div>
         </div>
