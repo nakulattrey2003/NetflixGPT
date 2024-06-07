@@ -18,7 +18,7 @@ function App() {
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="/search" element={<GptSearchPage />} />
-          <Route path="/movie-detail" element={<MovieDetailPage />} />
+          <Route path="/movie-detail/:id" element={<MovieDetailPage />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -67,7 +67,7 @@ const UserInfo = () => {
             </button>
             <button
               onClick={handleClose}
-              className="mt-4 w-36 bg-transparent hover:bg-red-700 text-red-600 hover:text-white font-bold py-2 px-4 border border-red-600 hover:border-transparent rounded"
+              className="mt-4 z-30 w-36 bg-transparent text-red-500 hover:bg-red-600 hover:text-white font-bold py-2 px-4 border border-red-600 hover:border-transparent rounded"
             >
               {langArray[langKey].Close}
             </button>

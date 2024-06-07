@@ -3,9 +3,8 @@ import { API_OPTIONS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addCastDetail } from "../redux/detailSlice";
 
-const useCastDetail = () => {
+const useCastDetail = (movieId) => {
   const dispatch = useDispatch();
-  const movieId = 653346;
 
   const getCastDetail = async () => {
     const response = await fetch(
@@ -16,11 +15,15 @@ const useCastDetail = () => {
     const data = await response.json();
 
     dispatch(addCastDetail(data));
+
+    console.log('c', data);
   };
 
   useEffect(() => {
-    getCastDetail();
-  }, []);
+    if (movieId) {
+      getCastDetail();
+    }
+  }, [movieId]);
 
   return <div></div>;
 };

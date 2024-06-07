@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import VideoTitle from "./VideoTitle";
 import VideoBackground from "./VideoBackground";
+import useMovieDetail from "../hooks/useMovieDetail";
+import useCastDetail from "../hooks/useCastDetail";
 
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
@@ -21,6 +23,9 @@ const MainContainer = () => {
     release_date,
     id,
   } = mainMovie;
+
+  // useMovieDetail(id);
+  // useCastDetail(id);
 
   return (
     <div>

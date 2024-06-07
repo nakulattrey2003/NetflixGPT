@@ -1,14 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
+import UserModal from "../components/UserModal.js"
 
 const UserAvatar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const langKey = useSelector((state) => state.language.lang);
-    
+
+  const handleUserAvatarClick = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   const user = useSelector((state) => state.user);
   return (
-    <div className="flex">
+    <div onClick={handleUserAvatarClick} className="flex cursor-pointer">
       <div className="mt-4 font-semibold text-white pl-3 pt-3 pb-3 pr-2">
         {langArray[langKey].Howdy} {user.displayName}!
       </div>
@@ -19,8 +25,9 @@ const UserAvatar = () => {
           alt="dp"
         />
       </div>
+      {isModalOpen && <UserModal />}
     </div>
   );
-}
+};
 
-export default UserAvatar
+export default UserAvatar;

@@ -8,9 +8,8 @@ import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
 
 const MovieList = ({ title, movies }) => {
-
   const langKey = useSelector((state) => state.language.lang);
-  
+
   const nowPlayingTitle = langArray[langKey].NowPlaying;
   const popularTitle = langArray[langKey].Popular;
   const topRatedTitle = langArray[langKey].TopRated;
@@ -41,6 +40,7 @@ const MovieList = ({ title, movies }) => {
         {movies?.map((movie) => (
           <MovieCard
             key={movie.id}
+            movieId={movie.id}
             rating={movie.vote_average}
             date={movie.release_date}
             language={movie.original_language}
