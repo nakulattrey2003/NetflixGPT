@@ -13,7 +13,6 @@ const langArray = {
     Popular: "Popular",
     TopRated: "Top Rated",
     Upcoming: "Upcoming",
-    Close: "Close",
   },
   hindi: {
     myName: "नकुल",
@@ -29,7 +28,6 @@ const langArray = {
     Popular: "लोकप्रिय",
     TopRated: "टॉप रेटेड",
     Upcoming: "आगामी",
-    Close: "बंद करें",
   },
   spanish: {
     myName: "Nakul",
@@ -45,7 +43,6 @@ const langArray = {
     Popular: "Popular",
     TopRated: "Los más valorados",
     Upcoming: "Próximo",
-    Close: "Cerca",
   },
   french: {
     myName: "Nakul",
@@ -62,7 +59,6 @@ const langArray = {
     Popular: "Popular",
     TopRated: "Les mieux notés",
     Upcoming: "Suivant",
-    Close: "Fermer",
   },
 };
 

@@ -13,7 +13,6 @@ import { SUPPORTED_LANGUAGES } from "../utils/constants.js";
 import UserAvatar from "./UserAvatar.js";
 import { changeLanguage } from "../redux/languageSlice.js";
 import langArray from "../utils/langConstants.js";
-import UserInfo from "./UserModal.js";
 
 const Header = () => {
   const navigate = useNavigate();
