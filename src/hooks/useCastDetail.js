@@ -16,16 +16,13 @@ const useCastDetail = (movieId) => {
 
     dispatch(addCastDetail(data));
 
-    console.log('c', data);
   };
 
   useEffect(() => {
-    if (movieId) {
+    // if (movieId) {
       getCastDetail();
-    }
-  }, [movieId]);
-
-  return <div></div>;
+    // }
+  }, []);
 };
 
 export default useCastDetail;

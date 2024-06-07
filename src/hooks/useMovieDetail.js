@@ -1,31 +1,34 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addMovieDetail } from "../redux/detailSlice";
+import { useNavigate } from "react-router-dom";
 
 const useMovieDetail = (movieId) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  
   const getMovieDetail = async () => {
-    const response = await fetch(
-      "https://api.themoviedb.org/3/movie/" + movieId,
-      API_OPTIONS
-    );
+    try {
+      const response = await fetch(
+        "https://api.themoviedb.org/3/movie/" + movieId,
+        API_OPTIONS
+      );
 
-    const data = await response.json();
+      const data = await response.json();
 
-    dispatch(addMovieDetail(data));
+      dispatch(addMovieDetail(data));
+    } catch (error) {
+      navigate("/error");
+    }
 
-    console.log('d', data)
   };
 
   useEffect(() => {
-    if (movieId) {
+    // if (movieId) {
       getMovieDetail();
-    }
+    // }
   }, [movieId]);
-
-  return <div></div>;
 };
 
 export default useMovieDetail;

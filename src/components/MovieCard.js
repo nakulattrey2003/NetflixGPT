@@ -1,15 +1,12 @@
 import React from "react";
 import { IMG_URL } from "../utils/constants";
 import { GoDotFill } from "react-icons/go";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
 import { useNavigate } from "react-router-dom";
-import useMovieDetails from "../hooks/useMovieDetail";
-import { addMovieDetail } from "../redux/detailSlice";
 
 const MovieCard = ({ movieId, rating, date, language, movieName, posterPath }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const langKey = useSelector((state) => state.language.lang);
 
@@ -19,7 +16,6 @@ const MovieCard = ({ movieId, rating, date, language, movieName, posterPath }) =
   const roundedRating = rating.toFixed(1);
 
   const handleMovieCardClick = () => {
-    // dispatch(addMovieDetail(movie));
     navigate("/movie-detail/"+movieId);
   }
 

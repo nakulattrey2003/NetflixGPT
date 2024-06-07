@@ -11,12 +11,11 @@ import { useParams } from "react-router-dom";
 
 const MovieDetailPage = () => {
   const { id: movieId } = useParams();
-  // console.log("movieId", movieId);
 
   const langKey = useSelector((state) => state.language.lang);
   const movies = useSelector((store) => store.movies);
 
-  const relatedTitle = langArray[langKey].Popular;
+  const relatedTitle = langArray[langKey].Related;
 
   useMovieDetail(movieId);
   useCastDetail(movieId);
@@ -26,7 +25,7 @@ const MovieDetailPage = () => {
       <Header />
       <div className="flex-grow">
         <MovieOverview />
-        <div className="bg-black -mt-12">
+        <div>
           <MovieList title={relatedTitle} movies={movies.popularMovies} />
         </div>
       </div>

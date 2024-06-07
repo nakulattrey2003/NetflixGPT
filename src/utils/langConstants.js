@@ -13,6 +13,7 @@ const langArray = {
     Popular: "Popular",
     TopRated: "Top Rated",
     Upcoming: "Upcoming",
+    Related: "Related",
     Close: "Close",
   },
   hindi: {
@@ -29,6 +30,7 @@ const langArray = {
     Popular: "लोकप्रिय",
     TopRated: "टॉप रेटेड",
     Upcoming: "आगामी",
+    Related: "संबंधित",
     Close: "बंद करें",
   },
   spanish: {
@@ -45,6 +47,7 @@ const langArray = {
     Popular: "Popular",
     TopRated: "Los más valorados",
     Upcoming: "Próximo",
+    Related: "Relacionado",
     Close: "Cerca",
   },
   french: {
@@ -62,6 +65,7 @@ const langArray = {
     Popular: "Popular",
     TopRated: "Les mieux notés",
     Upcoming: "Suivant",
+    Related: "Rapport",
     Close: "Fermer",
   },
 };

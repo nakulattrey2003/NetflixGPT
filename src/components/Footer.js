@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <div className="bg-black -my-10">
+    <div className="bg-black -my-10 z-10">
       <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
       <footer class="bg-black rounded-lg shadow dark:bg-black m-4">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
@@ -13,7 +13,8 @@ const Footer = () => {
               class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
             >
               <img
-                src="NetflixGPT Res/Netflix Logo.png"
+                // src="NetflixGPT Res/Netflix Logo.png"
+                src="https://images.ctfassets.net/y2ske730sjqp/1aONibCke6niZhgPxuiilC/2c401b05a07288746ddf3bd3943fbc76/BrandAssets_Logos_01-Wordmark.jpg?w=940"
                 class="h-24"
                 alt="Netflix Logo"
               />

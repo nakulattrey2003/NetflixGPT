@@ -5,6 +5,7 @@ import { FaFire } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { SiNextra } from "react-icons/si";
 import { useSelector } from "react-redux";
+import { BiSolidMoviePlay } from "react-icons/bi";
 import langArray from "../utils/langConstants";
 
 const MovieList = ({ title, movies }) => {
@@ -14,6 +15,7 @@ const MovieList = ({ title, movies }) => {
   const popularTitle = langArray[langKey].Popular;
   const topRatedTitle = langArray[langKey].TopRated;
   const upcomingTitle = langArray[langKey].Upcoming;
+  const relatedTitle = langArray[langKey].Related;
 
   if (!movies || movies.length === 0) {
     return <div>No movies available</div>;
@@ -33,6 +35,9 @@ const MovieList = ({ title, movies }) => {
         )}
         {title == upcomingTitle && (
           <SiNextra className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
+        )}
+        {title == relatedTitle && (
+          <BiSolidMoviePlay className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
         )}
         {title}
       </div>
