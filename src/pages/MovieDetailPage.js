@@ -2,7 +2,7 @@ import React from "react";
 import useMovieDetails from "../hooks/useMovieDetail";
 import useCastDetail from "../hooks/useCastDetail";
 import Header from "../components/Header";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 import MovieOverview from "../components/MovieOverview";
 import MovieList from "../components/MovieList";
 import { useSelector } from "react-redux";
@@ -20,9 +20,11 @@ const MovieDetailPage = () => {
       <Header />
       <div className="flex-grow">
         <MovieOverview />
-        <MovieList title={relatedTitle} movies={movies.popularMovies} />
-      </div>
-      {/* <Footer /> */}
+        <div className="bg-black -mt-12">
+          <MovieList title={relatedTitle} movies={movies.popularMovies} />
+          </div>
+        </div>
+        <Footer />
     </div>
   );
 };
