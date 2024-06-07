@@ -11,6 +11,7 @@ const SecondaryContainer = () => {
   const popularTitle = langArray[langKey].Popular;
   const topRatedTitle = langArray[langKey].TopRated;
   const upcomingTitle = langArray[langKey].Upcoming;
+
   
   return (
     <div className="bg-black">

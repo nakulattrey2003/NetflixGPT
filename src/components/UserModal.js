@@ -52,7 +52,7 @@ const UserInfo = () => {
           <div className="m-4 font-bold text-3xl">{user.displayName}</div>
           <div className="mb-8 ">
             <img
-              className="rounded-full h-56 w-56 object-cover"
+              className="rounded-full h-60 w-60 object-cover"
               src={user.photoURL}
               alt="dp"
             />
@@ -61,13 +61,13 @@ const UserInfo = () => {
           <div className="flex gap-6">
             <button
               onClick={handleLogOut}
-              className="mt-4 w-36 bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
+              className="mt-4 w-36 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             >
               {langArray[langKey].LogOut}
             </button>
             <button
               onClick={handleClose}
-              className="mt-4 w-36 bg-transparent hover:bg-red-700 text-red-500 hover:text-white font-bold py-2 px-4 border border-red-500 hover:border-transparent rounded"
+              className="mt-4 w-36 bg-transparent hover:bg-red-700 text-red-600 hover:text-white font-bold py-2 px-4 border border-red-600 hover:border-transparent rounded"
             >
               {langArray[langKey].Close}
             </button>

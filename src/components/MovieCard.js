@@ -3,8 +3,12 @@ import { IMG_URL } from "../utils/constants";
 import { GoDotFill } from "react-icons/go";
 import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
+import MovieDetailPage from "../pages/MovieDetailPage";
+import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({ rating, date, language, movieName, posterPath }) => {
+  const navigate = useNavigate();
+
   const langKey = useSelector((state) => state.language.lang);
 
   const uppercaseMovieName = movieName.toUpperCase();
@@ -12,9 +16,13 @@ const MovieCard = ({ rating, date, language, movieName, posterPath }) => {
   const uppercaseLanguage = language.toUpperCase();
   const roundedRating = rating.toFixed(1);
 
+  const handleMovieCardClick = () => {
+    navigate("/movie-detail");
+  }
+
   return (
     <div className="relative ml-3 mb-20">
-      <div className="w-52">
+      <div onClick={handleMovieCardClick} className="cursor-pointer w-52">
         <img
           className="rounded-lg"
           src={IMG_URL + posterPath}
