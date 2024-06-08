@@ -16,6 +16,8 @@ const MovieDetailPage = () => {
   const movies = useSelector((store) => store.movies);
 
   const relatedTitle = langArray[langKey].Related;
+  const topRatedTitle = langArray[langKey].TopRated;
+  const upcomingTitle = langArray[langKey].Upcoming;
 
   useMovieDetail(movieId);
   useCastDetail(movieId);
@@ -27,6 +29,8 @@ const MovieDetailPage = () => {
         <MovieOverview />
         <div>
           <MovieList title={relatedTitle} movies={movies.popularMovies} />
+          <MovieList title={topRatedTitle} movies={movies.topRatedMovies} />
+          <MovieList title={upcomingTitle} movies={movies.upcomingMovies} />
         </div>
       </div>
       <Footer />

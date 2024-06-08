@@ -22,7 +22,7 @@ const useCastDetail = (movieId) => {
     // if (movieId) {
       getCastDetail();
     // }
-  }, []);
+  }, [movieId]);
 };
 
 export default useCastDetail;

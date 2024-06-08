@@ -54,13 +54,13 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
         </div>
         <div className="flex">
           <div>
-            <button class="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-2 px-4 rounded">
+            <button className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-2 px-4 rounded">
               <FaPlay className="mt-1 mr-2" /> {langArray[langKey].Play}
             </button>
           </div>
           <div>
             <button
-              class="flex bg-gray-500 hover:bg-gray-600 bg-opacity-50 hover:bg-opacity-50 text-white font-bold hover:text-white py-2 px-4 hover:border-transparent rounded"
+              className="flex bg-gray-500 hover:bg-gray-600 bg-opacity-50 hover:bg-opacity-50 text-white font-bold hover:text-white py-2 px-4 hover:border-transparent rounded"
               onClick={handleExpand}
             >
               <CiCircleInfo className="mr-2 h-6 w-6" />{" "}
