@@ -125,7 +125,7 @@ const MovieOverview = () => {
                     alt="character-dp"
                   />
                 </div>
-                <div className="font-bold text-sm text-white">
+                <div className="font-bold text-sm text-white break-words w-28">
                   {it.original_name}
                 </div>
                 <div className="text-gray-300 text-sm break-words w-28">{it.character}</div>
