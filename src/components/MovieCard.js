@@ -5,7 +5,14 @@ import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
 import { useNavigate } from "react-router-dom";
 
-const MovieCard = ({ movieId, rating, date, language, movieName, posterPath }) => {
+const MovieCard = ({
+  movieId,
+  rating,
+  date,
+  language,
+  movieName,
+  posterPath,
+}) => {
   const navigate = useNavigate();
 
   const langKey = useSelector((state) => state.language.lang);
@@ -16,18 +23,24 @@ const MovieCard = ({ movieId, rating, date, language, movieName, posterPath }) =
   const roundedRating = rating.toFixed(1);
 
   const handleMovieCardClick = () => {
-    navigate("/movie-detail/"+movieId);
-  }
+    try {
+      navigate("/movie-detail/" + movieId);
+    } catch (error) {
+      navigate("/error");
+    }
+  };
 
   return (
     <div className="relative ml-3 mb-20">
       <div onClick={handleMovieCardClick} className="cursor-pointer w-52">
-        <img
-          className="rounded-lg"
-          src={IMG_URL + posterPath}
-          alt="Movie Card"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-40 rounded-lg"></div>
+        <div className="relative">
+          <img
+            className="rounded-lg transition-transform duration-300 hover:scale-110"
+            src={IMG_URL + posterPath}
+            alt="Movie Card"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black bg-opacity-40 rounded-lg"></div>
         <div className="absolute bottom-10 left-2 text-white font-black text-lg p-2 w-full text-left rounded-t-lg">
           {uppercaseMovieName}
         </div>

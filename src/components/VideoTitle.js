@@ -6,9 +6,21 @@ import { MdDateRange } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
 import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
+import useMovieTrailer from "../hooks/useMovieTrailer";
+import ReactPlayer from "react-player";
 
 const VideoTitle = ({ title, overview, language, rating, date }) => {
   const langKey = useSelector((state) => state.language.lang);
+  const movies = useSelector((store) => store.movies?.nowPlayingMovies);
+
+  // const randomcount = Math.floor(Math.random() * (movies.length));
+  // const mainMovie = movies[randomcount];
+
+  const mainMovie = movies[9]; // 10 for garfield and 7 for inside out 2
+
+  const trailerKey = useMovieTrailer(mainMovie.id);
+
+  const [playing, setPlaying] = useState(false);
 
   const lessInfoText = langArray[langKey].LessInfo || "Less Info";
   const moreInfoText = langArray[langKey].MoreInfo || "More Info";
@@ -27,6 +39,11 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
+  const handlePlay = () => {
+    setPlaying(true);
+  };
+  
   const roundedRating = rating.toFixed(1);
 
   const upperCaseLanguage = language.toUpperCase();
@@ -54,7 +71,10 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
         </div>
         <div className="flex">
           <div>
-            <button className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-2 px-4 rounded">
+            <button
+              onClick={handlePlay}
+              className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-2 px-4 rounded"
+            >
               <FaPlay className="mt-1 mr-2" /> {langArray[langKey].Play}
             </button>
           </div>
@@ -69,6 +89,25 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
           </div>
         </div>
       </div>
+      {/* Trailer Preview */}
+      {playing && (
+        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+          <ReactPlayer
+            url={`https://www.youtube.com/embed/${trailerKey}`} // Replace with your video URL
+            playing={playing}
+            controls={true}
+            // light={true}
+            width="100%"
+            height="100%"
+          />
+          <button
+            className="absolute top-4 right-4 text-white text-xl bg-black bg-opacity-50 p-2 rounded-full"
+            onClick={() => setPlaying(false)}
+          >
+            ✖
+          </button>
+        </div>
+      )}
     </div>
   );
 };

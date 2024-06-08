@@ -6,17 +6,27 @@ import { GoDotFill } from "react-icons/go";
 import langArray from "../utils/langConstants";
 import { CiCircleInfo } from "react-icons/ci";
 import { FaPlay } from "react-icons/fa";
+import ReactPlayer from "react-player";
+import useMovieTrailer from "../hooks/useMovieTrailer";
+import { useParams } from "react-router-dom";
 
 const MovieOverview = () => {
   const movie = useSelector((state) => state.detail.movieDetail);
   const cast = useSelector((state) => state.detail.castDetail);
-
   const langKey = useSelector((state) => state.language.lang);
+
+  const {id: movieId} = useParams();
+
+  const trailerKey = useMovieTrailer(movieId);
+  // const trailerKey = useMovieTrailer(929590);
+
+  console.log("movieKey", movie);
 
   const lessInfoText = langArray[langKey].LessInfo || "Less Info";
   const moreInfoText = langArray[langKey].MoreInfo || "More Info";
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   const splitOverview = (text, maxWords) => {
     const words = text.split(" ");
@@ -29,6 +39,10 @@ const MovieOverview = () => {
 
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  const handlePlay = () => {
+    setPlaying(true);
   };
 
   if (!movie || !cast) {
@@ -94,7 +108,10 @@ const MovieOverview = () => {
           </div>
           <div className="flex -ml-4">
             <div>
-              <button className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-2 px-4 rounded">
+              <button
+                onClick={handlePlay}
+                className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-2 px-4 rounded"
+              >
                 <FaPlay className="mt-1 mr-2" /> {langArray[langKey].Play}
               </button>
             </div>
@@ -128,11 +145,33 @@ const MovieOverview = () => {
                 <div className="font-bold text-sm text-white break-words w-28">
                   {it.original_name}
                 </div>
-                <div className="text-gray-300 text-sm break-words w-28">{it.character}</div>
+                <div className="text-gray-300 text-sm break-words w-28">
+                  {it.character}
+                </div>
               </div>
             ))}
         </div>
       </div>
+
+      {/* Trailer Preview */}
+      {playing && (
+        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+          <ReactPlayer
+            url={`https://www.youtube.com/embed/${trailerKey}`} // Replace with your video URL
+            playing={playing}
+            controls={true}
+            // light={true}
+            width="100%"
+            height="100%"
+          />
+          <button
+            className="absolute top-4 right-4 text-white text-xl bg-black bg-opacity-50 p-2 rounded-full"
+            onClick={() => setPlaying(false)}
+          >
+            ✖
+          </button>
+        </div>
+      )}
     </div>
   );
 };
