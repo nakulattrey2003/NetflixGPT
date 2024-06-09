@@ -6,6 +6,7 @@ import detailReducer from "./detailSlice.js";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import watchlistReducer from "./watchlistSlice.js";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   movies: moviesReducer,
   language: languageReducer,
   detail: detailReducer,
+  watchlist: watchlistReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
