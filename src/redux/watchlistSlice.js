@@ -8,7 +8,7 @@ const watchlistSlice = createSlice({
             return [...state, action.payload];
         },
         removeWatchlist: (state, action) => {
-            return state.filter((movie) => movie.id !== action.payload.id);
+            return state.filter((movie) => movie.id !== action.payload);
         },
     },
 });

@@ -4,7 +4,7 @@ const langArray = {
     GptSearchPlaceholder: "Search for your next binge-worthy series...",
     Howdy: "Howdy",
     LogOut: "Log Out",
-    Play: "Play",
+    Play: "Play Now",
     LessInfo: "Less Info",
     MoreInfo: "More Info",
     Rating: "Rating",
@@ -15,13 +15,15 @@ const langArray = {
     Upcoming: "Upcoming",
     Related: "Related",
     Close: "Close",
+    Added: "Added",
+    AddToList: "Add to List",
   },
   hindi: {
     myName: "नकुल",
     GptSearchPlaceholder: "अपनी अगली फिल्म खोजें...",
     Howdy: "कैसे हो",
     LogOut: "लॉग आउट",
-    Play: "चालू",
+    Play: "शुरू करें",
     LessInfo: "कम जानकारी",
     MoreInfo: "अधिक जानकारी",
     Rating: "रेटिंग",
@@ -32,6 +34,8 @@ const langArray = {
     Upcoming: "आगामी",
     Related: "संबंधित",
     Close: "बंद करें",
+    Added: "जोड़ दिया गया",
+    AddToList: "लिस्ट में जोडे",
   },
   spanish: {
     myName: "Nakul",
@@ -49,6 +53,8 @@ const langArray = {
     Upcoming: "Próximo",
     Related: "Relacionado",
     Close: "Cerca",
+    Added: "Agregado",
+    AddToList: "Agregar a la lista",
   },
   french: {
     myName: "Nakul",
@@ -67,6 +73,8 @@ const langArray = {
     Upcoming: "Suivant",
     Related: "Rapport",
     Close: "Fermer",
+    Added: "Ajouté",
+    AddToList: "Ajouter à la liste",
   },
 };
 
