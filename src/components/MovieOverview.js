@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IMG_URL } from "../utils/constants";
 import Skeleton from "./Skeleton";
@@ -15,18 +15,21 @@ const MovieOverview = () => {
   const cast = useSelector((state) => state.detail.castDetail);
   const langKey = useSelector((state) => state.language.lang);
 
-  const {id: movieId} = useParams();
-
-  const trailerKey = useMovieTrailer(movieId);
-  // const trailerKey = useMovieTrailer(929590);
-
-  console.log("movieKey", movie);
-
-  const lessInfoText = langArray[langKey].LessInfo || "Less Info";
-  const moreInfoText = langArray[langKey].MoreInfo || "More Info";
+  const { id: movieId } = useParams();
+  console.log("movieid", movieId);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [playing, setPlaying] = useState(false);
+
+  const trailerKey = useMovieTrailer(movieId);
+  console.log("trailerKry", trailerKey);
+
+  useEffect(() => {
+    // This useEffect ensures that when the movieId changes, we re-fetch the trailer key
+  }, [movieId]);
+
+  const lessInfoText = langArray[langKey].LessInfo || "Less Info";
+  const moreInfoText = langArray[langKey].MoreInfo || "More Info";
 
   const splitOverview = (text, maxWords) => {
     const words = text.split(" ");
@@ -76,7 +79,7 @@ const MovieOverview = () => {
             alt="movie-image"
           />
           {/* Black Overlay */}
-          <div class="absolute inset-0 bg-black opacity-30 z-0 h-full full-height"></div>
+          <div class="absolute inset-0 bg-black opacity-40 z-0 h-full full-height"></div>
         </div>
 
         {/* Content */}
@@ -157,7 +160,7 @@ const MovieOverview = () => {
       {playing && (
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
           <ReactPlayer
-            url={`https://www.youtube.com/embed/${trailerKey}`} // Replace with your video URL
+            url={`https://www.youtube.com/embed/${trailerKey}?&loop=1&playlist=${trailerKey}`} // Replace with your video URL
             playing={playing}
             controls={true}
             // light={true}

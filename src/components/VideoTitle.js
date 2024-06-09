@@ -18,7 +18,9 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
 
   const mainMovie = movies[9]; // 10 for garfield and 7 for inside out 2
 
-  const trailerKey = useMovieTrailer(mainMovie.id);
+  const movieId = mainMovie?.id || "dQw4w9WgXcQ?si=CZOmhr0IiXt4JHHz";
+
+  const trailerKey = useMovieTrailer(movieId);
 
   const [playing, setPlaying] = useState(false);
 

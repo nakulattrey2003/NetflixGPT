@@ -25,6 +25,7 @@ const MovieCard = ({
   const handleMovieCardClick = () => {
     try {
       navigate("/movie-detail/" + movieId);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       navigate("/error");
     }
