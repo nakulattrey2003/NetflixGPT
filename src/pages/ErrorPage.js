@@ -8,7 +8,7 @@ const Error = () => {
     navigate("/browse");
   }
   return (
-    <div className="flex flex-col items-center justify-center p-8 text-center bg-gray-900 text-white">
+    <div className="flex flex-col items-center justify-center p-8 text-center bg-gray-900 text-white h-screen">
       <img
         className="mt-[-50px] h-80"
         src="/NetflixGPT Res/404 Error.png"

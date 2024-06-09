@@ -16,13 +16,11 @@ const MovieOverview = () => {
   const langKey = useSelector((state) => state.language.lang);
 
   const { id: movieId } = useParams();
-  console.log("movieid", movieId);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [playing, setPlaying] = useState(false);
 
   const trailerKey = useMovieTrailer(movieId);
-  console.log("trailerKry", trailerKey);
 
   useEffect(() => {
     // This useEffect ensures that when the movieId changes, we re-fetch the trailer key
