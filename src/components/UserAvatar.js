@@ -15,12 +15,12 @@ const UserAvatar = () => {
   const user = useSelector((state) => state.user);
   return (
     <div onClick={handleUserAvatarClick} className="flex cursor-pointer">
-      <div className="mt-4 font-semibold text-white pl-3 pt-3 pb-3 pr-2">
+      <div className="mt-4 font-semibold text-white pl-3 pt-3 pb-3 pr-2 hover:text-red-500">
         {langArray[langKey].Howdy} {user.displayName}!
       </div>
       <div>
         <img
-          className="mt-4 w-12 h-12 rounded-full object-cover"
+          className="mt-4 w-12 h-12 rounded-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
           src={user.photoURL}
           alt="dp"
         />

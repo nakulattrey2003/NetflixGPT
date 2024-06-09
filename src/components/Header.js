@@ -21,10 +21,6 @@ const Header = () => {
   const user = useSelector((state) => state.user);
   const langKey = useSelector((state) => state.language.lang);
 
-  const handleLogoClick = () => {
-    navigate("/browse");
-  };
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       // this api function is provided by the firebase which is called whenever user is logged in or logged out
@@ -62,9 +58,15 @@ const Header = () => {
       });
   };
 
+  const handleLogoClick = () => {
+    navigate("/browse");
+  };
+
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
+
+  const handleWatchlist = () => {}
 
   return (
     <div className="absolute w-full px-8 py-2 bg-gradient-to-b from-black z-50 flex justify-between">
@@ -76,17 +78,17 @@ const Header = () => {
       ></img>
 
       {user && (
-        <div className="flex ml-24 w-full justify-between">
+        <div className="flex ml-6 w-full justify-between">
           <GptSearchBar />
 
           <div className="flex">
             <select
               onChange={handleLanguageChange}
-              className="text-white p-2 m-2 outline-none border-none rounded bg-transparent mr-10"
+              className="text-white p-2 m-2 outline-none border-none rounded bg-transparent mr-10 hover:text-red-500 hover:font-bold"
             >
               {SUPPORTED_LANGUAGES.map((it) => (
                 <option
-                  className="bg-black opacity-100 p-2 m-2 text-white"
+                  className="bg-black opacity-0 p-2 m-2 text-white"
                   key={it.identifier}
                   value={it.identifier}
                 >
@@ -94,6 +96,8 @@ const Header = () => {
                 </option>
               ))}
             </select>
+
+            <div onClick={handleWatchlist} className="text-white mt-7 mr-12 hover:font-bold hover:text-red-500">Watchlist</div>
 
             <UserAvatar />
 
