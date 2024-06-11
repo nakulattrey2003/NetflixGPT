@@ -144,7 +144,7 @@ const Register = () => {
 
         <button
           onClick={handleRegisterButton}
-          className="p-2 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
+          className="p-3 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
           disabled={isLoading}
         >
           {isLoading ? (

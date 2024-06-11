@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getWatchlistKey = (userId) => `watchlist_${userId}`;
+
 const watchlistSlice = createSlice({
   name: "watchlist",
   initialState: {
@@ -7,19 +9,29 @@ const watchlistSlice = createSlice({
   },
   reducers: {
     addToWatchlist: (state, action) => {
-      const { movie } = action.payload;
+      const { movie, userId } = action.payload;
+
+      const watchlistKey = getWatchlistKey(userId);
+
       state.watchlistArray.push(movie);
-      localStorage.setItem("watchlist", JSON.stringify(state.watchlistArray));
+      localStorage.setItem(watchlistKey, JSON.stringify(state.watchlistArray));
     },
     removeFromWatchlist: (state, action) => {
-      const { movie } = action.payload;
+      const { movie, userId } = action.payload;
+
+      const watchlistKey = getWatchlistKey(userId);
+
       state.watchlistArray = state.watchlistArray.filter(
         (it) => it.id !== movie.id
       );
-      localStorage.setItem("watchlist", JSON.stringify(state.watchlistArray));
+      localStorage.setItem(watchlistKey, JSON.stringify(state.watchlistArray));
     },
     loadWatchlist: (state, action) => {
-      const storedWatchlist = localStorage.getItem("watchlist");
+      const {userId} = action.payload;
+
+      const watchlistKey = getWatchlistKey(userId);
+
+      const storedWatchlist = localStorage.getItem(watchlistKey);
       state.watchlistArray = storedWatchlist ? JSON.parse(storedWatchlist) : [];
     },
   },

@@ -32,7 +32,7 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
 
-        dispatch(loadWatchlist());   // it takes all the watchlist data from localstorage to watchlist reducer array;
+        // dispatch(loadWatchlist());   // it takes all the watchlist data from localstorage to watchlist reducer array;
 
         toast.success("Logged in Successfully");
 
@@ -88,7 +88,7 @@ const Login = () => {
         />
         {/* <p className="text-red-500 mt-3 ml-2">{errorMessage}</p> */}
         <button
-          className="p-2 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
+          className="p-3 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
           onClick={handleLoginButton}
           disabled={isLoading}
         >

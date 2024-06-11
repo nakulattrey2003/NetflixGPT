@@ -19,10 +19,14 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  dispatch(loadWatchlist()); 
-
   const user = useSelector((state) => state.user);
   const langKey = useSelector((state) => state.language.lang);
+
+  useEffect(() => {
+    if(user){
+      dispatch(loadWatchlist({ userId : user.uid }));
+    }
+  }, [user, dispatch]); 
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -51,7 +55,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful
-        localStorage.removeItem("watchlist");
+        // localStorage.removeItem("watchlist");
         toast.success("Logged Out Succesfully");
         navigate("/login");
       })

@@ -12,13 +12,13 @@ import { useParams } from "react-router-dom";
 import { addToWatchlist, removeFromWatchlist } from "../redux/watchlistSlice";
 
 const MovieOverview = () => {
+  
+  const user = useSelector((state) => state.user);
   const movie = useSelector((state) => state.detail.movieDetail);
   const cast = useSelector((state) => state.detail.castDetail);
   const langKey = useSelector((state) => state.language.lang);
   const watchlistArray =
     useSelector((state) => state.watchlist.watchlistArray) || [];
-
-  console.log("watchlistArray", watchlistArray);
 
   const dispatch = useDispatch();
   const { id: movieId } = useParams();
@@ -33,10 +33,12 @@ const MovieOverview = () => {
   const moreInfoText = langArray[langKey].MoreInfo || "More Info";
 
   useEffect(() => {
+    if(!movie) return ;
+
     setIsInWatchlist(
       !!watchlistArray.find((item) => item && item.id === movie.id)
     );
-  }, [movie.id]);
+  }, [movie]);
 
   const splitOverview = (text, maxWords) => {
     const words = text.split(" ");
@@ -56,14 +58,12 @@ const MovieOverview = () => {
   };
 
   const handleWatchlist = () => {
-    if (!movie || !movieId) return;
-
-    console.log('movie', movie);
+    if (!movie || !movieId || !user) return;
 
     if (isInWatchlist) {
-      dispatch(removeFromWatchlist({ movie }));
+      dispatch(removeFromWatchlist({ movie, userId : user.uid }));
     } else {
-      dispatch(addToWatchlist({ movie }));
+      dispatch(addToWatchlist({ movie, userId : user.uid }));
     }
 
     setIsInWatchlist(!isInWatchlist);
