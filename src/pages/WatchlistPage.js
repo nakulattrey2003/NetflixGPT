@@ -5,8 +5,9 @@ import langArray from "../utils/langConstants";
 import { useDispatch, useSelector } from "react-redux";
 import { FaHeart } from "react-icons/fa";
 import MovieCard from "../components/MovieCard";
-import { clearWatchlist } from "../redux/watchlistSlice";
+import { clearWatchlist, removeFromWatchlist } from "../redux/watchlistSlice";
 import { toast } from "react-toastify";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 
 const WatchlistPage = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const WatchlistPage = () => {
   const user = useSelector((state) => state.user);
 
   const [sortByYear, setSortByYear] = useState("descending");
+  const [hoveredMovieId, setHoveredMovieId] = useState(null);
 
   // Function to sort the movies by release date
   const sortMoviesByYear = (movies, order) => {
@@ -29,8 +31,13 @@ const WatchlistPage = () => {
   };
 
   const handleClearWatchlist = () => {
-    toast.success("Watchlist cleared successfully!")
+    toast.success("Watchlist cleared successfully!");
     dispatch(clearWatchlist({ userId: user.uid }));
+  };
+
+  const handleDeleteMovie = (movie) => {
+    toast.success(`${movie.original_title} is Removed from the Watchlist`);
+    dispatch(removeFromWatchlist({ movie, userId: user.uid }));
   };
 
   // Sort the watchlist based on selected sorting option
@@ -87,15 +94,30 @@ const WatchlistPage = () => {
             {!isListEmpty && (
               <div className="grid grid-cols-6 gap-2">
                 {sortedWatchlist.map((movie) => (
-                  <MovieCard
+                  <div
                     key={movie.id}
-                    movieId={movie.id}
-                    rating={movie.vote_average}
-                    date={movie.release_date}
-                    language={movie.original_language}
-                    movieName={movie.original_title}
-                    posterPath={movie.poster_path}
-                  />
+                    className="relative"
+                    onMouseEnter={() => setHoveredMovieId(movie.id)}
+                    onMouseLeave={() => setHoveredMovieId(null)}
+                  >
+                    <MovieCard
+                      movieId={movie.id}
+                      rating={movie.vote_average}
+                      date={movie.release_date}
+                      language={movie.original_language}
+                      movieName={movie.original_title}
+                      posterPath={movie.poster_path}
+                    />
+                    {/* Delete icon */}
+                    {hoveredMovieId === movie.id && ( // Show delete icon only when hoveredMovieId matches
+                      <button
+                        onClick={() => handleDeleteMovie(movie)}
+                        className="absolute top-2 right-10 text-2xl shadow-lg text-white hover:text-red-500 focus:outline-none"
+                      >
+                        <RiDeleteBin6Fill />
+                      </button>
+                    )}
+                  </div>
                 ))}
               </div>
             )}
