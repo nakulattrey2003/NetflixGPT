@@ -6,6 +6,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ErrorPage from "./pages/ErrorPage.js";
 import GptSearchPage from "./pages/GptSearchPage.js";
 import MovieDetailPage from "./pages/MovieDetailPage.js";
+import WatchlistPage from "./pages/WatchlistPage.js";
 import ProtectRoute from "./utils/ProtectRoute";
 
 function App() {
@@ -23,9 +24,7 @@ function App() {
           />
           <Route
             path="/register"
-            element={
-              <ProtectRoute type="public" element={<RegisterPage />} />
-            }
+            element={<ProtectRoute type="public" element={<RegisterPage />} />}
           />
           <Route
             path="/browse"
@@ -42,6 +41,13 @@ function App() {
             path="/movie-detail/:id"
             element={
               <ProtectRoute type="private" element={<MovieDetailPage />} />
+            }
+          />
+          <Route
+            path="/watchlist"
+            type="private"
+            element={
+              <ProtectRoute type="private" element={<WatchlistPage />} />
             }
           />
         </Routes>

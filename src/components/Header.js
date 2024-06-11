@@ -74,7 +74,7 @@ const Header = () => {
     dispatch(changeLanguage(e.target.value));
   };
 
-  const handleWatchlist = () => {}
+  const handleWatchlist = () => {navigate("/watchlist")}
 
   return (
     <div className="absolute w-full px-8 py-2 bg-gradient-to-b from-black z-50 flex justify-between">
@@ -105,7 +105,7 @@ const Header = () => {
               ))}
             </select>
 
-            <div onClick={handleWatchlist} className="text-white mt-7 mr-12 hover:font-bold hover:text-red-500">Watchlist</div>
+            <div onClick={handleWatchlist} className="text-white mt-7 mr-12 hover:font-bold hover:text-red-500">{langArray[langKey].Watchlist}</div>
 
             <UserAvatar />
 

@@ -10,6 +10,7 @@ import ReactPlayer from "react-player";
 import useMovieTrailer from "../hooks/useMovieTrailer";
 import { useParams } from "react-router-dom";
 import { addToWatchlist, removeFromWatchlist } from "../redux/watchlistSlice";
+import { toast } from "react-toastify";
 
 const MovieOverview = () => {
   
@@ -61,8 +62,10 @@ const MovieOverview = () => {
     if (!movie || !movieId || !user) return;
 
     if (isInWatchlist) {
+      toast.success(`${movie.title} is Removed From Watchlist`)
       dispatch(removeFromWatchlist({ movie, userId : user.uid }));
     } else {
+      toast.success(`${movie.title} is added to the Watchlist`)
       dispatch(addToWatchlist({ movie, userId : user.uid }));
     }
 

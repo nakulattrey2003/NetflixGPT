@@ -17,6 +17,7 @@ const langArray = {
     Close: "Close",
     Added: "Added",
     AddToList: "Add to List",
+    Watchlist: "Watchlist",
   },
   hindi: {
     myName: "नकुल",
@@ -36,6 +37,7 @@ const langArray = {
     Close: "बंद करें",
     Added: "जोड़ दिया गया",
     AddToList: "लिस्ट में जोडे",
+    Watchlist: "देखने की सूची",
   },
   spanish: {
     myName: "Nakul",
@@ -55,6 +57,7 @@ const langArray = {
     Close: "Cerca",
     Added: "Agregado",
     AddToList: "Agregar a la lista",
+    Watchlist: "Lista de vigilancia",
   },
   french: {
     myName: "Nakul",
@@ -75,6 +78,7 @@ const langArray = {
     Close: "Fermer",
     Added: "Ajouté",
     AddToList: "Ajouter à la liste",
+    Watchlist: "Liste de surveillance",
   },
 };
 
