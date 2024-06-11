@@ -32,11 +32,11 @@ const MovieCard = ({
   };
 
   return (
-    <div className="relative ml-3 mb-20">
+    <div className="relative ml-3 mb-20 transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-150">
       <div onClick={handleMovieCardClick} className="cursor-pointer w-52">
         <div className="relative">
           <img
-            className="rounded-lg transition-transform duration-300 hover:scale-110"
+            className="rounded-lg"
             src={IMG_URL + posterPath}
             alt="Movie Card"
           />

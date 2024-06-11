@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import langArray from "../utils/langConstants";
@@ -9,7 +9,22 @@ import MovieCard from "../components/MovieCard";
 const WatchlistPage = () => {
   const langKey = useSelector((state) => state.language.lang);
   const watchlist = useSelector((state) => state.watchlist.watchlistArray);
-  
+
+  const [sortByYear, setSortByYear] = useState("ascending");
+
+  // Function to sort the movies by release date
+  const sortMoviesByYear = (movies, order) => {
+    const sortedMovies = [...movies];
+    sortedMovies.sort((a, b) => {
+      const dateA = new Date(a.release_date);
+      const dateB = new Date(b.release_date);
+      return order === "ascending" ? dateA - dateB : dateB - dateA;
+    });
+    return sortedMovies;
+  };
+
+  // Sort the watchlist based on selected sorting option
+  const sortedWatchlist = sortMoviesByYear(watchlist, sortByYear);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -28,13 +43,22 @@ const WatchlistPage = () => {
           </div>
         </div>
         <div className="relative z-10 pt-2/5 py-10 mt-72 bg-black">
-          <div className="container mx-auto ml-28 rounded-lg shadow-lg bg-black">
-            {/* Card content goes here */}
-            <h2 className="text-3xl border-l-4 font-bold mb-4 text-white pl-4">
-              Your Watchlist
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1">
-              {watchlist?.map((movie) => (
+          <div className="container mx-auto ml-28 rounded-lg bg-black">
+            <div className="flex justify-between mb-6">
+              <h2 className="text-3xl border-l-4 font-bold mb-4 text-white border-red-500 pl-4">
+                Your Watchlist
+              </h2>
+              <select
+                value={sortByYear}
+                onChange={(e) => setSortByYear(e.target.value)}
+                className="px-9 mb-5 py-3 rounded bg-gray-800 text-white"
+              >
+                <option value="ascending">Oldest First</option>
+                <option value="descending">Newest First</option>
+              </select>
+            </div>
+            <div className="grid grid-cols-6 gap-4">
+              {sortedWatchlist.map((movie) => (
                 <MovieCard
                   key={movie.id}
                   movieId={movie.id}
