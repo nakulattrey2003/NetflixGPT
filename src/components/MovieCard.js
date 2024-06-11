@@ -18,7 +18,7 @@ const MovieCard = ({
   const langKey = useSelector((state) => state.language.lang);
 
   const uppercaseMovieName = movieName.toUpperCase();
-  const year = date.split("-")[2];
+  const year = date.split("-")[0];
   const uppercaseLanguage = language.toUpperCase();
   const roundedRating = rating.toFixed(1);
 
@@ -48,7 +48,7 @@ const MovieCard = ({
         <div className="flex absolute bottom-4 left-2 text-gray-200 font-normal text-sm p-2 w-full text-left rounded-t-lg">
           {langArray[langKey].Rating}: {roundedRating}
           <GoDotFill className="size-3 m-1" />
-          20{year}
+          {year}
           <GoDotFill className="size-3 m-1" />
           {uppercaseLanguage}
         </div>
