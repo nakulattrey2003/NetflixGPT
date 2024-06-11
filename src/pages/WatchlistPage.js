@@ -57,18 +57,18 @@ const WatchlistPage = () => {
             className="object-cover w-full h-full filter blur-sm"
           />
           <div className="absolute inset-0 bg-black opacity-40"></div>
-          <div className="absolute inset-0 mt-12 flex items-center justify-center text-white text-4xl font-bold">
+          <div className="absolute inset-0 mt-6 flex items-center justify-center text-white text-4xl font-bold">
             <FaHeart className="mr-3" />
             <div>{langArray[langKey].Watchlist}</div>
           </div>
         </div>
-        <div className={`relative z-10 pt-10 mt-72 bg-black rounded-2xl`}>
+        <div className={`relative z-10 pt-10 mt-56 bg-black rounded-2xl`}>
           <div
-            className={`container mx-auto ml-28 bg-black ${
+            className={`ml-28 bg-black ${
               isListEmpty ? "h-96 " : "h-auto"
             }`}
           >
-            <div className="flex justify-between mb-6 ">
+            <div className="flex justify-between mb-6 mr-7">
               <h2 className="text-3xl border-l-4 font-bold mb-4 h-9 text-white border-red-500 pl-4">
                 {langArray[langKey].YourWatchlist}
               </h2>
