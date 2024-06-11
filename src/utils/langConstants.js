@@ -18,6 +18,11 @@ const langArray = {
     Added: "Added",
     AddToList: "Add to List",
     Watchlist: "Watchlist",
+    YourWatchlist: "Your Watchlist",
+    OldestFirst: "Oldest First",
+    NewestFirst: "Newest First",
+    YourWatchlistIsEmpty: "Your Watchlist is Empty!",
+    ClearAll: "Clear All",
   },
   hindi: {
     myName: "नकुल",
@@ -38,6 +43,11 @@ const langArray = {
     Added: "जोड़ दिया गया",
     AddToList: "लिस्ट में जोडे",
     Watchlist: "देखने की सूची",
+    YourWatchlist: "आपकी सूची",
+    OldestFirst: "सबसे पुराना पहले",
+    NewestFirst: "नवीनतम पहले",
+    YourWatchlistIsEmpty: "आपकी वॉचलिस्ट खाली है!",
+    ClearAll: "सभी साफ करें",
   },
   spanish: {
     myName: "Nakul",
@@ -58,6 +68,11 @@ const langArray = {
     Added: "Agregado",
     AddToList: "Agregar a la lista",
     Watchlist: "Lista de vigilancia",
+    YourWatchlist: "Tu lista de seguimiento",
+    OldestFirst: "Los más viejos primero",
+    NewestFirst: "El más reciente primero",
+    YourWatchlistIsEmpty: "Tu lista de seguimiento está vacía!",
+    ClearAll: "Limpiar todo",
   },
   french: {
     myName: "Nakul",
@@ -79,6 +94,11 @@ const langArray = {
     Added: "Ajouté",
     AddToList: "Ajouter à la liste",
     Watchlist: "Liste de surveillance",
+    YourWatchlist: "Votre liste de surveillance",
+    OldestFirst: "Le plus ancienPremier",
+    NewestFirst: "Le plus récent d'abord",
+    YourWatchlistIsEmpty: "Votre liste de surveillance est vide!",
+    ClearAll: "Tout effacer",
   },
 };
 

@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import langArray from "../utils/langConstants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaHeart } from "react-icons/fa";
 import MovieCard from "../components/MovieCard";
+import { clearWatchlist } from "../redux/watchlistSlice";
+import { toast } from "react-toastify";
 
 const WatchlistPage = () => {
+  const dispatch = useDispatch();
+
   const langKey = useSelector((state) => state.language.lang);
   const watchlist = useSelector((state) => state.watchlist.watchlistArray);
+  const user = useSelector((state) => state.user);
 
-  const [sortByYear, setSortByYear] = useState("ascending");
+  const [sortByYear, setSortByYear] = useState("descending");
 
   // Function to sort the movies by release date
   const sortMoviesByYear = (movies, order) => {
@@ -23,8 +28,16 @@ const WatchlistPage = () => {
     return sortedMovies;
   };
 
+  const handleClearWatchlist = () => {
+    toast.success("Watchlist cleared successfully!")
+    dispatch(clearWatchlist({ userId: user.uid }));
+  };
+
   // Sort the watchlist based on selected sorting option
   const sortedWatchlist = sortMoviesByYear(watchlist, sortByYear);
+
+  // Check if the watchlist is empty
+  const isListEmpty = sortedWatchlist.length === 0;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -42,34 +55,57 @@ const WatchlistPage = () => {
             <div>{langArray[langKey].Watchlist}</div>
           </div>
         </div>
-        <div className="relative z-10 pt-2/5 py-10 mt-72 bg-black">
-          <div className="container mx-auto ml-28 rounded-lg bg-black">
-            <div className="flex justify-between mb-6">
-              <h2 className="text-3xl border-l-4 font-bold mb-4 text-white border-red-500 pl-4">
-                Your Watchlist
+        <div className={`relative z-10 pt-10 mt-72 bg-black rounded-2xl`}>
+          <div
+            className={`container mx-auto ml-28 bg-black ${
+              isListEmpty ? "h-96 " : "h-auto"
+            }`}
+          >
+            <div className="flex justify-between mb-6 ">
+              <h2 className="text-3xl border-l-4 font-bold mb-4 h-9 text-white border-red-500 pl-4">
+                {langArray[langKey].YourWatchlist}
               </h2>
               <select
                 value={sortByYear}
                 onChange={(e) => setSortByYear(e.target.value)}
-                className="px-9 mb-5 py-3 rounded bg-gray-800 text-white"
+                className="px-9 mb-5 py-3 rounded bg-gray-800 text-white mr-10"
               >
-                <option value="ascending">Oldest First</option>
-                <option value="descending">Newest First</option>
+                <option value="ascending">
+                  {langArray[langKey].OldestFirst}
+                </option>
+                <option value="descending">
+                  {langArray[langKey].NewestFirst}
+                </option>
               </select>
             </div>
-            <div className="grid grid-cols-6 gap-4">
-              {sortedWatchlist.map((movie) => (
-                <MovieCard
-                  key={movie.id}
-                  movieId={movie.id}
-                  rating={movie.vote_average}
-                  date={movie.release_date}
-                  language={movie.original_language}
-                  movieName={movie.original_title}
-                  posterPath={movie.poster_path}
-                />
-              ))}
-            </div>
+            {/* Conditionally render based on whether watchlist is empty or not */}
+            {isListEmpty && (
+              <div className="text-gray-400 text-xl text-center">
+                {langArray[langKey].YourWatchlistIsEmpty}
+              </div>
+            )}
+            {!isListEmpty && (
+              <div className="grid grid-cols-6 gap-2">
+                {sortedWatchlist.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movieId={movie.id}
+                    rating={movie.vote_average}
+                    date={movie.release_date}
+                    language={movie.original_language}
+                    movieName={movie.original_title}
+                    posterPath={movie.poster_path}
+                  />
+                ))}
+              </div>
+            )}
+            <button
+              onClick={handleClearWatchlist}
+              className="px-6 py-3 rounded-xl bg-gray-800 text-white hover:bg-gray-700 focus:outline-none"
+              style={{ position: "absolute", bottom: "40px", right: "120px" }}
+            >
+              {langArray[langKey].ClearAll}
+            </button>
           </div>
         </div>
       </div>

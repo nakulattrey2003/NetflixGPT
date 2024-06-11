@@ -27,17 +27,29 @@ const watchlistSlice = createSlice({
       localStorage.setItem(watchlistKey, JSON.stringify(state.watchlistArray));
     },
     loadWatchlist: (state, action) => {
-      const {userId} = action.payload;
+      const { userId } = action.payload;
 
       const watchlistKey = getWatchlistKey(userId);
 
       const storedWatchlist = localStorage.getItem(watchlistKey);
       state.watchlistArray = storedWatchlist ? JSON.parse(storedWatchlist) : [];
     },
+    clearWatchlist: (state, action) => {
+      const { userId } = action.payload;
+      
+      const watchlistKey = getWatchlistKey(userId);
+
+      state.watchlistArray = [];
+      localStorage.setItem(watchlistKey, JSON.stringify(state.watchlistArray));
+    },
   },
 });
 
-export const { addToWatchlist, removeFromWatchlist, loadWatchlist } =
-  watchlistSlice.actions;
+export const {
+  addToWatchlist,
+  removeFromWatchlist,
+  loadWatchlist,
+  clearWatchlist,
+} = watchlistSlice.actions;
 
 export default watchlistSlice.reducer;
