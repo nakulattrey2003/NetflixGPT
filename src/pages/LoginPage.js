@@ -6,10 +6,13 @@ import { auth } from "../utils/firebase";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
+import { useDispatch } from "react-redux";
+import { loadWatchlist } from "../redux/watchlistSlice";
 
 const Login = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +31,8 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+
+        dispatch(loadWatchlist());   // it takes all the watchlist data from localstorage to watchlist reducer array;
 
         toast.success("Logged in Successfully");
 

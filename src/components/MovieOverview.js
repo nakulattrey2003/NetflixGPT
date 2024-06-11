@@ -9,28 +9,34 @@ import { FaPlay, FaRegHeart, FaHeart } from "react-icons/fa";
 import ReactPlayer from "react-player";
 import useMovieTrailer from "../hooks/useMovieTrailer";
 import { useParams } from "react-router-dom";
-import { addWatchlist, removeWatchlist } from "../redux/watchlistSlice";
+import { addToWatchlist, removeFromWatchlist } from "../redux/watchlistSlice";
 
 const MovieOverview = () => {
   const movie = useSelector((state) => state.detail.movieDetail);
   const cast = useSelector((state) => state.detail.castDetail);
   const langKey = useSelector((state) => state.language.lang);
-  const watchlist = useSelector((state) => state.watchlist);
+  const watchlistArray =
+    useSelector((state) => state.watchlist.watchlistArray) || [];
+
+  console.log("watchlistArray", watchlistArray);
 
   const dispatch = useDispatch();
   const { id: movieId } = useParams();
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [playing, setPlaying] = useState(false);
-
-  const isWatchlist = watchlist.some(      // it checks if any of the movieId matches with the id of the movies present in reducer than it returns true else false.
-    (item) => item.id === parseInt(movieId, 10)
-  );
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
 
   const trailerKey = useMovieTrailer(movieId);
 
   const lessInfoText = langArray[langKey].LessInfo || "Less Info";
   const moreInfoText = langArray[langKey].MoreInfo || "More Info";
+
+  useEffect(() => {
+    setIsInWatchlist(
+      !!watchlistArray.find((item) => item && item.id === movie.id)
+    );
+  }, [movie.id]);
 
   const splitOverview = (text, maxWords) => {
     const words = text.split(" ");
@@ -50,11 +56,17 @@ const MovieOverview = () => {
   };
 
   const handleWatchlist = () => {
-    if (isWatchlist) {
-      dispatch(removeWatchlist(parseInt(movieId, 10)));
+    if (!movie || !movieId) return;
+
+    console.log('movie', movie);
+
+    if (isInWatchlist) {
+      dispatch(removeFromWatchlist({ movie }));
     } else {
-      dispatch(addWatchlist(movie));
+      dispatch(addToWatchlist({ movie }));
     }
+
+    setIsInWatchlist(!isInWatchlist);
   };
 
   if (!movie || !cast) {
@@ -138,7 +150,7 @@ const MovieOverview = () => {
             className="flex justify-center cursor-pointer items-center border mt-4 py-2 px-4 rounded w-[278px] font-bold hover:bg-gray-200 hover:text-black"
             onClick={handleWatchlist}
           >
-            {isWatchlist ? (
+            {isInWatchlist ? (
               <div className="flex ">
                 <FaHeart className="mr-2 mt-1" />
                 {langArray[langKey].Added}
@@ -154,8 +166,8 @@ const MovieOverview = () => {
 
         <div className="col-span-1 row-span-1 z-10 gap-4 overflow-hidden flex justify-left items-left -ml-28 mt-32">
           {cast.cast
-            .concat()
-            .sort((a, b) => b.popularity - a.popularity)
+            // .concat()
+            // .sort((a, b) => b.popularity - a.popularity)
             .slice(0, 5)
             .map((it) => (
               <div key={it.cast_id}>

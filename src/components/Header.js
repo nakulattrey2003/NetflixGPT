@@ -13,10 +13,13 @@ import { SUPPORTED_LANGUAGES } from "../utils/constants.js";
 import UserAvatar from "./UserAvatar.js";
 import { changeLanguage } from "../redux/languageSlice.js";
 import langArray from "../utils/langConstants.js";
+import { loadWatchlist } from "../redux/watchlistSlice.js";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  dispatch(loadWatchlist()); 
 
   const user = useSelector((state) => state.user);
   const langKey = useSelector((state) => state.language.lang);
@@ -48,6 +51,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful
+        localStorage.removeItem("watchlist");
         toast.success("Logged Out Succesfully");
         navigate("/login");
       })
