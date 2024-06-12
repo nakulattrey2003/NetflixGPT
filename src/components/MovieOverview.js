@@ -62,10 +62,10 @@ const MovieOverview = () => {
     if (!movie || !movieId || !user) return;
 
     if (isInWatchlist) {
-      toast.success(`${movie.title} is Removed From Watchlist`);
+      toast(` 👍🏼 ${movie.title} is Removed From Watchlist`);
       dispatch(removeFromWatchlist({ movie, userId : user.uid }));
     } else {
-      toast.success(`${movie.title} is Added to the Watchlist`)
+      toast(` 🔥 ${movie.title} is Added to the Watchlist`);
       dispatch(addToWatchlist({ movie, userId : user.uid }));
     }
 

@@ -30,11 +30,11 @@ const GptSearchBar = () => {
         toast.warning(toastWarning);
       } else {
         try {
-          console.log(searchInput);
+          console.log("Question:", searchInput);
           const gptResults = await fetchApiResponse(searchInput);
           setSearchInput("");
 
-          console.log("gptResults", gptResults);
+          console.log("Answer: ", gptResults[0].generated_text);
 
           // navigate("/search");
         } catch (error) {
