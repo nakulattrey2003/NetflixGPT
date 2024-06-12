@@ -105,7 +105,7 @@ const MovieOverview = () => {
 
         <div className="z-10 text-white col-span-1 row-span-1 flex flex-col justify-left items-left mt-44 mr-36 -ml-28 ">
           <div className="text-5xl uppercase font-bold">
-            {movie?.original_title}
+            {movie?.title}
           </div>
           <div className="mb-4 text-gray-300">{movie?.tagline}</div>
           <div className="flex mb-4">

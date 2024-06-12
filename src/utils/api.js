@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const API_URL =
   "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill";
 

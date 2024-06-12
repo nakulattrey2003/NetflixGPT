@@ -49,7 +49,7 @@ const MovieList = ({ title, movies }) => {
             rating={movie.vote_average}
             date={movie.release_date}
             language={movie.original_language}
-            movieName={movie.original_title}
+            movieName={movie.title}
             posterPath={movie.poster_path}
           />
         ))}

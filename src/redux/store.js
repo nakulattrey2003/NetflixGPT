@@ -7,6 +7,7 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import watchlistReducer from "./watchlistSlice.js";
+import gptSearchReducer from "./gptSearchSlice.js";
 
 const persistConfig = {
   key: "root",
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   language: languageReducer,
   detail: detailReducer,
   watchlist: watchlistReducer,
+  gptSearch: gptSearchReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

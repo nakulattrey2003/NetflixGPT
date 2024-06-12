@@ -36,7 +36,7 @@ const WatchlistPage = () => {
   };
 
   const handleDeleteMovie = (movie) => {
-    toast(` 👍🏼${movie.original_title} is Removed from the Watchlist`);
+    toast(` 👍🏼${movie.title} is Removed from the Watchlist`);
     dispatch(removeFromWatchlist({ movie, userId: user.uid }));
   };
 
@@ -63,11 +63,7 @@ const WatchlistPage = () => {
           </div>
         </div>
         <div className={`relative z-10 pt-10 mt-56 bg-black rounded-2xl`}>
-          <div
-            className={`ml-28 bg-black ${
-              isListEmpty ? "h-96 " : "h-auto"
-            }`}
-          >
+          <div className={`ml-28 bg-black ${isListEmpty ? "h-96 " : "h-auto"}`}>
             <div className="flex justify-between mb-6 mr-7">
               <h2 className="text-3xl border-l-4 font-bold mb-4 h-9 text-white border-red-500 pl-4">
                 {langArray[langKey].YourWatchlist}
@@ -75,7 +71,7 @@ const WatchlistPage = () => {
               <select
                 value={sortByYear}
                 onChange={(e) => setSortByYear(e.target.value)}
-                className="px-9 mb-5 py-3 rounded bg-gray-800 text-white mr-10"
+                className="px-9 mb-5 py-3 rounded bg-gray-800 text-white mr-10 focus:outline-none"
               >
                 <option value="ascending">
                   {langArray[langKey].OldestFirst}
@@ -92,7 +88,7 @@ const WatchlistPage = () => {
               </div>
             )}
             {!isListEmpty && (
-              <div className="grid grid-cols-6 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
                 {sortedWatchlist.map((movie) => (
                   <div
                     key={movie.id}
@@ -105,14 +101,14 @@ const WatchlistPage = () => {
                       rating={movie.vote_average}
                       date={movie.release_date}
                       language={movie.original_language}
-                      movieName={movie.original_title}
+                      movieName={movie.title}
                       posterPath={movie.poster_path}
                     />
                     {/* Delete icon */}
                     {hoveredMovieId === movie.id && ( // Show delete icon only when hoveredMovieId matches
                       <button
                         onClick={() => handleDeleteMovie(movie)}
-                        className="absolute top-2 right-10 text-2xl shadow-lg text-white hover:text-red-500 focus:outline-none"
+                        className="absolute top-2 right-10 text-2xl shadow-lg text-red-500 hover:text-white hover:bg-red-500 hover:rounded-full hover:p-3 focus:outline-none"
                       >
                         <RiDeleteBin6Fill />
                       </button>

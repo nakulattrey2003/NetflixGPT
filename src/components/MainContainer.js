@@ -16,7 +16,7 @@ const MainContainer = () => {
   const mainMovie = movies[0];
 
   const {
-    original_title,
+    title,
     overview,
     original_language,
     vote_average,
@@ -30,7 +30,7 @@ const MainContainer = () => {
   return (
     <div>
       <VideoTitle
-        title={original_title}
+        title={title}
         overview={overview}
         language={original_language}
         rating={vote_average}

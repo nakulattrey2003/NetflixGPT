@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { FaMicrophone, FaSearch } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import langArray from "../utils/langConstants";
-import fetchApiResponse from "../utils/api";
+import { textGeneration } from "@huggingface/inference";
+import { HfInference } from "@huggingface/inference";
+import { API_OPTIONS } from "../utils/constants";
+import { addGptSearchResult } from "../redux/gptSearchSlice";
 
 const GptSearchBar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [searchInput, setSearchInput] = useState();
 
@@ -18,10 +22,41 @@ const GptSearchBar = () => {
     setToastWarning(langArray[langKey].Warning1);
   }, [langKey]);
 
-  const handleSearch = () => {
-    if (!searchInput || searchInput.length == 0) {
+  const searchMovie = async (movieName) => {
+    try{
+      const response = await fetch(
+        "https://api.themoviedb.org/3/search/movie?query=" +
+          movieName +
+          "&include_adult=false&page=1",
+        API_OPTIONS
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      return data.results;
+
+    } catch(error){
+      toast.error("Error in Fetching Movies");
+    }
+  };
+
+  const handleSearch = async () => {
+    if (!searchInput || searchInput.length === 0) {
       toast.warning(toastWarning);
-    } else navigate("/search");
+      return;
+    }
+    try {
+      const movieResults = await searchMovie(searchInput);
+      dispatch(addGptSearchResult(movieResults));
+      setSearchInput("");
+      navigate("/search");
+    } catch (error) {
+      toast.error("Error fetching response from Chat API");
+    }
+    
   };
 
   const handleKeyPress = async (e) => {
@@ -30,23 +65,44 @@ const GptSearchBar = () => {
         toast.warning(toastWarning);
       } else {
         try {
-          console.log("Question:", searchInput);
-          const gptResults = await fetchApiResponse(searchInput);
+          const gptQuery =
+            // "Act as a movie recomendation system and suggest some movies for the query " +
+            // searchInput +
+            // ". Only give me names of 5 movies, in one line and comma seperated with no inverted or double inverted commas.";
+            searchInput;
+
+          // console.log("Q:", gptQuery);
+
+          // const hf = new HfInference(process.env.REACT_APP_API_KEY);
+
+          // const gptResults = await hf.textGeneration({
+          //   model: "Sharathhebbar24/chat_gpt2", // Replace with your desired model
+          //   inputs: gptQuery,
+          // });
+          // const gptResults = await hf.chatCompletion({
+          //   model: "jjezabek/multi-user-chat-llama-2-7b-chat-completions-only", // Replace with your desired model
+          //   messages: [
+          //     { role: "system", content: "You are a helpful assistant." },
+          //     { role: "user", content: gptQuery },
+          //   ],
+          //   stream: false,
+          // });
+
+          // console.log("A:", gptResults);
+
+          const movieResults = await searchMovie(searchInput);
+          dispatch(addGptSearchResult(movieResults));
+          
           setSearchInput("");
 
-          console.log("Answer: ", gptResults[0].generated_text);
-
-          // navigate("/search");
+          navigate("/search");
         } catch (error) {
-          console.error(
-            "Error fetching response from Hugging Face API:",
-            error.response ? error.response.data : error.message
-          );
-          toast.error("Error fetching response from Hugging Face API");
+          toast.error("Error fetching response from Chat API", error.message);
         }
       }
     }
   };
+
   return (
     <div className="flex items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 w-full max-w-md">
       <FaSearch

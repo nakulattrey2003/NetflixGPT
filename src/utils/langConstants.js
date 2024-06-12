@@ -23,6 +23,7 @@ const langArray = {
     NewestFirst: "Newest First",
     YourWatchlistIsEmpty: "Your Watchlist is Empty!",
     ClearAll: "Clear All",
+    SearchResults: "Search Results",
   },
   hindi: {
     myName: "नकुल",
@@ -48,6 +49,7 @@ const langArray = {
     NewestFirst: "नवीनतम पहले",
     YourWatchlistIsEmpty: "आपकी वॉचलिस्ट खाली है!",
     ClearAll: "सभी साफ करें",
+    SearchResults: "खोज के परिणाम",
   },
   spanish: {
     myName: "Nakul",
@@ -73,6 +75,7 @@ const langArray = {
     NewestFirst: "El más reciente primero",
     YourWatchlistIsEmpty: "Tu lista de seguimiento está vacía!",
     ClearAll: "Limpiar todo",
+    SearchResults: "Resultados de la búsqueda",
   },
   french: {
     myName: "Nakul",
@@ -99,6 +102,7 @@ const langArray = {
     NewestFirst: "Le plus récent d'abord",
     YourWatchlistIsEmpty: "Votre liste de surveillance est vide!",
     ClearAll: "Tout effacer",
+    SearchResults: "Résultats de recherche",
   },
 };
 
