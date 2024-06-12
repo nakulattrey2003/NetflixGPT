@@ -6,14 +6,14 @@ import useMovieDetail from "../hooks/useMovieDetail";
 import useCastDetail from "../hooks/useCastDetail";
 
 const MainContainer = () => {
-  const movies = useSelector((store) => store.movies?.nowPlayingMovies);
+  const movies = useSelector((store) => store.movies?.todayTrendingMovie);
 
   if (movies == null) return;
 
   // const randomcount = Math.floor(Math.random() * (movies.length));
   // const mainMovie = movies[randomcount];
 
-  const mainMovie = movies[12]; // 10 for garfield and 7 for inside out 2
+  const mainMovie = movies[0];
 
   const {
     original_title,
