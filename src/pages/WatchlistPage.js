@@ -36,7 +36,7 @@ const WatchlistPage = () => {
   };
 
   const handleDeleteMovie = (movie) => {
-    toast(` 👍🏼 ${movie.original_title} is Removed from the Watchlist`);
+    toast(` 👍🏼${movie.original_title} is Removed from the Watchlist`);
     dispatch(removeFromWatchlist({ movie, userId: user.uid }));
   };
 
@@ -97,6 +97,8 @@ const WatchlistPage = () => {
                   <div
                     key={movie.id}
                     className="relative"
+                    onMouseEnter={() => setHoveredMovieId(movie.id)}
+                    onMouseLeave={() => setHoveredMovieId(null)}
                   >
                     <MovieCard
                       movieId={movie.id}
@@ -106,7 +108,15 @@ const WatchlistPage = () => {
                       movieName={movie.original_title}
                       posterPath={movie.poster_path}
                     />
+                    {/* Delete icon */}
+                    {hoveredMovieId === movie.id && ( // Show delete icon only when hoveredMovieId matches
+                      <button
+                        onClick={() => handleDeleteMovie(movie)}
+                        className="absolute top-2 right-10 text-2xl shadow-lg text-white hover:text-red-500 focus:outline-none"
+                      >
                         <RiDeleteBin6Fill />
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
