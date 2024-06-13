@@ -71,7 +71,7 @@ const GptSearchBar = () => {
       const data = await response.json();
       return data.results;
     } catch (error) {
-      toast.error("Error in Fetching Movies");
+      toast.error("Error in Fetching Movies from TMBD");
     }
   };
 
@@ -99,6 +99,7 @@ const GptSearchBar = () => {
       const promiseArray = splitMovieResults.map((movie) => searchMovie(movie));
 
       const movieResults = await Promise.all(promiseArray);
+      
       // Clear previous search results before adding new ones
       dispatch(clearGptSearchResult());
 
