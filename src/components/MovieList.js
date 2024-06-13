@@ -11,6 +11,7 @@ import langArray from "../utils/langConstants";
 const MovieList = ({ title, movies }) => {
   const langKey = useSelector((state) => state.language.lang);
 
+  const todayTrendingTitle = langArray[langKey].TodayTrending;
   const nowPlayingTitle = langArray[langKey].NowPlaying;
   const popularTitle = langArray[langKey].Popular;
   const topRatedTitle = langArray[langKey].TopRated;
@@ -24,6 +25,9 @@ const MovieList = ({ title, movies }) => {
   return (
     <div className="overflow-scroll  text-white">
       <div className="absolute -mt-11 ml-20 text-2xl font-bold flex">
+        {title == todayTrendingTitle && (
+          <FaFire className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
+        )}
         {title == nowPlayingTitle && (
           <RiMovie2Fill className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
         )}

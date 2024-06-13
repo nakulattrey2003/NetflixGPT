@@ -7,6 +7,7 @@ const SecondaryContainer = () => {
   const langKey = useSelector((state) => state.language.lang);
   const movies = useSelector((store) => store.movies);
 
+  const todayTrendingTitle = langArray[langKey].TodayTrending;
   const nowPlayingTitle = langArray[langKey].NowPlaying;
   const popularTitle = langArray[langKey].Popular;
   const topRatedTitle = langArray[langKey].TopRated;
@@ -16,6 +17,7 @@ const SecondaryContainer = () => {
   return (
     <div className="bg-black">
       <div className="-mt-40 relative z-20">
+        <MovieList title={todayTrendingTitle} movies={movies.todayTrendingMovie} />
         <MovieList title={nowPlayingTitle} movies={movies.nowPlayingMovies} />
         <MovieList title={popularTitle} movies={movies.popularMovies} />
         <MovieList title={topRatedTitle} movies={movies.topRatedMovies} />
