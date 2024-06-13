@@ -6,20 +6,24 @@ import Footer from "../components/Footer";
 import Skeleton from "../components/Skeleton";
 import FilterDropdown from "../components/FilterDropdown";
 import langArray from "../utils/langConstants";
+import MovieList from "../components/MovieList";
 
 const GptSearchPage = () => {
-  const gptSearch = useSelector((state) => state.gptSearch.gptSearchResult);
+  const gptMovieNames = useSelector((state) => state.gptSearch.gptMovieNames);
+  const gptMovieResults = useSelector(
+    (state) => state.gptSearch.gptMovieResults
+  );
   const langKey = useSelector((state) => state.language.lang);
 
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
-    setFilteredMovies(gptSearch);
-  }, [gptSearch]);
+    setFilteredMovies(gptMovieNames);
+  }, [gptMovieNames]);
 
   const handleFilterChange = (e) => {
     const filter = e.target.value;
-    let sortedMovies = [...gptSearch];
+    let sortedMovies = [...gptMovieNames];
 
     switch (filter) {
       case "newest":
@@ -41,7 +45,7 @@ const GptSearchPage = () => {
         sortedMovies = sortedMovies.sort((a, b) => b.popularity - a.popularity);
         break;
       default:
-        sortedMovies = gptSearch;
+        sortedMovies = gptMovieNames;
     }
 
     setFilteredMovies(sortedMovies);
@@ -56,27 +60,17 @@ const GptSearchPage = () => {
             {langArray[langKey].SearchResults}
           </div>
           <div className="mr-28">
-          <FilterDropdown onChange={handleFilterChange} />
+            <FilterDropdown onChange={handleFilterChange} />
           </div>
         </div>
         <div className="container mx-auto px-4">
-          {!gptSearch ? (
-            <Skeleton />
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
-              {filteredMovies?.map((movie) => (
-                <MovieCard
-                  key={movie.id}
-                  movieId={movie.id}
-                  rating={movie.vote_average}
-                  date={movie.release_date}
-                  language={movie.original_language}
-                  movieName={movie.title}
-                  posterPath={movie.poster_path}
-                />
-              ))}
-            </div>
-          )}
+          {gptMovieNames.map((movie, index) => (
+            <MovieList
+              key={movie}
+              title={gptMovieNames[index]}
+              movies={gptMovieResults[index]}
+            />
+          ))}
         </div>
       </div>
       <Footer />

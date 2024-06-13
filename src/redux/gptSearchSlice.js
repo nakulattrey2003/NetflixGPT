@@ -3,11 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const gptSearchSlice = createSlice({
     name:"gptSearch",
     initialState:{
-        gptSearchResult: null
+        gptMovieNames: null,
+        gptMovieResults: null
     },
     reducers:{
         addGptSearchResult: (state, action) => {
-            state.gptSearchResult = action.payload;
+            const {movieNames, movieResults} = action.payload;
+            state.gptMovieNames = movieNames;
+            state.gptMovieResults = movieResults;
         }
     }
 });

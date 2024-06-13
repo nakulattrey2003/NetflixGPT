@@ -26,7 +26,7 @@ const GptSearchBar = () => {
   }, [langKey]);
 
   const searchMovie = async (movieName) => {
-    try{
+    try {
       const response = await fetch(
         "https://api.themoviedb.org/3/search/movie?query=" +
           movieName +
@@ -40,8 +40,7 @@ const GptSearchBar = () => {
 
       const data = await response.json();
       return data.results;
-
-    } catch(error){
+    } catch (error) {
       toast.error("Error in Fetching Movies");
     }
   };
@@ -52,14 +51,33 @@ const GptSearchBar = () => {
       return;
     }
     try {
-      const movieResults = await searchMovie(searchInput);
+      const gptQuery =
+        "Act as a movie recomendation system and suggest some movies for the query " +
+        searchInput +
+        ". Only give me names of 5 movies, in one line and comma seperated with no inverted or double inverted commas.";
+      // searchInput;
+
+      console.log("Q:", gptQuery);
+
+      const gptResults = await fetchResponse(gptQuery);
+
+      console.log("A:", gptResults);
+
+      const splitMovieResults = gptResults.split(",");
+
+      const promiseArray = splitMovieResults.map((movie) => searchMovie(movie));
+
+      const movieResults = await Promise.all(promiseArray);
+
+      console.log("movieResults", movieResults);
       dispatch(addGptSearchResult(movieResults));
+
       setSearchInput("");
+
       navigate("/search");
     } catch (error) {
       toast.error("Error fetching response from Chat API");
     }
-    
   };
 
   const handleKeyPress = async (e) => {
@@ -72,7 +90,7 @@ const GptSearchBar = () => {
             "Act as a movie recomendation system and suggest some movies for the query " +
             searchInput +
             ". Only give me names of 5 movies, in one line and comma seperated with no inverted or double inverted commas.";
-            // searchInput;
+          // searchInput;
 
           console.log("Q:", gptQuery);
 
@@ -80,9 +98,15 @@ const GptSearchBar = () => {
 
           console.log("A:", gptResults);
 
-          const movieResults = await searchMovie(searchInput);
-          dispatch(addGptSearchResult(movieResults));
-          
+          const splitMovieResults = gptResults.split(",");
+
+          const promiseArray = splitMovieResults.map((movie) => searchMovie(movie));
+
+          const movieResults = await Promise.all(promiseArray);
+
+          console.log("movieResults", movieResults);
+          dispatch(addGptSearchResult({movieNames: splitMovieResults, movieResults: movieResults}));
+
           setSearchInput("");
 
           navigate("/search");
