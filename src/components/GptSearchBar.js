@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import langArray from "../utils/langConstants";
 import { API_OPTIONS } from "../utils/constants";
-import { addGptSearchResult } from "../redux/gptSearchSlice";
+import {
+  addGptSearchResult,
+  clearGptSearchResult,
+} from "../redux/gptSearchSlice";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoMicOutline } from "react-icons/io5";
 import SpeechRecognition, {
@@ -20,6 +23,11 @@ const GptSearchBar = () => {
   const { response, loading, error, fetchResponse } = api();
   const { transcript } = useSpeechRecognition();
 
+  const [searchInput, setSearchInput] = useState();
+  const [showInfoPopup, setShowInfoPopup] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [autoSearchTimer, setAutoSearchTimer] = useState(null);
+
   useEffect(() => {
     if (transcript) {
       setSearchInput(transcript);
@@ -30,15 +38,13 @@ const GptSearchBar = () => {
       setAutoSearchTimer(
         setTimeout(() => {
           handleSearch();
+          setIsListening(!isListening);
+          SpeechRecognition.stopListening();
+          setSearchInput("");
         }, 2000)
       );
     }
   }, [transcript]);
-
-  const [searchInput, setSearchInput] = useState();
-  const [showInfoPopup, setShowInfoPopup] = useState(false);
-  const [isListening, setIsListening] = useState(false);
-  const [autoSearchTimer, setAutoSearchTimer] = useState(null);
 
   const langKey = useSelector((state) => state.language.lang);
   const [toastWarning, setToastWarning] = useState(langArray[langKey].Warning1); // not working
@@ -90,6 +96,8 @@ const GptSearchBar = () => {
       const promiseArray = splitMovieResults.map((movie) => searchMovie(movie));
 
       const movieResults = await Promise.all(promiseArray);
+      // Clear previous search results before adding new ones
+      dispatch(clearGptSearchResult());
 
       console.log("movieResults", movieResults);
       dispatch(
@@ -107,50 +115,11 @@ const GptSearchBar = () => {
     }
   };
 
-  const handleKeyPress = async (e) => {
-    if (e.key == "Enter") {
-      if (!searchInput || searchInput.length == 0) {
-        toast.warning(toastWarning);
-      } else {
-        try {
-          const gptQuery =
-            "Act as a movie recomendation system and suggest some movies for the query " +
-            searchInput +
-            ". Only give me names of 7 movies, in one line and comma seperated with no inverted or double inverted commas.";
-          // searchInput;
-
-          console.log("Q:", gptQuery);
-
-          const gptResults = await fetchResponse(gptQuery);
-
-          console.log("A:", gptResults);
-
-          const splitMovieResults = gptResults.split(",");
-
-          const promiseArray = splitMovieResults.map((movie) =>
-            searchMovie(movie)
-          );
-
-          const movieResults = await Promise.all(promiseArray);
-
-          console.log("movieResults", movieResults);
-          dispatch(
-            addGptSearchResult({
-              movieNames: splitMovieResults,
-              movieResults: movieResults,
-            })
-          );
-
-          setSearchInput("");
-
-          navigate("/search");
-        } catch (error) {
-          toast.error("Error fetching response from Chat API", error.message);
-        }
-      }
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
-
   const handleInfoMouseEnter = () => {
     setShowInfoPopup(true);
   };
