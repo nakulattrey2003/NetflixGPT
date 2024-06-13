@@ -25,6 +25,7 @@ const langArray = {
     ClearAll: "Clear All",
     SearchResults: "Search Results",
     TodayTrending: "Today Trending",
+    PopupInfo: `The search bar allows you to search for any movie name, providing quick access to detailed movie information. If you're unsure of what to watch, simply type in a query like "Suggest me new funny movies" for recommendations. It intelligently fetches relevant movie suggestions based on your input. Enjoy discovering new films effortlessly with this versatile search feature.`,
   },
   hindi: {
     myName: "नकुल",
@@ -52,6 +53,7 @@ const langArray = {
     ClearAll: "सभी साफ करें",
     SearchResults: "खोज के परिणाम",
     TodayTrending: "आज ट्रेंडिंग",
+    PopupInfo: `खोज बार आपको किसी भी फिल्म का नाम खोजने की अनुमति देता है, जो विस्तृत फिल्म जानकारी तक त्वरित पहुंच प्रदान करता है। यदि आप निश्चित नहीं हैं कि क्या देखना है, तो अनुशंसाओं के लिए बस "मुझे नई मजेदार फिल्में सुझाएं" जैसी क्वेरी टाइप करें। यह आपके इनपुट के आधार पर समझदारी से प्रासंगिक मूवी सुझाव लाता है। इस बहुमुखी खोज सुविधा के साथ सहजता से नई फिल्में खोजने का आनंद लें।`,
   },
   spanish: {
     myName: "Nakul",
@@ -79,6 +81,7 @@ const langArray = {
     ClearAll: "Limpiar todo",
     SearchResults: "Resultados de la búsqueda",
     TodayTrending: "Hoy Tendencias",
+    PopupInfo: `La barra de búsqueda le permite buscar cualquier nombre de película, brindando acceso rápido a información detallada de la película. Si no está seguro de qué ver, simplemente escriba una consulta como "Sugiérame nuevas películas divertidas" para obtener recomendaciones. Recupera de forma inteligente sugerencias de películas relevantes en función de sus comentarios. Disfrute descubriendo nuevas películas sin esfuerzo con esta versátil función de búsqueda.`,
   },
   french: {
     myName: "Nakul",
@@ -107,6 +110,7 @@ const langArray = {
     ClearAll: "Tout effacer",
     SearchResults: "Résultats de recherche",
     TodayTrending: "Tendance du jour",
+    PopupInfo: `La barre de recherche vous permet de rechercher n'importe quel nom de film, offrant un accès rapide aux informations détaillées sur le film. Si vous ne savez pas quoi regarder, tapez simplement une requête telle que « Suggérez-moi de nouveaux films amusants » pour obtenir des recommandations. Il récupère intelligemment des suggestions de films pertinentes en fonction de vos commentaires. Profitez de la découverte de nouveaux films sans effort grâce à cette fonction de recherche polyvalente.`,
   },
 };
 

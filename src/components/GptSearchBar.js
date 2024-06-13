@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import langArray from "../utils/langConstants";
 import { API_OPTIONS } from "../utils/constants";
 import { addGptSearchResult } from "../redux/gptSearchSlice";
+import { IoIosInformationCircleOutline } from "react-icons/io";
 import api from "../utils/api";
 
 const GptSearchBar = () => {
@@ -15,6 +16,7 @@ const GptSearchBar = () => {
   const { response, loading, error, fetchResponse } = api();
 
   const [searchInput, setSearchInput] = useState();
+  const [showInfoPopup, setShowInfoPopup] = useState(false);
 
   const langKey = useSelector((state) => state.language.lang);
   const [toastWarning, setToastWarning] = useState(langArray[langKey].Warning1); // not working
@@ -122,6 +124,14 @@ const GptSearchBar = () => {
     }
   };
 
+  const handleInfoMouseEnter = () => {
+    setShowInfoPopup(true);
+  };
+
+  const handleInfoMouseLeave = () => {
+    setShowInfoPopup(false);
+  };
+
   return (
     <div className="flex items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 w-full max-w-md">
       <FaSearch
@@ -136,6 +146,18 @@ const GptSearchBar = () => {
         type="text"
         placeholder={langArray[langKey]?.GptSearchPlaceholder}
       />
+      <div
+        className="relative"
+        onMouseEnter={handleInfoMouseEnter}
+        onMouseLeave={handleInfoMouseLeave}
+      >
+        <IoIosInformationCircleOutline className="text-gray-300 size-6 cursor-pointer ml-2 hover:text-red-500" />
+        {showInfoPopup && (
+          <div className="absolute top-10 right-0 left-5 p-7 bg-gray-800 text-white rounded-lg shadow-lg w-[600px] z-10">
+            <p>{langArray[langKey].PopupInfo}</p>
+          </div>
+        )}
+      </div>
       <FaMicrophone className="text-gray-300 ml-2 size-4 cursor-pointer hover:text-red-500" />
     </div>
   );
