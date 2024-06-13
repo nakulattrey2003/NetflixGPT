@@ -13,7 +13,7 @@ const MainContainer = () => {
   // const randomcount = Math.floor(Math.random() * (movies.length));
   // const mainMovie = movies[randomcount];
 
-  const mainMovie = movies[0];
+  const mainMovie = movies[3];
 
   const {
     title,
@@ -28,7 +28,7 @@ const MainContainer = () => {
   // useCastDetail(id);
 
   return (
-    <div>
+    <div className="pt-[30%] lg:[pt-30%] bg-black md:pt-0">
       <VideoTitle
         title={title}
         overview={overview}

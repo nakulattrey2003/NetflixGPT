@@ -24,28 +24,28 @@ const MovieList = ({ title, movies }) => {
 
   return (
     <div className="overflow-scroll  text-white">
-      <div className="absolute -mt-11 ml-20 text-2xl font-bold flex">
+      <div className="absolute -mt-11 ml-10 md:ml-20 text-base md:text-2xl font-bold flex">
         {title == todayTrendingTitle && (
-          <FaFire className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
+          <FaFire className="bg-red-500 p-1 size-6 md:size-8 mr-4 text-black rounded-md" />
         )}
         {title == nowPlayingTitle && (
-          <RiMovie2Fill className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
+          <RiMovie2Fill className="bg-red-500 p-1 size-6 md:size-8 mr-4 text-black rounded-md" />
         )}
         {title == popularTitle && (
-          <FaFire className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
+          <FaFire className="bg-red-500 p-1 size-6 md:size-8 mr-4 text-black rounded-md" />
         )}
         {title == topRatedTitle && (
-          <FaStar className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
+          <FaStar className="bg-red-500 p-1 size-6 md:size-8 mr-4 text-black rounded-md" />
         )}
         {title == upcomingTitle && (
-          <SiNextra className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
+          <SiNextra className="bg-red-500 p-1 size-6 md:size-8 mr-4 text-black rounded-md" />
         )}
         {title == relatedTitle && (
-          <BiSolidMoviePlay className="bg-red-500 p-1 size-8 mr-4 text-black rounded-md" />
+          <BiSolidMoviePlay className="bg-red-500 p-1 size-6 md:size-8 mr-4 text-black rounded-md" />
         )}
         {title}
       </div>
-      <div className="flex ml-16 gap-7 mt-3">
+      <div className="flex ml-7 md:ml-16 gap-1 md:gap-7 mt-3">
         {movies?.map((movie) => (
           <MovieCard
             key={movie.id}

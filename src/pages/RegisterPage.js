@@ -98,7 +98,7 @@ const Register = () => {
           <img
             src="/NetflixGPT Res/Netflix Background.jpg"
             alt="background"
-            className="w-full h-full"
+            className="w-full h-screen object-cover"
           />
           <div className="absolute inset-0 bg-black opacity-30"></div>
         </div>
@@ -106,7 +106,7 @@ const Register = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute p-12 m-10 d-flex bg-black w-4/12 my-32 mx-auto right-0 left-0 text-white bg-opacity-70"
+        className="absolute p-12 m-10 d-flex bg-black w-5/6 md:w-7/12 lg:w-4/12 my-32 mx-auto right-0 left-0 text-white bg-opacity-70"
       >
         <h1 className="mb-6 text-3xl font-bold">Register</h1>
         <input

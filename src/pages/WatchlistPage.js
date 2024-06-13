@@ -31,8 +31,13 @@ const WatchlistPage = () => {
   };
 
   const handleClearWatchlist = () => {
+    if (!watchlist || watchlist.length == 0) {
+      toast.info("There is nothing to clear");
+    }
+    else{
     toast.success("Watchlist cleared successfully!");
     dispatch(clearWatchlist({ userId: user.uid }));
+    }
   };
 
   const handleDeleteMovie = (movie) => {

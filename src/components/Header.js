@@ -79,26 +79,28 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-full px-8 py-2 bg-gradient-to-b from-black z-50 flex justify-between">
+    <div className="absolute w-full px-2 md:px-8 py-2 bg-gradient-to-b from-black z-50 flex flex-col md:flex-row md:justify-between  bg-black md:bg-transparent">
+      {/* // bg-black is for small screen,  sm:bg-blue-100 will be for screen bigger than smaller and md:bg-green-100 will be for screen biffer than medium */}
+      {/* so for small (by default what you write), sm for medium, md for large */}
       <img
         onClick={handleLogoClick}
-        className="w-44"
+        className="w-44 mx-auto md:mx-0"
         src="/NetflixGPT Res/Netflix Logo.png"
         alt="netflix-logo"
       ></img>
 
       {user && (
-        <div className="flex ml-6 w-full justify-between">
+        <div className="flex flex-col md:flex-row ml-6 w-full justify-evenly md:justify-between">
           <GptSearchBar />
 
           <div className="flex">
             <select
               onChange={handleLanguageChange}
-              className="text-white p-2 m-2 outline-none border-none rounded bg-transparent mr-10 hover:text-red-500 hover:font-bold"
+              className="text-white p-2 m-2 outline-none border-none text-xs md:text-base rounded bg-transparent mr-10 hover:text-red-500 hover:font-bold"
             >
               {SUPPORTED_LANGUAGES.map((it) => (
                 <option
-                  className="bg-black opacity-0 p-2 m-2 text-white"
+                  className="bg-black opacity-0 p-2 m-2 text-xs md:text-base text-white"
                   key={it.identifier}
                   value={it.identifier}
                 >
@@ -109,14 +111,14 @@ const Header = () => {
 
             <div
               onClick={handleWatchlist}
-              className="text-white mt-7 cursor-pointer mr-12 hover:font-bold hover:text-red-500"
+              className="text-white mt-7 text-xs md:text-base cursor-pointer mr-12 hover:font-bold hover:text-red-500"
             >
               {langArray[langKey].Watchlist}
             </div>
 
             <UserAvatar />
 
-            <div className="m-3 pl-8 p-2">
+            <div className="m-3 text-xs md:text-base pl-8 p-2">
               <button
                 onClick={handleLogOut}
                 className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"

@@ -145,10 +145,10 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="flex items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 w-full max-w-md">
+    <div className="flex text-xs md:text-base items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 w-full md:max-w-md">
       <FaSearch
         onClick={handleSearch}
-        className="text-gray-300 mr-3 cursor-pointer size-4 hover:text-red-500"
+        className="text-gray-300 mr-3 cursor-pointer size-3 md:size-4 hover:text-red-500"
       />
       <input
         className="outline-none bg-transparent w-full text-white placeholder-slate-300"
@@ -163,9 +163,9 @@ const GptSearchBar = () => {
         onMouseEnter={handleInfoMouseEnter}
         onMouseLeave={handleInfoMouseLeave}
       >
-        <IoIosInformationCircleOutline className="text-gray-300 size-6 cursor-pointer ml-2 hover:text-red-500" />
+        <IoIosInformationCircleOutline className="text-gray-300 size-4 md:size-6 cursor-pointer ml-2 hover:text-red-500" />
         {showInfoPopup && (
-          <div className="absolute top-10 right-0 left-5 p-7 bg-gray-800 text-white rounded-lg shadow-lg w-[600px] z-10">
+          <div className="absolute top-10 md:left-5 p-7 bg-gray-800 text-white rounded-lg shadow-lg md:w-[600px] z-10">
             <p>{langArray[langKey].PopupInfo}</p>
           </div>
         )}
@@ -175,12 +175,12 @@ const GptSearchBar = () => {
           {isListening ? (
             <FaMicrophone
               onClick={toggleListening}
-              className="text-red-500 ml-2 size-5 cursor-pointer"
+              className="text-red-500 ml-2 size-4 md:size-6 cursor-pointer"
             />
           ) : (
             <IoMicOutline
               onClick={toggleListening}
-              className="text-gray-300 ml-2 size-6 cursor-pointer hover:text-red-500"
+              className="text-gray-300 ml-2 size-4 md:size-6 cursor-pointer hover:text-red-500"
             />
           )}
         </div>
