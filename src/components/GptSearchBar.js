@@ -7,6 +7,10 @@ import langArray from "../utils/langConstants";
 import { API_OPTIONS } from "../utils/constants";
 import { addGptSearchResult } from "../redux/gptSearchSlice";
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import { IoMicOutline } from "react-icons/io5";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 import api from "../utils/api";
 
 const GptSearchBar = () => {
@@ -14,9 +18,18 @@ const GptSearchBar = () => {
   const dispatch = useDispatch();
 
   const { response, loading, error, fetchResponse } = api();
+  const { transcript, browserSupportsSpeechRecognition } =
+    useSpeechRecognition();
+
+  useEffect(() => {
+    if (transcript) {
+      setSearchInput(transcript);
+    }
+  }, [transcript]);
 
   const [searchInput, setSearchInput] = useState();
   const [showInfoPopup, setShowInfoPopup] = useState(false);
+  const [isListening, setIsListening] = useState(false);
 
   const langKey = useSelector((state) => state.language.lang);
   const [toastWarning, setToastWarning] = useState(langArray[langKey].Warning1); // not working
@@ -132,6 +145,15 @@ const GptSearchBar = () => {
     setShowInfoPopup(false);
   };
 
+  const toggleListening = () => {
+    if (isListening) {
+      SpeechRecognition.stopListening();
+    } else {
+      SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
+    }
+    setIsListening(!isListening);
+  };
+
   return (
     <div className="flex items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 w-full max-w-md">
       <FaSearch
@@ -158,7 +180,21 @@ const GptSearchBar = () => {
           </div>
         )}
       </div>
-      <FaMicrophone className="text-gray-300 ml-2 size-4 cursor-pointer hover:text-red-500" />
+      <div>
+        <div>
+          {isListening ? (
+            <FaMicrophone
+              onClick={toggleListening}
+              className="text-red-500 ml-2 size-5 cursor-pointer"
+            />
+          ) : (
+            <IoMicOutline
+              onClick={toggleListening}
+              className="text-gray-300 ml-2 size-6 cursor-pointer hover:text-red-500"
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 };
