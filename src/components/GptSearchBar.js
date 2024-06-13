@@ -52,7 +52,7 @@ const GptSearchBar = () => {
       const gptQuery =
         "Act as a movie recomendation system and suggest some movies for the query " +
         searchInput +
-        ". Only give me names of 5 movies, in one line and comma seperated with no inverted or double inverted commas.";
+        ". Only give me names of 7 movies, in one line and comma seperated with no inverted or double inverted commas.";
       // searchInput;
 
       console.log("Q:", gptQuery);
@@ -87,7 +87,7 @@ const GptSearchBar = () => {
           const gptQuery =
             "Act as a movie recomendation system and suggest some movies for the query " +
             searchInput +
-            ". Only give me names of 5 movies, in one line and comma seperated with no inverted or double inverted commas.";
+            ". Only give me names of 7 movies, in one line and comma seperated with no inverted or double inverted commas.";
           // searchInput;
 
           console.log("Q:", gptQuery);
@@ -98,12 +98,19 @@ const GptSearchBar = () => {
 
           const splitMovieResults = gptResults.split(",");
 
-          const promiseArray = splitMovieResults.map((movie) => searchMovie(movie));
+          const promiseArray = splitMovieResults.map((movie) =>
+            searchMovie(movie)
+          );
 
           const movieResults = await Promise.all(promiseArray);
 
           console.log("movieResults", movieResults);
-          dispatch(addGptSearchResult({movieNames: splitMovieResults, movieResults: movieResults}));
+          dispatch(
+            addGptSearchResult({
+              movieNames: splitMovieResults,
+              movieResults: movieResults,
+            })
+          );
 
           setSearchInput("");
 

@@ -36,6 +36,7 @@
 // };
 
 // export default Skeleton;
+
 import React from "react";
 
 const Skeleton = () => {

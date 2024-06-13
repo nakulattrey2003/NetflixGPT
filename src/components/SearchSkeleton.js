@@ -1,6 +1,6 @@
 import React from "react";
 
-const Skeleton = () => {
+const SearchSkeleton = () => {
   return (
     <div className="bg-gray-900 to-black min-h-screen w-full flex flex-col">
       <div className="bg-gray-800 shadow-md">
@@ -76,4 +76,4 @@ const Skeleton = () => {
   );
 };
 
-export default Skeleton;
+export default SearchSkeleton;
