@@ -7,24 +7,24 @@ const useMovieTrailer = (movieId) => {
 
   const [trailerKey, setTrailerKey] = useState(null);
 
-  useEffect(() => {
-    const fetchTrailer = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-          API_OPTIONS
-        );
-        const data = await response.json();
-        const allTrailers = data.results.filter(
-          (video) => video.type === "Trailer"
-        );
-        const trailer = allTrailers.length ? allTrailers[0] : data.results[0]; // if my data does not have any type="Trailer" then play the first video you have founded
-        setTrailerKey(trailer ? trailer.key : null);
-      } catch (error) {
-        navigate("/error");
-      }
-    };
+  const fetchTrailer = async () => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+        API_OPTIONS
+      );
+      const data = await response.json();
+      const allTrailers = data.results.filter(
+        (video) => video.type === "Trailer"
+      );
+      const trailer = allTrailers.length ? allTrailers[0] : data.results[0]; // if my data does not have any type="Trailer" then play the first video you have founded
+      setTrailerKey(trailer ? trailer.key : null);
+    } catch (error) {
+      navigate("/error");
+    }
+  };
 
+  useEffect(() => {
     fetchTrailer();
   }, [movieId, navigate]);
 

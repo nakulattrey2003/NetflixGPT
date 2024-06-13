@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUpcomingMovies } from "../redux/moviesSlice";
 import { API_OPTIONS } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 const useUpcomingMovies = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const upcomingMovies = useSelector((state) => state.movies.upcomingMovies);
 
     const getUpcomingMovies = async () => {
       try
@@ -24,7 +26,7 @@ const useUpcomingMovies = () => {
     };
 
   useEffect(() => {
-    getUpcomingMovies();
+    if(!upcomingMovies) getUpcomingMovies();
   }, []);
 
   return <div></div>;

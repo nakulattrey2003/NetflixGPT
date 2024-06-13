@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addTodayTrendingMovie } from "../redux/moviesSlice";
 import { API_OPTIONS } from "../utils/constants";
@@ -7,6 +7,8 @@ import { API_OPTIONS } from "../utils/constants";
 const useTodayTrendingMovie = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const todayTrendingMovie = useSelector((state) => state.movies.todayTrendingMovie);
 
   const getTodayTrendingMovie = async () => {
     try {
@@ -24,7 +26,7 @@ const useTodayTrendingMovie = () => {
   };
 
   useEffect(() => {
-    getTodayTrendingMovie();
+    if(!todayTrendingMovie) getTodayTrendingMovie();
   }, []);
 };
 

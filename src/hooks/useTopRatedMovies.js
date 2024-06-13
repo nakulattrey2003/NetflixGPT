@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTopRatedMovies } from "../redux/moviesSlice";
 import { API_OPTIONS } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 const useTopRatedMovies = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const topRatedMovies = useSelector((state) => state.movies.topRatedMovies);
     
     const getTopRatedMovies = async () => {
       try {
@@ -23,7 +25,7 @@ const useTopRatedMovies = () => {
     };
 
   useEffect(() => {
-    getTopRatedMovies();
+    if(!topRatedMovies) getTopRatedMovies();
   }, []);
 
 };

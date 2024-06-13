@@ -1,5 +1,5 @@
 import { API_OPTIONS } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNowPlayingMovies } from "../redux/moviesSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 const useNowPlayingMovies = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const nowPlayingMovies = useSelector(
+    (state) => state.movies.nowPlayingMovies
+  ); // With this line of code, we are memoizing our app V are making sure that if the now playing data is in the reducer, then we are not refetching it whenever we go to homepage. This reduces our api fetching and also reduces our time and Price.
 
   const getNowPlayingMovies = async () => {
     try {
@@ -25,7 +29,7 @@ const useNowPlayingMovies = () => {
   };
 
   useEffect(() => {
-    getNowPlayingMovies();
+    if (!nowPlayingMovies) getNowPlayingMovies();
   }, []);
 };
 
