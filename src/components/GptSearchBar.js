@@ -18,18 +18,27 @@ const GptSearchBar = () => {
   const dispatch = useDispatch();
 
   const { response, loading, error, fetchResponse } = api();
-  const { transcript, browserSupportsSpeechRecognition } =
-    useSpeechRecognition();
+  const { transcript } = useSpeechRecognition();
 
   useEffect(() => {
     if (transcript) {
       setSearchInput(transcript);
+
+      if (autoSearchTimer) {
+        clearTimeout(autoSearchTimer);
+      }
+      setAutoSearchTimer(
+        setTimeout(() => {
+          handleSearch();
+        }, 2000)
+      );
     }
   }, [transcript]);
 
   const [searchInput, setSearchInput] = useState();
   const [showInfoPopup, setShowInfoPopup] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [autoSearchTimer, setAutoSearchTimer] = useState(null);
 
   const langKey = useSelector((state) => state.language.lang);
   const [toastWarning, setToastWarning] = useState(langArray[langKey].Warning1); // not working
@@ -83,7 +92,12 @@ const GptSearchBar = () => {
       const movieResults = await Promise.all(promiseArray);
 
       console.log("movieResults", movieResults);
-      dispatch(addGptSearchResult(movieResults));
+      dispatch(
+        addGptSearchResult({
+          movieNames: splitMovieResults,
+          movieResults: movieResults,
+        })
+      );
 
       setSearchInput("");
 

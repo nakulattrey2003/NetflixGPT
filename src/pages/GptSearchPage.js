@@ -5,13 +5,17 @@ import Footer from "../components/Footer";
 import SearchSkeleton from "../components/SearchSkeleton";
 import langArray from "../utils/langConstants";
 import MovieList from "../components/MovieList";
+import { useNavigate } from "react-router-dom";
 
 const GptSearchPage = () => {
+  const navigate = useNavigate();
+  
   const gptMovieNames = useSelector((state) => state.gptSearch.gptMovieNames);
   const gptMovieResults = useSelector(
     (state) => state.gptSearch.gptMovieResults
   );
   const langKey = useSelector((state) => state.language.lang);
+
 
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true); 
@@ -23,6 +27,11 @@ const GptSearchPage = () => {
         setIsLoading(false);
       }, 2000); // Simulating 2 seconds delay
     }, [gptMovieResults]);
+
+  if(!gptMovieNames || !gptMovieResults)
+    {
+      navigate("/error");
+    }
 
   return (
     <div className="bg-gray-900 to-black min-h-screen w-full flex flex-col">
