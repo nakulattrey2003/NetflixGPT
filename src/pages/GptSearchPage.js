@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
-import MovieCard from "../components/MovieCard";
 import Footer from "../components/Footer";
-import Skeleton from "../components/Skeleton";
+import SearchSkeleton from "../components/SearchSkeleton";
 import FilterDropdown from "../components/FilterDropdown";
 import langArray from "../utils/langConstants";
 import MovieList from "../components/MovieList";
@@ -16,14 +15,25 @@ const GptSearchPage = () => {
   const langKey = useSelector((state) => state.language.lang);
 
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [currentFilter, setCurrentFilter] = useState("newest");
+  const [isLoading, setIsLoading] = useState(true); 
 
-  useEffect(() => {
-    setFilteredMovies(gptMovieNames);
-  }, [gptMovieNames]);
+    useEffect(() => {
+      // Simulating API fetch delay for demonstration
+      setIsLoading(true);
+      setTimeout(() => {
+        setFilteredMovies(gptMovieResults);
+        setIsLoading(false);
+      }, 2000); // Simulating 2 seconds delay
+    }, [gptMovieResults]);
 
-  const handleFilterChange = (e) => {
-    const filter = e.target.value;
-    let sortedMovies = [...gptMovieNames];
+  const handleFilterChange = (filter) => {
+    setCurrentFilter(filter);
+    filterMovies(filter);
+  };
+
+  const filterMovies = (filter) => {
+    let sortedMovies = [...gptMovieResults];
 
     switch (filter) {
       case "newest":
@@ -45,11 +55,11 @@ const GptSearchPage = () => {
         sortedMovies = sortedMovies.sort((a, b) => b.popularity - a.popularity);
         break;
       default:
-        sortedMovies = gptMovieNames;
+        sortedMovies = gptMovieResults;
     }
 
-    setFilteredMovies(sortedMovies);
-  };
+    setFilteredMovies([...sortedMovies]);
+  }
 
   return (
     <div className="bg-gray-900 to-black min-h-screen w-full flex flex-col">
@@ -64,13 +74,17 @@ const GptSearchPage = () => {
           </div>
         </div>
         <div className="container mx-auto px-4">
-          {gptMovieNames.map((movie, index) => (
-            <MovieList
-              key={movie}
-              title={gptMovieNames[index]}
-              movies={gptMovieResults[index]}
-            />
-          ))}
+          {isLoading ? (
+            <SearchSkeleton /> // Show skeleton while loading
+          ) : (
+            filteredMovies.map((movie, index) => (
+              <MovieList
+                key={movie}
+                title={gptMovieNames[index]}
+                movies={gptMovieResults[index]}
+              />
+            ))
+          )}
         </div>
       </div>
       <Footer />

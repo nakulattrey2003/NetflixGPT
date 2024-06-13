@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import langArray from "../utils/langConstants";
-import { textGeneration } from "@huggingface/inference";
-import { HfInference } from "@huggingface/inference";
 import { API_OPTIONS } from "../utils/constants";
 import { addGptSearchResult } from "../redux/gptSearchSlice";
 import api from "../utils/api";
