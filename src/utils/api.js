@@ -1,32 +1,34 @@
-import axios from "axios";
-import { toast } from "react-toastify";
+import { useState } from "react";
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const API_URL =
-  "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill";
+const useGeminiAPI = () => {
+  const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-const fetchApiResponse = async (message) => {
-  const apiKey = process.env.REACT_APP_API_KEY;
+  const fetchResponse = async (gptQuery) => {
+    setLoading(true);
+    setError(null);
 
-  if (!apiKey) {
-    toast.error("API key is missing");
-    return;
-  }
+    try {
+      const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  try {
-    const response = await axios.post(
-      API_URL,
-      { inputs: message },
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    toast.error("Error fetching response from Hugging Face API:", error);
-    throw error;
-  }
+      const result = await model.generateContent(gptQuery);
+      const response = await result.response;
+      const text = await response.text();
+
+      setResponse(text);
+      return text;
+    } catch (err) {
+      setError(err);
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { response, loading, error, fetchResponse };
 };
 
-export default fetchApiResponse;
+export default useGeminiAPI;

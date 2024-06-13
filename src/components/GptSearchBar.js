@@ -8,10 +8,13 @@ import { textGeneration } from "@huggingface/inference";
 import { HfInference } from "@huggingface/inference";
 import { API_OPTIONS } from "../utils/constants";
 import { addGptSearchResult } from "../redux/gptSearchSlice";
+import api from "../utils/api";
 
 const GptSearchBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { response, loading, error, fetchResponse } = api();
 
   const [searchInput, setSearchInput] = useState();
 
@@ -66,29 +69,16 @@ const GptSearchBar = () => {
       } else {
         try {
           const gptQuery =
-            // "Act as a movie recomendation system and suggest some movies for the query " +
-            // searchInput +
-            // ". Only give me names of 5 movies, in one line and comma seperated with no inverted or double inverted commas.";
-            searchInput;
+            "Act as a movie recomendation system and suggest some movies for the query " +
+            searchInput +
+            ". Only give me names of 5 movies, in one line and comma seperated with no inverted or double inverted commas.";
+            // searchInput;
 
-          // console.log("Q:", gptQuery);
+          console.log("Q:", gptQuery);
 
-          // const hf = new HfInference(process.env.REACT_APP_API_KEY);
+          const gptResults = await fetchResponse(gptQuery);
 
-          // const gptResults = await hf.textGeneration({
-          //   model: "Sharathhebbar24/chat_gpt2", // Replace with your desired model
-          //   inputs: gptQuery,
-          // });
-          // const gptResults = await hf.chatCompletion({
-          //   model: "jjezabek/multi-user-chat-llama-2-7b-chat-completions-only", // Replace with your desired model
-          //   messages: [
-          //     { role: "system", content: "You are a helpful assistant." },
-          //     { role: "user", content: gptQuery },
-          //   ],
-          //   stream: false,
-          // });
-
-          // console.log("A:", gptResults);
+          console.log("A:", gptResults);
 
           const movieResults = await searchMovie(searchInput);
           dispatch(addGptSearchResult(movieResults));
