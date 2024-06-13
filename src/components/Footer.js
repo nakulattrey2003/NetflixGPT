@@ -13,8 +13,7 @@ const Footer = () => {
               class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
             >
               <img
-                src="NetflixGPT Res/Netflix Logo.png"
-                // src="https://images.ctfassets.net/y2ske730sjqp/1aONibCke6niZhgPxuiilC/2c401b05a07288746ddf3bd3943fbc76/BrandAssets_Logos_01-Wordmark.jpg?w=940"
+                src="/NetflixGPT Res/Netflix Logo.png"
                 class="h-24"
                 alt="Netflix Logo"
               />

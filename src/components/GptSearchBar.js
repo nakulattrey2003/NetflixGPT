@@ -15,18 +15,20 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import api from "../utils/api";
+import SearchSkeleton from "./SearchSkeleton";
 
 const GptSearchBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { response, loading, error, fetchResponse } = api();
-  const { transcript } = useSpeechRecognition();
+  const { fetchResponse } = api();
+  const { loading, transcript } = useSpeechRecognition();
 
   const [searchInput, setSearchInput] = useState();
   const [showInfoPopup, setShowInfoPopup] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [autoSearchTimer, setAutoSearchTimer] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (transcript) {
@@ -79,6 +81,7 @@ const GptSearchBar = () => {
       return;
     }
     try {
+      setIsLoading(true);
       const gptQuery =
         "Act as a movie recomendation system and suggest some movies for the query " +
         searchInput +
@@ -112,6 +115,9 @@ const GptSearchBar = () => {
       navigate("/search");
     } catch (error) {
       toast.error("Error fetching response from Chat API");
+    }
+    finally{
+      setIsLoading(false);
     }
   };
 
@@ -178,6 +184,7 @@ const GptSearchBar = () => {
           )}
         </div>
       </div>
+      {loading && <SearchSkeleton />}
     </div>
   );
 };

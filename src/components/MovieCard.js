@@ -17,6 +17,8 @@ const MovieCard = ({
 
   const langKey = useSelector((state) => state.language.lang);
 
+  if (!posterPath) return null;
+
   const uppercaseMovieName = movieName.toUpperCase();
   const year = date.split("-")[0];
   const uppercaseLanguage = language.toUpperCase();

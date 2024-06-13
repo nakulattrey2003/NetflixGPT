@@ -86,11 +86,15 @@ const MovieOverview = () => {
   return (
     <div className="">
       <div className="">
-        <img
-          src={IMG_URL + movie?.backdrop_path}
-          alt="background-image"
-          className="object-cover w-full h-full fixed z-0 filter blur-sm"
-        />
+        {movie?.backdrop_path ? (
+          <img
+            src={IMG_URL + movie?.backdrop_path}
+            alt="background-image"
+            className="object-cover w-full h-full fixed z-0 filter blur-sm"
+          />
+        ) : (
+          <div className="bg-gray-900 w-full h-full fixed z-0" />
+        )}
       </div>
 
       <div className="z-10 relative grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 h-full -ml-24">
@@ -104,9 +108,7 @@ const MovieOverview = () => {
         </div>
 
         <div className="z-10 text-white col-span-1 row-span-1 flex flex-col justify-left items-left mt-44 mr-36 -ml-28 ">
-          <div className="text-5xl uppercase font-bold">
-            {movie?.title}
-          </div>
+          <div className="text-5xl uppercase font-bold">{movie?.title}</div>
           <div className="mb-4 text-gray-300">{movie?.tagline}</div>
           <div className="flex mb-4">
             {movie?.release_date}
@@ -175,11 +177,19 @@ const MovieOverview = () => {
             .map((it) => (
               <div key={it.cast_id}>
                 <div className="">
-                  <img
-                    className="w-20 h-20 rounded-full object-cover"
-                    src={IMG_URL + it.profile_path}
-                    alt="character-dp"
-                  />
+                  {it.profile_path ? (
+                    <img
+                      className="w-20 h-20 rounded-full object-cover"
+                      src={IMG_URL + it.profile_path}
+                      alt="character-dp"
+                    />
+                  ) : (
+                    <img
+                      className="w-20 h-20 rounded-full object-cover"
+                      src="https://i.pinimg.com/736x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg"
+                      alt="default-character-dp"
+                    />
+                  )}
                 </div>
                 <div className="font-bold text-sm text-white break-words w-28">
                   {it.original_name}
