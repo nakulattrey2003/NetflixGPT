@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
+import Loader from "../shimmer/Loader";
 import { useDispatch } from "react-redux";
 import { loadWatchlist } from "../redux/watchlistSlice";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IMG_URL } from "../utils/constants";
-import Skeleton from "./Skeleton";
+import Skeleton from "../shimmer/Skeleton";
 import { GoDotFill } from "react-icons/go";
 import langArray from "../utils/langConstants";
 import { CiCircleInfo } from "react-icons/ci";

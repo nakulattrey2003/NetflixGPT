@@ -9,7 +9,7 @@ import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/userSlice";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Loader from "../components/Loader";
+import Loader from "../shimmer/Loader";
 
 const Register = () => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
-import SearchSkeleton from "../components/SearchSkeleton";
+import SearchSkeleton from "../shimmer/SearchSkeleton";
 import langArray from "../utils/langConstants";
 import MovieList from "../components/MovieList";
 import { useNavigate } from "react-router-dom";
