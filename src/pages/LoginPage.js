@@ -67,16 +67,16 @@ const Login = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute p-12 m-12 d-flex bg-black w-5/6 md:w-7/12 lg:w-4/12 my-40 mx-auto right-0 left-0 text-white bg-opacity-70"
+        className="absolute mt-16 p-5 md:p-12 m-10 d-flex bg-black w-5/6 md:w-7/12 lg:w-4/12 my-32 mx-auto right-0 left-0 text-white bg-opacity-70"
       >
-        <h1 className="mb-6 text-3xl font-bold">Sign In</h1>
+        <h1 className=" mb-3 md:mb-6 text-lg md:text-3xl font-bold">Sign In</h1>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email Address"
           required
-          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
+          className="bg-black rounded-md border border-slate-600 text-sm md:text-base p-2 md:p-3 md:m-2 w-full bg-opacity-70 mb-2"
         />
         <input
           type="password"
@@ -84,11 +84,11 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
-          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
+          className="bg-black rounded-md border border-slate-600 text-sm md:text-base p-2 md:p-3 md:m-2 w-full bg-opacity-70 mb-2"
         />
         {/* <p className="text-red-500 mt-3 ml-2">{errorMessage}</p> */}
         <button
-          className="p-3 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
+          className="text-sm md:text-base p-2 md:p-3 md:m-2 mt-3 md:mt-6 w-full font-semibold rounded-md bg-red-600"
           onClick={handleLoginButton}
           disabled={isLoading}
         >
@@ -98,7 +98,7 @@ const Login = () => {
             "Sign In"
           )}
         </button>
-        <p className="text-gray-400 mt-3 ml-2">
+        <p className="text-gray-400 text-sm md:text-base mt-3 ml-2">
           New to Netflix?{" "}
           <Link to="/register" className="text-white">
             Sign up now.

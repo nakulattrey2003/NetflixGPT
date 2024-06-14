@@ -106,16 +106,16 @@ const Register = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute p-12 m-10 d-flex bg-black w-5/6 md:w-7/12 lg:w-4/12 my-32 mx-auto right-0 left-0 text-white bg-opacity-70"
+        className="absolute mt-16 p-5 md:p-12 m-10 d-flex bg-black w-5/6 md:w-7/12 lg:w-4/12 my-32 mx-auto right-0 left-0 text-white bg-opacity-70"
       >
-        <h1 className="mb-6 text-3xl font-bold">Register</h1>
+        <h1 className=" mb-3 md:mb-6 text-lg md:text-3xl font-bold">Register</h1>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
           placeholder="Name"
-          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
+          className="bg-black rounded-md border border-slate-600 text-sm md:text-base p-2 md:p-3 md:m-2 w-full bg-opacity-70 mb-2"
         />
         <input
           type="email"
@@ -123,7 +123,7 @@ const Register = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
           placeholder="Email Address"
-          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
+          className="bg-black rounded-md border border-slate-600 text-sm md:text-base p-2 md:p-3 md:m-2 w-full bg-opacity-70 mb-2"
         />
         <input
           type="password"
@@ -131,20 +131,20 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
           placeholder="Password"
-          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
+          className="bg-black rounded-md border border-slate-600 text-sm md:text-base p-2 md:p-3 md:m-2 w-full bg-opacity-70 mb-2"
         />
         <input
           type="file"
           name="image"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
-          className="bg-black rounded-md border border-slate-600 p-3 m-2 w-full bg-opacity-70"
+          className="bg-black rounded-md border border-slate-600 text-sm md:text-base p-2 md:p-3 md:m-2 w-full bg-opacity-70 mb-2"
           // required
         />
 
         <button
           onClick={handleRegisterButton}
-          className="p-3 m-2 mt-6 w-full font-semibold rounded-md bg-red-600"
+          className="text-sm md:text-base p-2 md:p-3 md:m-2 mt-3 md:mt-6 w-full font-semibold rounded-md bg-red-600"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -154,7 +154,7 @@ const Register = () => {
           )}
         </button>
 
-        <p className="text-gray-400 mt-3 ml-2">
+        <p className="text-gray-400 text-sm md:text-base mt-3 ml-2">
           Already have an Account?{" "}
           <Link to="/login" className="text-white">
             Sign In now.
