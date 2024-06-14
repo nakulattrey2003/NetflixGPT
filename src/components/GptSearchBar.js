@@ -89,7 +89,9 @@ const GptSearchBar = () => {
       const gptQuery =
         "Act as a movie recomendation system and suggest some movies for the query " +
         searchInput +
-        ". Only give me names of 7 movies, in one line and comma seperated with no inverted or double inverted commas.";
+        ". Also include " +
+        searchInput +
+        " in the list if it exists .Only give me names of 7 movies, in one line and comma seperated with no inverted or double inverted commas.";
       // searchInput;
 
       console.log("Q:", gptQuery);
@@ -105,7 +107,7 @@ const GptSearchBar = () => {
       const movieResults = await Promise.all(promiseArray);
 
       console.log("movieResults", movieResults);
-      
+
       dispatch(
         addGptSearchResult({
           movieNames: splitMovieResults,
@@ -114,12 +116,11 @@ const GptSearchBar = () => {
       );
 
       setSearchInput("");
-    resetTranscript();
+      resetTranscript();
       navigate("/search");
     } catch (error) {
       toast.error("Error fetching response from Chat API");
-    }
-    finally{
+    } finally {
       setIsLoading(false);
     }
   };
