@@ -23,13 +23,13 @@ const VideoBackground = ({ movieId }) => {
       ></iframe>
 
       <button
-        className="absolute bottom-28 right-16 z-10 p-4 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 focus:outline-none"
+        className="absolute bottom-28 right-7 md:right-16 z-10 p-2 md:p-4 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 focus:outline-none"
         onClick={handleMute}
       >
         {isMute ? (
-          <IoVolumeMute className="h-6 w-6" />
+          <IoVolumeMute className=" h-3 w-3 md:h-6 md:w-6" />
         ) : (
-          <IoVolumeMediumSharp className="h-6 w-6" />
+          <IoVolumeMediumSharp className=" h-3 w-3 md:h-6 md:w-6" />
         )}
       </button>
     </div>

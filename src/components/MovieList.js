@@ -23,8 +23,8 @@ const MovieList = ({ title, movies }) => {
   }
 
   return (
-    <div className="overflow-scroll  text-white">
-      <div className="absolute -mt-11 ml-10 md:ml-20 text-base md:text-2xl font-bold flex">
+    <div className="overflow-scroll text-white">
+      <div className="absolute -mt-1 md:-mt-11 ml-10 md:ml-20 text-base md:text-2xl font-bold flex">
         {title == todayTrendingTitle && (
           <FaFire className="bg-red-500 p-1 size-6 md:size-8 mr-4 text-black rounded-md" />
         )}
@@ -45,7 +45,7 @@ const MovieList = ({ title, movies }) => {
         )}
         {title}
       </div>
-      <div className="flex ml-7 md:ml-16 gap-1 md:gap-7 mt-3">
+      <div className="flex mt-8 ml-7 md:ml-16 gap-1 md:gap-7 md:mt-3">
         {movies?.map((movie) => (
           <MovieCard
             key={movie.id}

@@ -52,21 +52,21 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
 
   return (
     <div>
-      <div className="pt-[14%] md:pt-[30%] lg:pt-[14%] p-12 absolute text-gray-50 bg-gradient-to-r from-black w-screen aspect-video">
-        <div className="p-2 m-2 -mt-5 text-2xl md:text-2xl lg:text-5xl font-black break-words w-6/12">
+      <div className="pt-[14%] md:pt-[30%] lg:pt-[14%] p-5 md:p-12 absolute text-gray-50 bg-gradient-to-r from-black w-screen aspect-video">
+        <div className="p-2 m-2 -mt-5 text-xl md:text-4xl lg:text-5xl font-black break-words w-6/12">
           {title}
         </div>
-        <div className="flex p-2 m-2 -mt-2 text-xs md:text-base">
-          <FaStar className="mr-1 mt-1" />{" "}
+        <div className="flex p-2 ml-2 md:ml-0 md:m-2 -mt-5 md:-mt-2 text-[8px] md:text-base">
+          <FaStar className="mr-1 md:mt-1" />
           <span className="mr-4">{roundedRating}</span>
-          <GoDotFill className="size-4 mr-3 mt-1" />
-          <MdDateRange className="mt-1 mr-1" />
+          <GoDotFill className="hidden md:block size-2 md:size-4 md:mr-3 mt-1" />
+          <MdDateRange className="md:mt-1 mr-1" />
           <span className="mr-4">{date}</span>
-          <GoDotFill className="size-4 mr-3 mt-1" />
+          <GoDotFill className="hidden md:block size-2 md:size-4 md:mr-3 mt-1" />
           <span>{upperCaseLanguage} - HD</span>
         </div>
         <div
-          className="p-2 -mt-5 md:-mt-2 m-2 text-xs md:text-lg w-6/12 break-words text-slate-200 cursor-pointer"
+          className="p-2 hidden md:hidden lg:block -mt-5 md:-mt-2 m-2 text-xs md:text-lg w-6/12 break-words text-slate-200 cursor-pointer"
           onClick={handleExpand}
         >
           {isExpanded ? overview : splitOverview(overview, 20)}
@@ -75,14 +75,14 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
           <div>
             <button
               onClick={handlePlay}
-              className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-1 px-2 md:py-2 md:px-4 rounded"
+              className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-1 px-2 text-[8px] md:text-base md:py-2 md:px-4 rounded"
             >
-              <FaPlay className="mt-1 mr-2" /> {langArray[langKey].Play}
+              <FaPlay className="text-[8px] md:text-base mt-[2px] md:mt-1 mr-2" /> {langArray[langKey].Play}
             </button>
           </div>
           <div>
             <button
-              className="hidden md:flex bg-gray-500 hover:bg-gray-600 bg-opacity-50 hover:bg-opacity-50 text-white font-bold hover:text-white py-2 px-4 hover:border-transparent rounded"
+              className="hidden md:hidden lg:flex bg-gray-500 hover:bg-gray-600 bg-opacity-50 hover:bg-opacity-50 text-white font-bold hover:text-white py-2 px-4 hover:border-transparent rounded"
               onClick={handleExpand}
             >
               <CiCircleInfo className="mr-2 h-6 w-6" />{" "}
