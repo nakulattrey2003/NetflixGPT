@@ -59,7 +59,7 @@ const Login = () => {
           <img
             src="/NetflixGPT Res/Netflix Background.jpg"
             alt="background"
-            className="w-full h-full"
+            className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black opacity-30"></div>
         </div>

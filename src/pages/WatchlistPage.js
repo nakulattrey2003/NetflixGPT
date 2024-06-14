@@ -52,31 +52,37 @@ const WatchlistPage = () => {
   const isListEmpty = sortedWatchlist.length === 0;
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col md:min-h-screen">
       <Header />
       <div className="flex-1 relative">
-        <div className="fixed top-0 left-0 w-full h-2/5 z-0">
+        <div className="fixed top-0 left-0 w-screen h-2/5 z-0">
           <img
             src="/NetflixGPT Res/WatchlistBG.jpg"
             alt="Watchlist Background"
             className="object-cover w-full h-full filter blur-sm"
           />
           <div className="absolute inset-0 bg-black opacity-40"></div>
-          <div className="absolute inset-0 mt-6 flex items-center justify-center text-white text-4xl font-bold">
+          <div className="absolute inset-0 mt-10 md:mt-6 flex items-center justify-center text-white text-xl md:text-4xl font-bold">
             <FaHeart className="mr-3" />
             <div>{langArray[langKey].Watchlist}</div>
           </div>
         </div>
-        <div className={`relative z-10 pt-10 mt-56 bg-black rounded-2xl`}>
-          <div className={`ml-28 bg-black ${isListEmpty ? "h-96 " : "h-auto"}`}>
+        <div
+          className={`relative z-10 pt-10 mt-44 md:mt-56 bg-black rounded-2xl`}
+        >
+          <div
+            className={` ml-7 md:ml-28 bg-black ${
+              isListEmpty ? "h-96 " : "h-auto"
+            }`}
+          >
             <div className="flex justify-between mb-6 mr-7">
-              <h2 className="text-3xl border-l-4 font-bold mb-4 h-9 text-white border-red-500 pl-4">
+              <h2 className="text-lg md:text-3xl border-l-4 font-bold mb-4 h-7 md:h-9 text-white border-red-500 pl-4">
                 {langArray[langKey].YourWatchlist}
               </h2>
               <select
                 value={sortByYear}
                 onChange={(e) => setSortByYear(e.target.value)}
-                className="px-9 mb-5 py-3 rounded bg-gray-800 text-white mr-10 focus:outline-none"
+                className="px-1 md:px-9 mb-5 py-2 md:py-3 text-xs md:text-base rounded bg-gray-800 text-white -mr-3 md:mr-10 focus:outline-none"
               >
                 <option value="ascending">
                   {langArray[langKey].OldestFirst}
@@ -93,7 +99,7 @@ const WatchlistPage = () => {
               </div>
             )}
             {!isListEmpty && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
+              <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-6 gap-0 md:gap-8">
                 {sortedWatchlist.map((movie) => (
                   <div
                     key={movie.id}
@@ -113,7 +119,7 @@ const WatchlistPage = () => {
                     {hoveredMovieId === movie.id && ( // Show delete icon only when hoveredMovieId matches
                       <button
                         onClick={() => handleDeleteMovie(movie)}
-                        className="absolute top-2 right-10 text-2xl shadow-lg text-red-500 hover:text-white hover:bg-red-500 hover:rounded-full hover:p-3 focus:outline-none"
+                        className="absolute top-2 right-7 text-2xl shadow-lg text-red-500 hover:text-white hover:bg-red-500 hover:rounded-full hover:p-3 focus:outline-none"
                       >
                         <RiDeleteBin6Fill />
                       </button>
@@ -124,7 +130,7 @@ const WatchlistPage = () => {
             )}
             <button
               onClick={handleClearWatchlist}
-              className="px-6 py-3 rounded-xl bg-gray-800 text-white hover:bg-gray-700 focus:outline-none"
+              className="px-4 md:px-6 py-2 md:py-3 rounded-xl bg-gray-800 text-white hover:bg-gray-700 focus:outline-none"
               style={{ position: "absolute", bottom: "40px", right: "120px" }}
             >
               {langArray[langKey].ClearAll}
