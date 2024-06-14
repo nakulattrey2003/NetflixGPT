@@ -16,7 +16,7 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
   // const randomcount = Math.floor(Math.random() * (movies.length));
   // const mainMovie = movies[randomcount];
 
-  const mainMovie = movies[0]; // 10 for garfield and 7 for inside out 2
+  const mainMovie = movies[3]; // 10 for garfield and 7 for inside out 2
 
   const movieId = mainMovie?.id || "dQw4w9WgXcQ?si=CZOmhr0IiXt4JHHz";
 
@@ -77,7 +77,8 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
               onClick={handlePlay}
               className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-1 px-2 text-[8px] md:text-base md:py-2 md:px-4 rounded"
             >
-              <FaPlay className="text-[8px] md:text-base mt-[2px] md:mt-1 mr-2" /> {langArray[langKey].Play}
+              <FaPlay className="text-[8px] md:text-base mt-[2px] md:mt-1 mr-2" />{" "}
+              {langArray[langKey].Play}
             </button>
           </div>
           <div>
