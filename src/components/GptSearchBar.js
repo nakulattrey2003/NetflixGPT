@@ -105,6 +105,7 @@ const GptSearchBar = () => {
       const movieResults = await Promise.all(promiseArray);
 
       console.log("movieResults", movieResults);
+      
       dispatch(
         addGptSearchResult({
           movieNames: splitMovieResults,
