@@ -97,22 +97,26 @@ const MovieOverview = () => {
         )}
       </div>
 
-      <div className="z-10 relative grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 h-full -ml-24">
+      <div className="z-10 relative grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 h-full lg:-ml-24">
         <div className="col-span-1 row-span-2 -mt-10 flex justify-center items-center">
           <img
-            className="h-[65%] z-10 m-3 p-2 rounded-3xl"
+            className="h-[45%] md:h-[40%] lg:h-[65%] z-10 m-1 md:m-3 p-2 rounded-3xl"
             src={IMG_URL + movie?.poster_path}
             alt="movie-image"
           />
           <div className="absolute inset-0 bg-black opacity-40 z-0 h-full full-height"></div>
         </div>
 
-        <div className="z-10 text-white col-span-1 row-span-1 flex flex-col justify-left items-left mt-44 mr-36 -ml-28 ">
-          <div className="text-5xl uppercase font-bold">{movie?.title}</div>
-          <div className="mb-4 text-gray-300">{movie?.tagline}</div>
-          <div className="flex mb-4">
+        <div className="z-10 text-white col-span-1 row-span-1 flex flex-col justify-left items-left md:mt-60 lg:mt-44 mr-36 lg:-ml-28 ">
+          <div className="text-base md:text-5xl uppercase font-bold">
+            {movie?.title}
+          </div>
+          <div className="mb-4 text-xs md:text-base text-gray-300">
+            {movie?.tagline}
+          </div>
+          <div className="flex text-sm md:text-base mb-1 md:mb-4">
             {movie?.release_date}
-            <GoDotFill className="size-4 mx-3 mt-1" />
+            <GoDotFill className=" size-1 md:size-4 mx-3 mt-1" />
             <div className="bg-teal-800 text-white font-semibold text-sm py-1 px-2 -mt-1 rounded-lg shadow-md bg-opacity-50">
               ⭐{roundedRating}
             </div>
@@ -122,14 +126,14 @@ const MovieOverview = () => {
           <div className="flex -ml-4 mb-4">
             {movie.genres.map((it) => (
               <div
-                className="bg-teal-700 ml-4 text-cyan-300 px-4 py-2 rounded-lg shadow-md bg-opacity-55"
+                className="bg-teal-700 ml-4 text-cyan-300 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-md bg-opacity-55"
                 key={it.id}
               >
                 {it.name}
               </div>
             ))}
           </div>
-          <div className="text-gray-200 text-md mb-4 mr-14">
+          <div className="text-gray-200 text-xs lg:text-base mb-4 mr-14">
             {isExpanded ? movie.overview : splitOverview(movie.overview, 60)}
           </div>
           <div className="flex -ml-4">
@@ -146,7 +150,7 @@ const MovieOverview = () => {
                 className="flex bg-transparent border hover:border-white hover:bg-slate-600 bg-opacity-50 hover:bg-opacity-50 text-white font-bold hover:text-white py-2 px-4 hover:border-transparent rounded"
                 onClick={handleExpand}
               >
-                <CiCircleInfo className="mr-2 h-6 w-6" />{" "}
+                <CiCircleInfo className="mr-2 md:h-6 md:w-6" />{" "}
                 {isExpanded ? lessInfoText : moreInfoText}
               </button>
             </div>
@@ -169,7 +173,7 @@ const MovieOverview = () => {
           </div>
         </div>
 
-        <div className="col-span-1 row-span-1 z-10 gap-4 overflow-hidden flex justify-left items-left -ml-28 mt-32">
+        <div className="col-span-1 row-span-1 z-10 md:gap-4 overflow-hidden flex justify-left items-left md:-ml-28 mt-32">
           {cast.cast
             // .concat()
             // .sort((a, b) => b.popularity - a.popularity)
@@ -179,22 +183,22 @@ const MovieOverview = () => {
                 <div className="">
                   {it.profile_path ? (
                     <img
-                      className="w-20 h-20 rounded-full object-cover"
+                      className="h-10 w-10 md:w-20 md:h-20 rounded-full object-cover"
                       src={IMG_URL + it.profile_path}
                       alt="character-dp"
                     />
                   ) : (
                     <img
-                      className="w-20 h-20 rounded-full object-cover"
+                      className="h-10 w-10 md:w-20 md:h-20 rounded-full object-cover"
                       src="https://i.pinimg.com/736x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg"
                       alt="default-character-dp"
                     />
                   )}
                 </div>
-                <div className="font-bold text-sm text-white break-words w-28">
+                <div className="font-bold text-[10px] md:text-sm text-white break-words w-28">
                   {it.original_name}
                 </div>
-                <div className="text-gray-300 text-sm break-words w-28">
+                <div className="text-gray-300 text-[10px] md:text-sm break-words w-28">
                   {it.character}
                 </div>
               </div>
