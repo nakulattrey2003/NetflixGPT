@@ -133,7 +133,7 @@ const MovieOverview = () => {
               </div>
             ))}
           </div>
-          <div className="text-gray-200 text-xs lg:text-base mb-4 mx-7 md:mx-0 md:mr-14">
+          <div className="text-gray-200 text-justify text-xs lg:text-base mb-4 mx-6 md:mx-0 md:mr-14">
             {isExpanded ? movie.overview : splitOverview(movie.overview, 60)}
           </div>
           <div className="flex -ml-4">

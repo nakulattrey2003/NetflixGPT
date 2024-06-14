@@ -67,7 +67,7 @@ const Login = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute mt-16 p-5 md:p-12 m-10 d-flex bg-black w-5/6 md:w-7/12 lg:w-4/12 my-32 mx-auto right-0 left-0 text-white bg-opacity-70"
+        className="absolute mt-44 md:mt-36 p-5 md:p-12 m-10 d-flex bg-black w-5/6 md:w-7/12 lg:w-4/12 my-32 mx-auto right-0 left-0 text-white bg-opacity-70"
       >
         <h1 className=" mb-3 md:mb-6 text-lg md:text-3xl font-bold">Sign In</h1>
         <input

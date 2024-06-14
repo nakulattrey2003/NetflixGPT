@@ -22,9 +22,9 @@ const GptSearchBar = () => {
   const dispatch = useDispatch();
 
   const { fetchResponse } = api();
-  const { loading, transcript } = useSpeechRecognition();
+  const { loading, transcript, resetTranscript } = useSpeechRecognition();
 
-  const [searchInput, setSearchInput] = useState();
+  const [searchInput, setSearchInput] = useState("");
   const [showInfoPopup, setShowInfoPopup] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [autoSearchTimer, setAutoSearchTimer] = useState(null);
@@ -42,7 +42,7 @@ const GptSearchBar = () => {
           handleSearch();
           setIsListening(!isListening);
           SpeechRecognition.stopListening();
-          setSearchInput("");
+          resetTranscript();
         }, 2000)
       );
     }
@@ -82,6 +82,10 @@ const GptSearchBar = () => {
     }
     try {
       setIsLoading(true);
+
+      // Clear previous search results before adding new ones
+      dispatch(clearGptSearchResult());
+
       const gptQuery =
         "Act as a movie recomendation system and suggest some movies for the query " +
         searchInput +
@@ -99,9 +103,6 @@ const GptSearchBar = () => {
       const promiseArray = splitMovieResults.map((movie) => searchMovie(movie));
 
       const movieResults = await Promise.all(promiseArray);
-      
-      // Clear previous search results before adding new ones
-      dispatch(clearGptSearchResult());
 
       console.log("movieResults", movieResults);
       dispatch(
@@ -112,7 +113,7 @@ const GptSearchBar = () => {
       );
 
       setSearchInput("");
-
+    resetTranscript();
       navigate("/search");
     } catch (error) {
       toast.error("Error fetching response from Chat API");
@@ -138,6 +139,7 @@ const GptSearchBar = () => {
   const toggleListening = () => {
     if (isListening) {
       SpeechRecognition.stopListening();
+      resetTranscript();
     } else {
       SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
     }
