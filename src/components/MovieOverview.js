@@ -140,28 +140,29 @@ const MovieOverview = () => {
             <div>
               <button
                 onClick={handlePlay}
-                className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-1 px-2 md:py-2 md:px-4 text-sm md:text-base rounded"
+                className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded"
               >
-                <FaPlay className="mt-1 mr-2" /> {langArray[langKey].Play}
+                <FaPlay className="mt-1 mr-2 h-2 w-2 md:h-4 md:w-4" />
+                {langArray[langKey].Play}
               </button>
             </div>
             <div>
               <button
-                className="flex bg-transparent border hover:border-white hover:bg-slate-600 bg-opacity-50 hover:bg-opacity-50 text-white font-bold hover:text-white py-1 px-2 md:py-2 md:px-4 text-sm md:text-base hover:border-transparent rounded"
+                className="flex bg-transparent border hover:border-white hover:bg-slate-600 bg-opacity-50 hover:bg-opacity-50 text-white font-bold hover:text-white py-1 px-4 md:py-2 md:px-4 text-xs md:text-base hover:border-transparent rounded"
                 onClick={handleExpand}
               >
-                <CiCircleInfo className="mr-2 h-5 w-5 md:h-6 md:w-6" />
+                <CiCircleInfo className="mr-2 h-4 w-4 md:h-6 md:w-6" />
                 {isExpanded ? lessInfoText : moreInfoText}
               </button>
             </div>
           </div>
           <div
-            className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-2 md:py-2 md:px-4 text-sm md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-gray-200 hover:text-black"
+            className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-gray-200 hover:text-black"
             onClick={handleWatchlist}
           >
             {isInWatchlist ? (
               <div className="flex ">
-                <FaHeart className="mr-2 mt-1" />
+                <FaHeart className="mr-2 mt-[2px] h-3 w-3 md:h-4 md:w-4" />
                 {langArray[langKey].Added}
               </div>
             ) : (
@@ -173,7 +174,7 @@ const MovieOverview = () => {
           </div>
         </div>
 
-        <div className="ml-3 mb-10 flex col-span-1 row-span-1 z-10 gap-0 md:gap-4 overflow-hidden justify-left md:items-left md:-ml-28 mt-4 md:mt-32">
+        <div className="ml-3 mb-10 flex col-span-1 row-span-1 z-10 gap-0 md:gap-4 overflow-hidden md:justify-left md:items-left md:-ml-28 mt-4 md:mt-32">
           {cast.cast
             // .concat()
             // .sort((a, b) => b.popularity - a.popularity)
