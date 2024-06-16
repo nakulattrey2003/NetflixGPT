@@ -22,7 +22,7 @@ const GptSearchBar = () => {
   const dispatch = useDispatch();
 
   const { fetchResponse } = api();
-  const { loading, transcript, resetTranscript } = useSpeechRecognition();
+  const { transcript, resetTranscript } = useSpeechRecognition();
 
   const [searchInput, setSearchInput] = useState("");
   const [showInfoPopup, setShowInfoPopup] = useState(false);
@@ -189,7 +189,11 @@ const GptSearchBar = () => {
           )}
         </div>
       </div>
-      {loading && <SearchSkeleton />}
+      {/* {isLoading && (
+        <div className="h-screen w-screen">
+          <SearchSkeleton />
+        </div>
+      )} */}
     </div>
   );
 };

@@ -9,29 +9,27 @@ import { useNavigate } from "react-router-dom";
 
 const GptSearchPage = () => {
   const navigate = useNavigate();
-  
+
   const gptMovieNames = useSelector((state) => state.gptSearch.gptMovieNames);
   const gptMovieResults = useSelector(
     (state) => state.gptSearch.gptMovieResults
   );
   const langKey = useSelector((state) => state.language.lang);
 
-
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-      setIsLoading(true);
-      setTimeout(() => {
-        setFilteredMovies(gptMovieResults);
-        setIsLoading(false);
-      }, 2000); // Simulating 2 seconds delay
-    }, [gptMovieResults]);
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setFilteredMovies(gptMovieResults);
+      setIsLoading(false);
+    }, 1000); // Simulating 2 seconds delay
+  }, [gptMovieResults]);
 
-  if(!gptMovieNames || !gptMovieResults)
-    {
-      navigate("/error");
-    }
+  if (!gptMovieNames || !gptMovieResults) {
+    navigate("/error");
+  }
 
   return (
     <div className="bg-gray-900 to-black min-h-screen w-full flex flex-col">
