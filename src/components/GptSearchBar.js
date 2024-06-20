@@ -80,7 +80,7 @@ const GptSearchBar = () => {
   const fetchSuggestions = async (query) => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&page=1`,
+        `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=true&page=1`,
         API_OPTIONS
       );
 
@@ -146,6 +146,7 @@ const GptSearchBar = () => {
       );
 
       setSearchInput("");
+      setShowSuggestions(false);
       resetTranscript();
       navigate("/search");
     } catch (error) {
