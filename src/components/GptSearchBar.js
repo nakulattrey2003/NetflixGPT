@@ -28,6 +28,8 @@ const GptSearchBar = () => {
   const [showInfoPopup, setShowInfoPopup] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [autoSearchTimer, setAutoSearchTimer] = useState(null);
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -72,6 +74,34 @@ const GptSearchBar = () => {
       return data.results;
     } catch (error) {
       toast.error("Error in Fetching Movies from TMBD");
+    }
+  };
+
+  const fetchSuggestions = async (query) => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&page=1`,
+        API_OPTIONS
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      const results = data.results.slice(0, 7);
+
+      const uniqueSuggestions = results.reduce((uniqueMovies, movie) => {
+        if (!uniqueMovies.includes(movie.title)) {
+          uniqueMovies.push(movie.title);
+        }
+        return uniqueMovies;
+      }, []);
+
+      return uniqueSuggestions;
+    } catch (error) {
+      toast.error("Error fetching suggestions");
+      return [];
     }
   };
 
@@ -125,6 +155,23 @@ const GptSearchBar = () => {
     }
   };
 
+  const handleInputChange = async (value) => {
+    setSearchInput(value);
+    setShowSuggestions(true);
+    if (value.trim().length > 0) {
+      const suggestions = await fetchSuggestions(value);
+      setSuggestions(suggestions);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchInput(suggestion);
+    setShowSuggestions(false);
+  };
+
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSearch();
@@ -156,12 +203,25 @@ const GptSearchBar = () => {
       />
       <input
         className="outline-none bg-transparent w-full text-white placeholder-slate-300"
-        onChange={(e) => setSearchInput(e.target.value)}
+        onChange={(e) => handleInputChange(e.target.value)}
         value={searchInput}
         onKeyDown={handleKeyPress}
         type="text"
         placeholder={langArray[langKey]?.GptSearchPlaceholder}
       />
+      {showSuggestions && suggestions.length > 0 && (
+        <div className="absolute z-10 bg-black bg-opacity-80 text-white mt-80 w-96 shadow-lg rounded-xl">
+          {suggestions.map((suggestion, index) => (
+            <div
+              key={index}
+              className="cursor-pointer px-4 py-2 hover:text-red-500 hover:font-bold"
+              onClick={() => handleSuggestionClick(suggestion)}
+            >
+              {suggestion}
+            </div>
+          ))}
+        </div>
+      )}
       <div
         className="relative"
         onMouseEnter={handleInfoMouseEnter}
@@ -189,11 +249,7 @@ const GptSearchBar = () => {
           )}
         </div>
       </div>
-      {/* {isLoading && (
-        <div className="h-screen w-screen">
-          <SearchSkeleton />
-        </div>
-      )} */}
+      {/* {isLoading && <Loader />} */}
     </div>
   );
 };
