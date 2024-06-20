@@ -210,7 +210,7 @@ const GptSearchBar = () => {
         placeholder={langArray[langKey]?.GptSearchPlaceholder}
       />
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute z-10 bg-black bg-opacity-80 text-white mt-80 w-96 shadow-lg rounded-xl">
+        <div className="absolute z-10 p-1 bg-black bg-opacity-80 text-white mt-80 w-96 shadow-lg rounded-xl">
           {suggestions.map((suggestion, index) => (
             <div
               key={index}

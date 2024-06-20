@@ -161,29 +161,31 @@ const MovieOverview = () => {
             </div>
           </div>
           <div className="flex flex-col items-center">
-          <div
-            className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-purple-700 hover:border-purple-700 z-10"
-            onClick={handleWatchlist}
-          >
-            {isInWatchlist ? (
-              <div className="flex ">
-                <FaHeart className="mr-2 mt-[4px] h-3 w-3 md:h-4 md:w-4" />
-                {langArray[langKey].Added}
-              </div>
-            ) : (
-              <>
-                <FaRegHeart className="mr-2" />
-                {langArray[langKey].AddToList}
-              </>
-            )}
-          </div>
-          <div
-            onClick={handlePlayTrialer}style={{ width: "fit-content" }}
-            className="text-xl text-white hover:text-red-500 hover:font-bold mt-4 -mb-7 cursor-pointer relative"
-          >
-            <p>{langArray[langKey].WatchTrailer}</p>
-            <div className="absolute inset-0 bg-red-500 rounded-lg opacity-0 hover:opacity-100 blur hover:w-full bg-opacity-50 transition-opacity duration-300 z-0"></div>
-          </div>
+            <div
+            className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-red-500 hover:border-none z-10 hover:bg-opacity-60 hover:backdrop-blur-xl"
+              onClick={handleWatchlist}
+            >
+              <div className="absolute inset-0 bg-red-500 bg-opacity-20 backdrop-filter backdrop-blur-lg rounded pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"></div>
+              {isInWatchlist ? (
+                <div className="flex ">
+                  <FaHeart className="mr-2 mt-[4px] h-3 w-3 md:h-4 md:w-4" />
+                  {langArray[langKey].Added}
+                </div>
+              ) : (
+                <>
+                  <FaRegHeart className="mr-2" />
+                  {langArray[langKey].AddToList}
+                </>
+              )}
+            </div>
+            <div
+              onClick={handlePlayTrialer}
+              style={{ width: "fit-content" }}
+              className="text-xl text-white hover:text-red-500 hover:font-bold mt-4 -mb-7 cursor-pointer relative"
+            >
+              <p>{langArray[langKey].WatchTrailer}</p>
+              <div className="absolute inset-0 bg-red-500 rounded-lg opacity-0 hover:opacity-100 blur hover:w-full bg-opacity-50 transition-opacity duration-300 z-0"></div>
+            </div>
           </div>
         </div>
         <div className="ml-3 mb-10 flex col-span-1 row-span-1 z-10 gap-0 md:gap-4 overflow-hidden md:justify-left md:items-left md:-ml-28 mt-4 md:mt-32">
