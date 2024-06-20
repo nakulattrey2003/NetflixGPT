@@ -24,7 +24,8 @@ const MovieOverview = () => {
   const { id: movieId } = useParams();
 
   const [isExpanded, setIsExpanded] = useState(false);
-  const [playing, setPlaying] = useState(false);
+  const [playingMovie, setPlayingMovie] = useState(false);
+  const [playingTrailer, setPlayingTrailer] = useState(false);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
 
   const trailerKey = useMovieTrailer(movieId);
@@ -53,8 +54,12 @@ const MovieOverview = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const handlePlay = () => {
-    setPlaying(true);
+  const handlePlayMovie = () => {
+    setPlayingMovie(true);
+  };
+
+  const handlePlayTrialer = () => {
+    setPlayingTrailer(true);
   };
 
   const handleWatchlist = () => {
@@ -138,7 +143,7 @@ const MovieOverview = () => {
           <div className="flex -ml-4">
             <div>
               <button
-                onClick={handlePlay}
+                onClick={handlePlayMovie}
                 className="flex ml-4 mr-3 bg-gray-200 hover:bg-gray-300 text-black font-black py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded"
               >
                 <FaPlay className="mt-1 mr-2 h-2 w-2 md:h-4 md:w-4" />
@@ -155,13 +160,14 @@ const MovieOverview = () => {
               </button>
             </div>
           </div>
+          <div className="flex flex-col items-center">
           <div
-            className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-gray-200 hover:text-black"
+            className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-purple-700 hover:border-purple-700 z-10"
             onClick={handleWatchlist}
           >
             {isInWatchlist ? (
               <div className="flex ">
-                <FaHeart className="mr-2 mt-[2px] h-3 w-3 md:h-4 md:w-4" />
+                <FaHeart className="mr-2 mt-[4px] h-3 w-3 md:h-4 md:w-4" />
                 {langArray[langKey].Added}
               </div>
             ) : (
@@ -171,8 +177,15 @@ const MovieOverview = () => {
               </>
             )}
           </div>
+          <div
+            onClick={handlePlayTrialer}style={{ width: "fit-content" }}
+            className="text-xl text-white hover:text-red-500 hover:font-bold mt-4 -mb-7 cursor-pointer relative"
+          >
+            <p>{langArray[langKey].WatchTrailer}</p>
+            <div className="absolute inset-0 bg-red-500 rounded-lg opacity-0 hover:opacity-100 blur hover:w-full bg-opacity-50 transition-opacity duration-300 z-0"></div>
+          </div>
+          </div>
         </div>
-
         <div className="ml-3 mb-10 flex col-span-1 row-span-1 z-10 gap-0 md:gap-4 overflow-hidden md:justify-left md:items-left md:-ml-28 mt-4 md:mt-32">
           {cast.cast
             // .concat()
@@ -206,15 +219,29 @@ const MovieOverview = () => {
         </div>
       </div>
 
-      {playing && (
+      {/* trailer */}
+      {playingTrailer && (
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-          {/* <ReactPlayer
+          <ReactPlayer
             url={`https://www.youtube.com/embed/${trailerKey}?&loop=1&playlist=${trailerKey}`}
-            playing={playing}
+            playing={playingTrailer}
+            allow="autoplay"
             controls={true}
             width="100%"
             height="100%"
-          /> */}
+          />
+          <button
+            className="absolute top-4 right-4 text-white text-2xl bg-black bg-opacity-50 p-2 rounded-full m-4 h-27 w-27"
+            onClick={() => setPlayingTrailer(false)}
+          >
+            ✖
+          </button>
+        </div>
+      )}
+
+      {/* movie  */}
+      {playingMovie && (
+        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
           <iframe
             className="w-full h-full"
             allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -223,7 +250,7 @@ const MovieOverview = () => {
           ></iframe>
           <button
             className="absolute top-4 right-4 text-white text-xl bg-black bg-opacity-50 p-2 rounded-full"
-            onClick={() => setPlaying(false)}
+            onClick={() => setPlayingMovie(false)}
           >
             ✖
           </button>
