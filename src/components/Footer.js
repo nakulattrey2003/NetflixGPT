@@ -45,9 +45,12 @@ const Footer = () => {
           <div class="sm:flex sm:items-center sm:justify-between">
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
               © 2023{" "}
-              <a href="https://flowbite.com/" class="hover:underline">
-                Flowbite™
-              </a>
+              <Link
+                to="https://netflixgpt-2d118.web.app/"
+                class="hover:underline"
+              >
+                NakulGPT™
+              </Link>
               . All Rights Reserved.
             </span>
             <div class="flex mt-4 sm:justify-center sm:mt-0">

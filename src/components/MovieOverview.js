@@ -13,7 +13,6 @@ import { addToWatchlist, removeFromWatchlist } from "../redux/watchlistSlice";
 import { toast } from "react-toastify";
 
 const MovieOverview = () => {
-  
   const user = useSelector((state) => state.user);
   const movie = useSelector((state) => state.detail.movieDetail);
   const cast = useSelector((state) => state.detail.castDetail);
@@ -34,7 +33,7 @@ const MovieOverview = () => {
   const moreInfoText = langArray[langKey].MoreInfo || "More Info";
 
   useEffect(() => {
-    if(!movie) return ;
+    if (!movie) return;
 
     setIsInWatchlist(
       !!watchlistArray.find((item) => item && item.id === movie.id)
@@ -63,10 +62,10 @@ const MovieOverview = () => {
 
     if (isInWatchlist) {
       toast(` 👍🏼 ${movie.title} is Removed From Watchlist`);
-      dispatch(removeFromWatchlist({ movie, userId : user.uid }));
+      dispatch(removeFromWatchlist({ movie, userId: user.uid }));
     } else {
       toast(` 🔥 ${movie.title} is Added to the Watchlist`);
-      dispatch(addToWatchlist({ movie, userId : user.uid }));
+      dispatch(addToWatchlist({ movie, userId: user.uid }));
     }
 
     setIsInWatchlist(!isInWatchlist);
@@ -209,13 +208,19 @@ const MovieOverview = () => {
 
       {playing && (
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-          <ReactPlayer
+          {/* <ReactPlayer
             url={`https://www.youtube.com/embed/${trailerKey}?&loop=1&playlist=${trailerKey}`}
             playing={playing}
             controls={true}
             width="100%"
             height="100%"
-          />
+          /> */}
+          <iframe
+            className="w-full h-full"
+            allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            src={`https://vidsrc.xyz/embed/movie/${movieId}`}
+          ></iframe>
           <button
             className="absolute top-4 right-4 text-white text-xl bg-black bg-opacity-50 p-2 rounded-full"
             onClick={() => setPlaying(false)}
