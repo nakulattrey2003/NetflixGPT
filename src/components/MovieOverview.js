@@ -88,16 +88,16 @@ const MovieOverview = () => {
   const upperCaseLanguage = movie?.original_language.toUpperCase();
 
   return (
-    <div className="">
-      <div className="">
-        {movie?.backdrop_path ? (
+    <div className="relative">
+      <div className="absolute inset-0 z-0">
+        {movie.backdrop_path ? (
           <img
-            src={IMG_URL + movie?.backdrop_path}
+            src={IMG_URL + movie.backdrop_path}
             alt="background-image"
             className="object-cover w-full h-full fixed z-0 filter blur-sm"
           />
         ) : (
-          <div className="bg-gray-900 h-full fixed z-0" />
+          <div className="bg-gray-800 fixed h-full w-full" />
         )}
       </div>
 
@@ -162,7 +162,7 @@ const MovieOverview = () => {
           </div>
           <div className="flex flex-col items-center">
             <div
-            className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-red-500 hover:border-none z-10 hover:bg-opacity-60 hover:backdrop-blur-xl"
+              className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-red-500 hover:border-none z-10 hover:bg-opacity-60 hover:backdrop-blur-xl"
               onClick={handleWatchlist}
             >
               <div className="absolute inset-0 bg-red-500 bg-opacity-20 backdrop-filter backdrop-blur-lg rounded pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"></div>
