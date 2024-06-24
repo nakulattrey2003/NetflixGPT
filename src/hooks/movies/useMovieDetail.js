@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
+import { API_OPTIONS } from "../../utils/constants";
 import { useDispatch } from "react-redux";
-import { addMovieDetail } from "../redux/detailSlice";
+import { addMovieDetail } from "../../redux/detailSlice";
 import { useNavigate } from "react-router-dom";
 
 const useMovieDetail = (movieId) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const getMovieDetail = async () => {
     try {
       const response = await fetch(
@@ -21,12 +21,11 @@ const useMovieDetail = (movieId) => {
     } catch (error) {
       navigate("/error");
     }
-
   };
 
   useEffect(() => {
     // if (movieId) {
-      getMovieDetail();
+    getMovieDetail();
     // }
   }, [movieId]);
 };

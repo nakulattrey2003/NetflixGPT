@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
+import { API_OPTIONS } from "../../utils/constants";
 import { useDispatch } from "react-redux";
-import { addCastDetail } from "../redux/detailSlice";
+import { addCastDetail } from "../../redux/detailSlice";
 
 const useCastDetail = (movieId) => {
   const dispatch = useDispatch();
@@ -15,13 +15,10 @@ const useCastDetail = (movieId) => {
     const data = await response.json();
 
     dispatch(addCastDetail(data));
-
   };
 
   useEffect(() => {
-    // if (movieId) {
-      getCastDetail();
-    // }
+    getCastDetail();
   }, [movieId]);
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
-import useMovieDetail from "../hooks/useMovieDetail";
-import useCastDetail from "../hooks/useCastDetail";
+import useMovieDetail from "../hooks/movies/useMovieDetail";
+import useCastDetail from "../hooks/movies/useCastDetail";
+import useSeriesDetail from "../hooks/series/useSeriesDetail";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import MovieOverview from "../components/MovieOverview";
@@ -16,6 +17,7 @@ const MovieDetailPage = () => {
   const movies = useSelector((store) => store.movies);
 
   const relatedTitle = langArray[langKey].Related;
+  const todayTrendingTitle = langArray[langKey].TodayTrending;
   const topRatedTitle = langArray[langKey].TopRated;
   const upcomingTitle = langArray[langKey].Upcoming;
 
@@ -29,6 +31,10 @@ const MovieDetailPage = () => {
         <MovieOverview />
         <div>
           <MovieList title={relatedTitle} movies={movies.popularMovies} />
+          <MovieList
+            title={todayTrendingTitle}
+            movies={movies.todayTrendingMovie}
+          />
           <MovieList title={topRatedTitle} movies={movies.topRatedMovies} />
           <MovieList title={upcomingTitle} movies={movies.upcomingMovies} />
         </div>

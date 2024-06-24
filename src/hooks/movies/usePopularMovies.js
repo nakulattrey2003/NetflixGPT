@@ -1,6 +1,6 @@
-import { API_OPTIONS } from "../utils/constants";
+import { API_OPTIONS } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addPopularMovies } from "../redux/moviesSlice";
+import { addPopularMovies } from "../../redux/moviesSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "../components/Header";
-import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
+import useNowPlayingMovies from "../hooks/movies/useNowPlayingMovies";
 import MainContainer from "../components/MainContainer";
 import SecondaryContainer from "../components/SecondaryContainer";
-import usePopularMovies from "../hooks/usePopularMovies";
-import useTopRatedMovies from "../hooks/useTopRatedMovies";
-import useUpcomingMovies from "../hooks/useUpcomingMovies";
+import usePopularMovies from "../hooks/movies/usePopularMovies";
+import useTopRatedMovies from "../hooks/movies/useTopRatedMovies";
+import useUpcomingMovies from "../hooks/movies/useUpcomingMovies";
 import Footer from "../components/Footer";
-import useTodayTrendingMovie from "../hooks/useTodayTrendingMovie";
+import useTodayTrending from "../hooks/useTodayTrending";
 
 
 const Browse = () => {
@@ -15,7 +15,7 @@ const Browse = () => {
   usePopularMovies();
   useTopRatedMovies();
   useUpcomingMovies();
-  useTodayTrendingMovie();
+  useTodayTrending();
 
   return (
     <div>

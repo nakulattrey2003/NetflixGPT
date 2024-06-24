@@ -8,12 +8,14 @@ const useTodayTrendingMovie = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const todayTrendingMovie = useSelector((state) => state.movies.todayTrendingMovie);
+  const todayTrendingMovie = useSelector(
+    (state) => state.movies.todayTrendingMovie
+  );
 
   const getTodayTrendingMovie = async () => {
     try {
       const response = await fetch(
-        "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
+        "https://api.themoviedb.org/3/trending/all/day?language=en-US",
         API_OPTIONS
       );
 
@@ -26,7 +28,7 @@ const useTodayTrendingMovie = () => {
   };
 
   useEffect(() => {
-    if(!todayTrendingMovie) getTodayTrendingMovie();
+    if (!todayTrendingMovie) getTodayTrendingMovie();
   }, []);
 };
 

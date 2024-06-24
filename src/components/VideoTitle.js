@@ -6,7 +6,7 @@ import { MdDateRange } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
 import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
-import useMovieTrailer from "../hooks/useMovieTrailer";
+import useMovieTrailer from "../hooks/movies/useMovieTrailer";
 import ReactPlayer from "react-player";
 
 const VideoTitle = ({ title, overview, language, rating, date }) => {

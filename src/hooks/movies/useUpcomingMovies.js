@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addUpcomingMovies } from "../redux/moviesSlice";
-import { API_OPTIONS } from "../utils/constants";
+import { addUpcomingMovies } from "../../redux/moviesSlice";
+import { API_OPTIONS } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 
 const useUpcomingMovies = () => {

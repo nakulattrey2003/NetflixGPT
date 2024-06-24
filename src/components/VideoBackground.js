@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useMovieTrailer from "../hooks/useMovieTrailer";
+import useMovieTrailer from "../hooks/movies/useMovieTrailer";
 import { IoVolumeMediumSharp, IoVolumeMute } from "react-icons/io5";
 
 const VideoBackground = ({ movieId }) => {

@@ -7,7 +7,7 @@ import langArray from "../utils/langConstants";
 import { CiCircleInfo } from "react-icons/ci";
 import { FaPlay, FaRegHeart, FaHeart } from "react-icons/fa";
 import ReactPlayer from "react-player";
-import useMovieTrailer from "../hooks/useMovieTrailer";
+import useMovieTrailer from "../hooks/movies/useMovieTrailer";
 import { useParams } from "react-router-dom";
 import { addToWatchlist, removeFromWatchlist } from "../redux/watchlistSlice";
 import { toast } from "react-toastify";
