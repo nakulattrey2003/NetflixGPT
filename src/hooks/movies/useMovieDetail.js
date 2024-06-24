@@ -24,9 +24,7 @@ const useMovieDetail = (movieId) => {
   };
 
   useEffect(() => {
-    // if (movieId) {
     getMovieDetail();
-    // }
   }, [movieId]);
 };
 

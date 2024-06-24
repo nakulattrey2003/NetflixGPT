@@ -33,6 +33,7 @@ const MainContainer = () => {
         language={original_language}
         rating={vote_average}
         date={release_date || first_air_date}
+        type={media_type}
       />
       <VideoBackground mediaId={id} type={media_type} />
     </div>

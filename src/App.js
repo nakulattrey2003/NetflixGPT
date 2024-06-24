@@ -8,6 +8,7 @@ import GptSearchPage from "./pages/GptSearchPage.js";
 import MovieDetailPage from "./pages/MovieDetailPage.js";
 import WatchlistPage from "./pages/WatchlistPage.js";
 import ProtectRoute from "./utils/ProtectRoute";
+import SeriesDetailPage from "./pages/SeriesDetailPage.js";
 
 function App() {
   return (
@@ -41,6 +42,12 @@ function App() {
             path="/movie-detail/:id"
             element={
               <ProtectRoute type="private" element={<MovieDetailPage />} />
+            }
+          />
+          <Route
+            path="/series-detail/:id"
+            element={
+              <ProtectRoute type="private" element={<SeriesDetailPage />} />
             }
           />
           <Route

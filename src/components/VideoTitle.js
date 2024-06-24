@@ -16,7 +16,7 @@ const VideoTitle = ({ title, overview, language, rating, date }) => {
   // const randomcount = Math.floor(Math.random() * (movies.length));
   // const mainMovie = movies[randomcount];
 
-  const mainMovie = movies[3]; // 10 for garfield and 7 for inside out 2
+  const mainMovie = movies[3];
 
   const movieId = mainMovie?.id || "dQw4w9WgXcQ?si=CZOmhr0IiXt4JHHz";
 

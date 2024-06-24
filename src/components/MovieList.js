@@ -46,15 +46,16 @@ const MovieList = ({ title, movies }) => {
         {title}
       </div>
       <div className="flex mt-8 ml-7 md:ml-16 gap-1 md:gap-7 md:mt-3">
-        {movies?.map((movie) => (
+        {movies?.map((media) => (
           <MovieCard
-            key={movie.id}
-            movieId={movie.id}
-            rating={movie.vote_average}
-            date={movie.release_date || movie.first_air_date}
-            language={movie.original_language}
-            movieName={movie.title || movie.name}
-            posterPath={movie.poster_path}
+            key={media.id}
+            mediaId={media.id}
+            rating={media.vote_average}
+            date={media.release_date || media.first_air_date}
+            language={media.original_language}
+            movieName={media.title || media.name}
+            posterPath={media.poster_path}
+            type={media.media_type}
           />
         ))}
       </div>

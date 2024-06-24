@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { API_OPTIONS } from "../../utils/constants";
 import { useDispatch } from "react-redux";
-import { addCastDetail } from "../../redux/detailSlice";
+import { addCastMovieDetail } from "../../redux/detailSlice";
 
-const useCastDetail = (movieId) => {
+const useCastMovieDetail = (movieId) => {
   const dispatch = useDispatch();
 
-  const getCastDetail = async () => {
+  const getCastMovieDetail = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/${movieId}/credits`,
       API_OPTIONS
@@ -14,12 +14,12 @@ const useCastDetail = (movieId) => {
 
     const data = await response.json();
 
-    dispatch(addCastDetail(data));
+    dispatch(addCastMovieDetail(data));
   };
 
   useEffect(() => {
-    getCastDetail();
+    getCastMovieDetail();
   }, [movieId]);
 };
 
-export default useCastDetail;
+export default useCastMovieDetail;

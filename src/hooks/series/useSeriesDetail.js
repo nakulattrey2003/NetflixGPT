@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { API_OPTIONS } from "../../utils/constants";
 import { useDispatch } from "react-redux";
+import { addSeriesDetail } from "../../redux/detailSlice";
 import { useNavigate } from "react-router-dom";
 
 const useSeriesDetail = (seriesId) => {
@@ -16,7 +17,7 @@ const useSeriesDetail = (seriesId) => {
 
       const data = await response.json();
 
-      // dispatch(addMovieDetail(data));
+      dispatch(addSeriesDetail(data));
     } catch (error) {
       navigate("/error");
     }

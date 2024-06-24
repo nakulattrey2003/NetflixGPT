@@ -1,21 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const detailSlice = createSlice({
-    name: "detail",
-    initialState: {
-        movieDetail: null,
-        castDetail: null,
+  name: "detail",
+  initialState: {
+    movieDetail: null,
+    castMovieDetail: null,
+    seriesDetail: null,
+    castSeriesDetail: null,
+  },
+  reducers: {
+    addMovieDetail: (state, action) => {
+      state.movieDetail = action.payload;
     },
-    reducers: {
-        addMovieDetail: (state, action) => {
-            state.movieDetail = action.payload;
-        },
-        addCastDetail: (state, action) => {
-            state.castDetail = action.payload
-        }
-    }
-})
+    addCastMovieDetail: (state, action) => {
+      state.castMovieDetail = action.payload;
+    },
+    addSeriesDetail: (state, action) => {
+      state.seriesDetail = action.payload;
+    },
+    addCastSeriesDetail: (state, action) => {
+      state.castSeriesDetail = action.payload;
+    },
+  },
+});
 
-export const {addMovieDetail, addCastDetail} = detailSlice.actions;
+export const {
+  addMovieDetail,
+  addCastMovieDetail,
+  addSeriesDetail,
+  addCastSeriesDetail,
+} = detailSlice.actions;
 
 export default detailSlice.reducer;

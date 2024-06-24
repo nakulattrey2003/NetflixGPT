@@ -57,17 +57,18 @@ const GptSearchBar = () => {
     setToastWarning(langArray[langKey].Warning1);
   }, [langKey]);
 
-  const searchMovie = async (movieName) => {
+  const searchMovie = async (mediaName) => {
     try {
       const response = await fetch(
-        "https://api.themoviedb.org/3/search/movie?query=" +
-          movieName +
-          "&include_adult=false&page=1",
+        "https://api.themoviedb.org/3/search/multi?query=" +
+          mediaName +
+          "&include_adult=true&page=1",
         API_OPTIONS
       );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
+        navigate("/error");
       }
 
       const data = await response.json();
@@ -80,7 +81,7 @@ const GptSearchBar = () => {
   const fetchSuggestions = async (query) => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=true&page=1`,
+        `https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=true&page=1`,
         API_OPTIONS
       );
 
@@ -117,11 +118,11 @@ const GptSearchBar = () => {
       dispatch(clearGptSearchResult());
 
       const gptQuery =
-        "Act as a movie recomendation system and suggest some movies for the query " +
+        "Act as a movie and series recomendation system and suggest some movies and series for the query " +
         searchInput +
         ". Also include " +
         searchInput +
-        " in the list if it exists .Only give me names of 7 movies, in one line and comma seperated with no inverted or double inverted commas.";
+        " in the list if it exists .Only give me names of 7 movies or series according to query, in one line and comma seperated with no inverted or double inverted commas.";
       // searchInput;
 
       console.log("Q:", gptQuery);

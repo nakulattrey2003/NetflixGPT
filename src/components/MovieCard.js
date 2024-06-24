@@ -6,12 +6,13 @@ import langArray from "../utils/langConstants";
 import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({
-  movieId,
+  mediaId,
   rating,
   date,
   language,
   movieName,
   posterPath,
+  type
 }) => {
   const navigate = useNavigate();
 
@@ -26,7 +27,12 @@ const MovieCard = ({
 
   const handleMovieCardClick = () => {
     try {
-      navigate("/movie-detail/" + movieId);
+      if(type == "tv"){
+        navigate("/series-detail/" + mediaId);
+      }
+      else{
+        navigate("/movie-detail/" + mediaId);
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       navigate("/error");
@@ -35,7 +41,10 @@ const MovieCard = ({
 
   return (
     <div className="relative ml-3 mb-20 transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-150">
-      <div onClick={handleMovieCardClick} className="cursor-pointer w-32 md:w-52">
+      <div
+        onClick={handleMovieCardClick}
+        className="cursor-pointer w-32 md:w-52"
+      >
         <div className="relative">
           <img
             className="rounded-lg"

@@ -7,39 +7,39 @@ import langArray from "../utils/langConstants";
 import { CiCircleInfo } from "react-icons/ci";
 import { FaPlay, FaRegHeart, FaHeart } from "react-icons/fa";
 import ReactPlayer from "react-player";
-import useMovieTrailer from "../hooks/movies/useMovieTrailer";
+import useSeriesTrailer from "../hooks/series/useSeriesTrailer";
 import { useParams } from "react-router-dom";
 import { addToWatchlist, removeFromWatchlist } from "../redux/watchlistSlice";
 import { toast } from "react-toastify";
 
-const MovieOverview = () => {
-  const user = useSelector((state) => state.user);
-  const movie = useSelector((state) => state.detail.movieDetail);
-  const cast = useSelector((state) => state.detail.castMovieDetail);
+const SeriesOverview = () => {
+  const series = useSelector((state) => state.detail.seriesDetail);
+  const cast = useSelector((state) => state.detail.castSeriesDetail);
   const langKey = useSelector((state) => state.language.lang);
+  const user = useSelector((state) => state.user);
   const watchlistArray =
     useSelector((state) => state.watchlist.watchlistArray) || [];
 
+  const { id: seriesId } = useParams();
   const dispatch = useDispatch();
-  const { id: movieId } = useParams();
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [playingMovie, setPlayingMovie] = useState(false);
   const [playingTrailer, setPlayingTrailer] = useState(false);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
 
-  const trailerKey = useMovieTrailer(movieId);
+  const trailerKey = useSeriesTrailer(seriesId);
 
   const lessInfoText = langArray[langKey].LessInfo || "Less Info";
   const moreInfoText = langArray[langKey].MoreInfo || "More Info";
 
   useEffect(() => {
-    if (!movie) return;
+    if (!series) return;
 
     setIsInWatchlist(
-      !!watchlistArray.find((item) => item && item.id === movie.id)
+      !!watchlistArray.find((item) => item && item.id === series.id)
     );
-  }, [movie]);
+  }, [series]);
 
   const splitOverview = (text, maxWords) => {
     const words = text.split(" ");
@@ -63,20 +63,20 @@ const MovieOverview = () => {
   };
 
   const handleWatchlist = () => {
-    if (!movie || !movieId || !user) return;
+    if (!series || !seriesId || !user) return;
 
     if (isInWatchlist) {
-      toast(` 👍🏼 ${movie.title} is Removed From Watchlist`);
-      dispatch(removeFromWatchlist({ movie, userId: user.uid }));
+      toast(` 👍🏼 ${series.name} is Removed From Watchlist`);
+      dispatch(removeFromWatchlist({ series, userId: user.uid }));
     } else {
-      toast(` 🔥 ${movie.title} is Added to the Watchlist`);
-      dispatch(addToWatchlist({ movie, userId: user.uid }));
+      toast(` 🔥 ${series.name} is Added to the Watchlist`);
+      dispatch(addToWatchlist({ series, userId: user.uid }));
     }
 
     setIsInWatchlist(!isInWatchlist);
   };
 
-  if (!movie || !cast) {
+  if (!series || !cast) {
     return (
       <div>
         <Skeleton />
@@ -84,15 +84,15 @@ const MovieOverview = () => {
     );
   }
 
-  const roundedRating = movie?.vote_average.toFixed(1);
-  const upperCaseLanguage = movie?.original_language.toUpperCase();
+  const roundedRating = series?.vote_average.toFixed(1);
+  const upperCaseLanguage = series?.original_language.toUpperCase();
 
   return (
     <div className="relative">
       <div className="absolute inset-0 z-0">
-        {movie.backdrop_path ? (
+        {series.backdrop_path ? (
           <img
-            src={IMG_URL + movie.backdrop_path}
+            src={IMG_URL + series.backdrop_path}
             alt="background-image"
             className="object-cover w-full h-full fixed z-0 filter blur-sm"
           />
@@ -105,7 +105,7 @@ const MovieOverview = () => {
         <div className="col-span-1 row-span-2 -mt-10 flex justify-center items-center">
           <img
             className="h-[50%] md:h-[40%] lg:h-[65%] z-10 m-1 mt-10 md:m-3 p-2 rounded-3xl"
-            src={IMG_URL + movie?.poster_path}
+            src={IMG_URL + series?.poster_path}
             alt="movie-image"
           />
           <div className="absolute inset-0 bg-black opacity-40 z-0 h-full full-height"></div>
@@ -113,13 +113,13 @@ const MovieOverview = () => {
 
         <div className="z-10 text-white col-span-1 row-span-1 flex flex-col justify-center items-center md:items-start md:justify-start mx-3 -mt-24 md:mt-60 lg:mt-44 md:mr-36 lg:-ml-28 mb-10">
           <div className="text-xl md:text-5xl uppercase font-bold">
-            {movie?.title}
+            {series?.name}
           </div>
           <div className="mb-4 text-xs md:text-base text-gray-300">
-            {movie?.tagline}
+            {series?.tagline}
           </div>
           <div className="flex text-xs md:text-base mb-1 md:mb-4">
-            {movie?.release_date}
+            {series?.first_air_date}
             <GoDotFill className=" size-2 md:size-4 mx-3 mt-1" />
             <div className="bg-teal-800 text-white font-semibold text-[10px] md:text-sm py-1 px-2 -mt-1 rounded-lg shadow-md bg-opacity-50">
               ⭐{roundedRating}
@@ -128,7 +128,7 @@ const MovieOverview = () => {
             {upperCaseLanguage}
           </div>
           <div className="flex ml-6 md:-ml-4 mb-4">
-            {movie.genres.map((it) => (
+            {series.genres.map((it) => (
               <div
                 className="bg-teal-700 -ml-1 md:ml-4 text-cyan-300 text-[10px] md:text-base mx-3 px-2 md:px-4 py-1 md:py-2 rounded-lg shadow-md bg-opacity-55"
                 key={it.id}
@@ -138,7 +138,7 @@ const MovieOverview = () => {
             ))}
           </div>
           <div className="text-gray-200 text-justify text-xs lg:text-base mb-4 mx-6 md:mx-0 md:mr-14">
-            {isExpanded ? movie.overview : splitOverview(movie.overview, 60)}
+            {isExpanded ? series.overview : splitOverview(series.overview, 50)}
           </div>
           <div className="flex -ml-4">
             <div>
@@ -248,7 +248,7 @@ const MovieOverview = () => {
             className="w-full h-full"
             allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            src={`https://vidsrc.xyz/embed/movie/${movieId}`}
+            src={`https://vidsrc.xyz/embed/tv/${seriesId}`}
           ></iframe>
           <button
             className="absolute top-4 right-4 text-white text-xl bg-black bg-opacity-50 p-2 rounded-full"
@@ -262,4 +262,4 @@ const MovieOverview = () => {
   );
 };
 
-export default MovieOverview;
+export default SeriesOverview;
