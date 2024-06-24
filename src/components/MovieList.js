@@ -23,7 +23,7 @@ const MovieList = ({ title, movies }) => {
   }
 
   return (
-    <div className="overflow-scroll text-white">
+    <div className="overflow-scroll text-white z-10">
       <div className="absolute -mt-1 md:-mt-11 ml-10 md:ml-20 text-base md:text-2xl font-bold flex">
         {title === todayTrendingTitle && (
           <FaFire className="bg-red-500 p-1 size-6 md:size-8 mr-4 text-black rounded-md" />

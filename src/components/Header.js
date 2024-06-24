@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +21,8 @@ const Header = () => {
 
   const user = useSelector((state) => state.user);
   const langKey = useSelector((state) => state.language.lang);
+
+  const [toggleState, setToggleState] = useState("Series");
 
   useEffect(() => {
     if (user) {
@@ -78,6 +80,14 @@ const Header = () => {
     navigate("/watchlist");
   };
 
+  const handleMovieSeriesChange = () => {
+    if (toggleState == "Series") {
+      setToggleState("Movies");
+    } else {
+      setToggleState("Series");
+    }
+  };
+
   return (
     <div className="absolute w-full px-2 md:px-8 md:py-2 bg-gradient-to-b from-black z-50 flex flex-col md:flex-row justify-evenly md:justify-between bg-transparent md:bg-transparent">
       {/* // bg-black is for small screen,  sm:bg-blue-100 will be for screen bigger than smaller and md:bg-green-100 will be for screen biffer than medium */}
@@ -114,6 +124,13 @@ const Header = () => {
               className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-1 mr-1 md:mr-12 hover:font-bold hover:text-red-500"
             >
               {langArray[langKey].Watchlist}
+            </div>
+
+            <div
+              onClick={handleMovieSeriesChange}
+              className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-1 mr-1 md:mr-12 hover:font-bold hover:text-red-500"
+            >
+              {toggleState}
             </div>
 
             <UserAvatar />

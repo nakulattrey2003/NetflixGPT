@@ -9,20 +9,20 @@ const watchlistSlice = createSlice({
   },
   reducers: {
     addToWatchlist: (state, action) => {
-      const { movie, userId } = action.payload;
+      const { media, userId } = action.payload;
 
       const watchlistKey = getWatchlistKey(userId);
 
-      state.watchlistArray.push(movie);
+      state.watchlistArray.push(media);
       localStorage.setItem(watchlistKey, JSON.stringify(state.watchlistArray));
     },
     removeFromWatchlist: (state, action) => {
-      const { movie, userId } = action.payload;
+      const { media, userId } = action.payload;
 
       const watchlistKey = getWatchlistKey(userId);
 
       state.watchlistArray = state.watchlistArray.filter(
-        (it) => it.id !== movie.id
+        (it) => it.id !== media.id
       );
       localStorage.setItem(watchlistKey, JSON.stringify(state.watchlistArray));
     },

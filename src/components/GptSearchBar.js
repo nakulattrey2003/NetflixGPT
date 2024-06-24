@@ -179,6 +179,7 @@ const GptSearchBar = () => {
       handleSearch();
     }
   };
+
   const handleInfoMouseEnter = () => {
     setShowInfoPopup(true);
   };

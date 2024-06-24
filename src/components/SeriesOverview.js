@@ -70,7 +70,7 @@ const SeriesOverview = () => {
       dispatch(removeFromWatchlist({ series, userId: user.uid }));
     } else {
       toast(` 🔥 ${series.name} is Added to the Watchlist`);
-      dispatch(addToWatchlist({ series, userId: user.uid }));
+      dispatch(addToWatchlist({ series: { ...series }, userId: user.uid }));
     }
 
     setIsInWatchlist(!isInWatchlist);

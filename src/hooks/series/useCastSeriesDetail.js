@@ -8,7 +8,9 @@ const useCastSeriesDetail = (seiresId) => {
 
   const getCastSeriesDetail = async () => {
     const response = await fetch(
+      // `https://api.themoviedb.org/3/tv/${seiresId}/season/season_number/credits`,
       `https://api.themoviedb.org/3/tv/${seiresId}/credits`,
+
       API_OPTIONS
     );
 

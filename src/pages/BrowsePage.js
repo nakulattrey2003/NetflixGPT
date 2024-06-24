@@ -8,14 +8,23 @@ import useTopRatedMovies from "../hooks/movies/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/movies/useUpcomingMovies";
 import Footer from "../components/Footer";
 import useTodayTrending from "../hooks/useTodayTrending";
-
+import usePopularSeries from "../hooks/series/usePopularSeries";
+import useTopRatedSeries from "../hooks/series/useTopRatedSeries";
+import useNowPlayingSeries from "../hooks/series/useNowPlayingSeries";
+import useUpcomingSeries from "../hooks/series/useUpcomingSeries";
 
 const Browse = () => {
+  useTodayTrending();
+  
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
   useUpcomingMovies();
-  useTodayTrending();
+
+  useNowPlayingSeries();
+  usePopularSeries();
+  useTopRatedSeries();
+  useUpcomingSeries();
 
   return (
     <div>

@@ -40,9 +40,9 @@ const WatchlistPage = () => {
     }
   };
 
-  const handleDeleteMovie = (movie) => {
-    toast(` 👍🏼${movie.title} is Removed from the Watchlist`);
-    dispatch(removeFromWatchlist({ movie, userId: user.uid }));
+  const handleDeleteMovie = (media) => {
+    toast(` 👍🏼${media.title} is Removed from the Watchlist`);
+    dispatch(removeFromWatchlist({ media, userId: user.uid }));
   };
 
   // Sort the watchlist based on selected sorting option

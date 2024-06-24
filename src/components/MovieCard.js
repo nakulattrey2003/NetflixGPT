@@ -12,7 +12,7 @@ const MovieCard = ({
   language,
   movieName,
   posterPath,
-  type
+  type,
 }) => {
   const navigate = useNavigate();
 
@@ -21,16 +21,15 @@ const MovieCard = ({
   if (!posterPath) return null;
 
   const uppercaseMovieName = movieName.toUpperCase();
-  const year = date.split("-")[0];
+  const year = date?.split("-")[0];
   const uppercaseLanguage = language.toUpperCase();
   const roundedRating = rating.toFixed(1);
 
   const handleMovieCardClick = () => {
     try {
-      if(type == "tv"){
+      if (type == "tv") {
         navigate("/series-detail/" + mediaId);
-      }
-      else{
+      } else if (type == "movie") {
         navigate("/movie-detail/" + mediaId);
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
