@@ -11,27 +11,30 @@ const MainContainer = () => {
   // const randomcount = Math.floor(Math.random() * (movies.length));
   // const mainMovie = movies[randomcount];
 
-  const mainMovie = movies[3];
+  const mainMovie = movies[1];
 
   const {
     title,
+    name,
     overview,
     original_language,
     vote_average,
     release_date,
+    first_air_date,
     id,
+    media_type
   } = mainMovie;
 
   return (
     <div className="pt-[30%] lg:[pt-30%] bg-black md:pt-0">
       <VideoTitle
-        title={title}
+        title={title || name}
         overview={overview}
         language={original_language}
         rating={vote_average}
-        date={release_date}
+        date={release_date || first_air_date}
       />
-      <VideoBackground movieId={id} />
+      <VideoBackground mediaId={id} type={media_type} />
     </div>
   );
 };
