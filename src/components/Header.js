@@ -12,6 +12,7 @@ import GptSearchBar from "./GptSearchBar.js";
 import { SUPPORTED_LANGUAGES } from "../utils/constants.js";
 import UserAvatar from "./UserAvatar.js";
 import { changeLanguage } from "../redux/languageSlice.js";
+import { changeMediaType } from "../redux/mediaTypeSlice.js";
 import langArray from "../utils/langConstants.js";
 import { loadWatchlist } from "../redux/watchlistSlice.js";
 
@@ -82,8 +83,10 @@ const Header = () => {
 
   const handleMovieSeriesChange = () => {
     if (toggleState == "Series") {
+      dispatch(changeMediaType("series"));
       setToggleState("Movies");
     } else {
+      dispatch(changeMediaType("movies"));
       setToggleState("Series");
     }
   };

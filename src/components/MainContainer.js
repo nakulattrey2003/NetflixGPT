@@ -11,7 +11,7 @@ const MainContainer = () => {
   // const randomcount = Math.floor(Math.random() * (movies.length));
   // const mainMovie = movies[randomcount];
 
-  const mainMovie = movies[1];
+  const mainMovie = movies[3];
 
   const {
     title,

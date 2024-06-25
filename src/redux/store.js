@@ -1,14 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "../redux/userSlice.js";
-import moviesReducer from "./moviesSlice.js";
-import languageReducer from "./languageSlice.js";
-import detailReducer from "./detailSlice.js";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import userReducer from "../redux/userSlice.js";
+import moviesReducer from "./moviesSlice.js";
+import languageReducer from "./languageSlice.js";
 import watchlistReducer from "./watchlistSlice.js";
+import detailReducer from "./detailSlice.js";
 import gptSearchReducer from "./gptSearchSlice.js";
 import seriesReducer from "./seriesSlice.js";
+import mediaTypeReducer from "./mediaTypeSlice.js";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   detail: detailReducer,
   watchlist: watchlistReducer,
   gptSearch: gptSearchReducer,
+  mediaType: mediaTypeReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
