@@ -8,6 +8,7 @@ const seriesSlice = createSlice({
     popularSeries: null,
     topRatedSeries: null,
     upcomingSeries: null,
+    relatedSeries: null,
   },
   reducers: {
     addTodayTrendingSeries: (state, action) => {
@@ -25,6 +26,9 @@ const seriesSlice = createSlice({
     addUpcomingSeries: (state, action) => {
       state.upcomingSeries = action.payload;
     },
+    addRelatedSeries: (state, action) => {
+      state.relatedSeries = action.payload;
+    }
   },
 });
 
@@ -34,6 +38,7 @@ export const {
   addPopularSeries,
   addTopRatedSeries,
   addUpcomingSeries,
+  addRelatedSeries
 } = seriesSlice.actions;
 
 export default seriesSlice.reducer;

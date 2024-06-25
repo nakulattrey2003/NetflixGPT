@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { API_OPTIONS } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 
-const useSeriesTrailer = (seiresId) => {
+const useSeriesTrailer = (seriesId) => {
   const navigate = useNavigate();
 
   const [trailerKey, setTrailerKey] = useState(null);
@@ -10,7 +10,7 @@ const useSeriesTrailer = (seiresId) => {
   const fetchTrailer = async () => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${seiresId}/videos?language=en-US`,
+        `https://api.themoviedb.org/3/tv/${seriesId}/videos?language=en-US`,
         API_OPTIONS
       );
       const data = await response.json();
@@ -26,7 +26,7 @@ const useSeriesTrailer = (seiresId) => {
 
   useEffect(() => {
     fetchTrailer();
-  }, [seiresId, navigate]);
+  }, [seriesId, navigate]);
 
   return trailerKey;
 };

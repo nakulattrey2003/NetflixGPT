@@ -11,6 +11,7 @@ import useSeriesTrailer from "../hooks/series/useSeriesTrailer";
 import { useParams } from "react-router-dom";
 import { addToWatchlist, removeFromWatchlist } from "../redux/watchlistSlice";
 import { toast } from "react-toastify";
+import useRelatedSeries from "../hooks/series/useRelatedSeries";
 
 const SeriesOverview = () => {
   const series = useSelector((state) => state.detail.seriesDetail);
@@ -22,6 +23,8 @@ const SeriesOverview = () => {
 
   const { id: seriesId } = useParams();
   const dispatch = useDispatch();
+
+  useRelatedSeries(seriesId);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [playingMovie, setPlayingMovie] = useState(false);

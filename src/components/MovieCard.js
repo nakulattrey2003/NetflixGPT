@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const MovieCard = ({
   mediaId,
   name,
+  title,
   rating,
   date,
   language,
@@ -28,10 +29,10 @@ const MovieCard = ({
 
   const handleMovieCardClick = () => {
     try {
-      if (type == "tv" || !name) {
-        navigate("/series-detail/" + mediaId);
-      } else{
-        navigate("/movie-detail/" + mediaId);
+      if (type === "tv" || name) {
+        navigate(`/series-detail/${mediaId}`);
+      } else {
+        navigate(`/movie-detail/${mediaId}`);
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {

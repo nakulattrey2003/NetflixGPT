@@ -8,6 +8,7 @@ import MovieList from "../components/MovieList";
 import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
 import { useParams } from "react-router-dom";
+import useRelatedMovies from "../hooks/movies/useRelatedMovies";
 
 const MovieDetailPage = () => {
   const { id: movieId } = useParams();
@@ -22,14 +23,17 @@ const MovieDetailPage = () => {
 
   useMovieDetail(movieId);
   useCastMovieDetail(movieId);
+  useRelatedMovies(movieId);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <div className="flex-grow">
         <MovieOverview />
-        <div>
-          <MovieList title={relatedTitle} movies={movies.popularMovies} />
+        <div className="mt-12">
+          {movies.relatedMovies && (
+            <MovieList title={relatedTitle} movies={movies.relatedMovies} />
+          )}
           <MovieList
             title={todayTrendingTitle}
             movies={movies.todayTrendingMovies}

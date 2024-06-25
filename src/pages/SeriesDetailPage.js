@@ -9,12 +9,12 @@ import langArray from "../utils/langConstants";
 import { useParams } from "react-router-dom";
 import SeriesOverview from "../components/SeriesOverview";
 import useCastSeriesDetail from "../hooks/series/useCastSeriesDetail";
+import useRelatedSeries from "../hooks/series/useRelatedSeries";
 
 const SeriesDetailPage = () => {
   const { id: mediaId } = useParams();
 
   const langKey = useSelector((state) => state.language.lang);
-  const movies = useSelector((store) => store.movies);
   const series = useSelector((store) => store.series);
 
   const relatedTitle = langArray[langKey].Related;
@@ -24,17 +24,20 @@ const SeriesDetailPage = () => {
 
   uesSeriesDetail(mediaId);
   useCastSeriesDetail(mediaId);
+  useRelatedSeries(mediaId);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <div className="flex-grow">
         <SeriesOverview />
-        <div>
-          <MovieList title={relatedTitle} movies={series.popularSeries} />
+        <div className="mt-10">
+          {series.relatedSeries && (
+            <MovieList title={relatedTitle} movies={series.relatedSeries} />
+          )}
           <MovieList
             title={todayTrendingTitle}
-            movies={series.todayTrendingMovies}
+            movies={series.todayTrendingSeries}
           />
           <MovieList title={topRatedTitle} movies={series.topRatedSeries} />
           <MovieList title={upcomingTitle} movies={series.upcomingSeries} />

@@ -11,6 +11,7 @@ import useMovieTrailer from "../hooks/movies/useMovieTrailer";
 import { useParams } from "react-router-dom";
 import { addToWatchlist, removeFromWatchlist } from "../redux/watchlistSlice";
 import { toast } from "react-toastify";
+import useRelatedMovies from "../hooks/movies/useRelatedMovies";
 
 const MovieOverview = () => {
   const user = useSelector((state) => state.user);
