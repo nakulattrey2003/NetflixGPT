@@ -8,15 +8,13 @@ const VideoBackground = ({ mediaId, type }) => {
   const [trailerKey, setTrailerKey] = useState("");
 
   const movieTrailerKey = useMovieTrailer(mediaId);
-  const seriesTrailerKey = useSeriesTrailer(mediaId);
+  // const seriesTrailerKey = useSeriesTrailer(mediaId);
 
   useEffect(() => {
     if (type === "movie") {
       setTrailerKey(movieTrailerKey);
-    } else if (type === "tv") {
-      setTrailerKey(seriesTrailerKey);
-    }
-  }, [mediaId, type, movieTrailerKey, seriesTrailerKey]);
+    } 
+  }, [mediaId, type, movieTrailerKey]);
 
   const handleMute = () => {
     setIsMute(!isMute);

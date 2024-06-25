@@ -1,35 +1,35 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addTodayTrendingMovie } from "../redux/moviesSlice";
-import { API_OPTIONS } from "../utils/constants";
+import { addTodayTrendingMovies } from "../../redux/moviesSlice";
+import { API_OPTIONS } from "../../utils/constants";
 
-const useTodayTrendingMovie = () => {
+const useTodayTrendingMovies = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const todayTrendingMovie = useSelector(
+  const todayTrendingMovies = useSelector(
     (state) => state.movies.todayTrendingMovie
   );
 
-  const getTodayTrendingMovie = async () => {
+  const getTodayTrendingMovies = async () => {
     try {
       const response = await fetch(
-        "https://api.themoviedb.org/3/trending/all/day?language=en-US",
+        "https://api.themoviedb.org/3/trending/movie/day",
         API_OPTIONS
       );
 
       const data = await response.json();
 
-      dispatch(addTodayTrendingMovie(data.results));
+      dispatch(addTodayTrendingMovies(data.results));
     } catch (error) {
       navigate("/error");
     }
   };
 
   useEffect(() => {
-    if (!todayTrendingMovie) getTodayTrendingMovie();
+    if (!todayTrendingMovies) getTodayTrendingMovies();
   }, []);
 };
 
-export default useTodayTrendingMovie;
+export default useTodayTrendingMovies;
