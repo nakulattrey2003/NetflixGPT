@@ -83,11 +83,13 @@ const Header = () => {
 
   const handleMovieSeriesChange = () => {
     if (toggleState == "Series") {
-      dispatch(changeMediaType("series"));
       setToggleState("Movies");
+      dispatch(changeMediaType("series"));
+      navigate("/series");
     } else {
-      dispatch(changeMediaType("movies"));
       setToggleState("Series");
+      dispatch(changeMediaType("movies"));
+      navigate("/browse");
     }
   };
 

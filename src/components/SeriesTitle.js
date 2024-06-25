@@ -6,14 +6,13 @@ import { MdDateRange } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
 import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
-import useMovieTrailer from "../hooks/movies/useMovieTrailer";
 import ReactPlayer from "react-player";
 import useSeriesTrailer from "../hooks/series/useSeriesTrailer";
 
-const VideoTitle = ({ title, overview, language, rating, date, mediaId }) => {
+const SeriesTitle = ({ title, overview, language, rating, date, mediaId }) => {
   const langKey = useSelector((state) => state.language.lang);
-  
-  const trailerKey = useMovieTrailer(mediaId);
+
+  const trailerKey = useSeriesTrailer(mediaId);
 
   const [playing, setPlaying] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -107,4 +106,4 @@ const VideoTitle = ({ title, overview, language, rating, date, mediaId }) => {
   );
 };
 
-export default VideoTitle;
+export default SeriesTitle;
