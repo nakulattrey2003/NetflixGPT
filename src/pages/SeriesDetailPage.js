@@ -15,6 +15,7 @@ const SeriesDetailPage = () => {
 
   const langKey = useSelector((state) => state.language.lang);
   const movies = useSelector((store) => store.movies);
+  const series = useSelector((store) => store.series);
 
   const relatedTitle = langArray[langKey].Related;
   const todayTrendingTitle = langArray[langKey].TodayTrending;
@@ -30,13 +31,13 @@ const SeriesDetailPage = () => {
       <div className="flex-grow">
         <SeriesOverview />
         <div>
-          <MovieList title={relatedTitle} movies={movies.popularMovies} />
+          <MovieList title={relatedTitle} movies={series.popularSeries} />
           <MovieList
             title={todayTrendingTitle}
-            movies={movies.todayTrendingMovies}
+            movies={series.todayTrendingMovies}
           />
-          <MovieList title={topRatedTitle} movies={movies.topRatedMovies} />
-          <MovieList title={upcomingTitle} movies={movies.upcomingMovies} />
+          <MovieList title={topRatedTitle} movies={series.topRatedSeries} />
+          <MovieList title={upcomingTitle} movies={series.upcomingSeries} />
         </div>
       </div>
       <Footer />

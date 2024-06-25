@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({
   mediaId,
+  name,
   rating,
   date,
   language,
@@ -27,7 +28,7 @@ const MovieCard = ({
 
   const handleMovieCardClick = () => {
     try {
-      if (type == "tv") {
+      if (type == "tv" || !name) {
         navigate("/series-detail/" + mediaId);
       } else{
         navigate("/movie-detail/" + mediaId);
