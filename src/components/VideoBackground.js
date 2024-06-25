@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
 import useMovieTrailer from "../hooks/movies/useMovieTrailer";
-import useSeriesTrailer from "../hooks/series/useSeriesTrailer";
 import { IoVolumeMediumSharp, IoVolumeMute } from "react-icons/io5";
 
-const VideoBackground = ({ mediaId, type }) => {
+const VideoBackground = ({ mediaId }) => {
   const [isMute, setIsMute] = useState(true);
-  const [trailerKey, setTrailerKey] = useState("");
 
-  const movieTrailerKey = useMovieTrailer(mediaId);
-  // const seriesTrailerKey = useSeriesTrailer(mediaId);
-
-  useEffect(() => {
-    if (type === "movie") {
-      setTrailerKey(movieTrailerKey);
-    } 
-  }, [mediaId, type, movieTrailerKey]);
+  const trailerKey = useMovieTrailer(mediaId);
 
   const handleMute = () => {
     setIsMute(!isMute);

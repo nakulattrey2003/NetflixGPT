@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import { FaPlay } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
@@ -8,26 +8,18 @@ import { useSelector } from "react-redux";
 import langArray from "../utils/langConstants";
 import useMovieTrailer from "../hooks/movies/useMovieTrailer";
 import ReactPlayer from "react-player";
+import useSeriesTrailer from "../hooks/series/useSeriesTrailer";
 
-const VideoTitle = ({ title, overview, language, rating, date }) => {
+const VideoTitle = ({ title, overview, language, rating, date, mediaId }) => {
   const langKey = useSelector((state) => state.language.lang);
-  const movies = useSelector((store) => store.movies?.todayTrendingMovie);
-
-  // const randomcount = Math.floor(Math.random() * (movies.length));
-  // const mainMovie = movies[randomcount];
-
-  const mainMovie = movies[3];
-
-  const movieId = mainMovie?.id || "dQw4w9WgXcQ?si=CZOmhr0IiXt4JHHz";
-
-  const trailerKey = useMovieTrailer(movieId);
+  
+  const trailerKey = useMovieTrailer(mediaId);
 
   const [playing, setPlaying] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const lessInfoText = langArray[langKey].LessInfo || "Less Info";
   const moreInfoText = langArray[langKey].MoreInfo || "More Info";
-
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const splitOverview = (text, maxWords) => {
     const words = text.split(" ");

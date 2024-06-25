@@ -29,7 +29,7 @@ const MovieCard = ({
     try {
       if (type == "tv") {
         navigate("/series-detail/" + mediaId);
-      } else if (type == "movie") {
+      } else{
         navigate("/movie-detail/" + mediaId);
       }
       window.scrollTo({ top: 0, behavior: "smooth" });

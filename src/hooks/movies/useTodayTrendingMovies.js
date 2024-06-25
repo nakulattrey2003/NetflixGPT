@@ -9,7 +9,7 @@ const useTodayTrendingMovies = () => {
   const dispatch = useDispatch();
 
   const todayTrendingMovies = useSelector(
-    (state) => state.movies.todayTrendingMovie
+    (state) => state.movies.todayTrendingMovies
   );
 
   const getTodayTrendingMovies = async () => {

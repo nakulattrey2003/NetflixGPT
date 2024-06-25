@@ -11,7 +11,7 @@ const moviesSlice = createSlice({
   },
   reducers: {
     addTodayTrendingMovies: (state, action) => {
-      state.todayTrendingMovie = action.payload;
+      state.todayTrendingMovies = action.payload;
     },
     addNowPlayingMovies: (state, action) => {
       state.nowPlayingMovies = action.payload;

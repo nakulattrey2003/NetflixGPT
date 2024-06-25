@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import VideoTitle from "./VideoTitle";
 import VideoBackground from "./VideoBackground";
 
 const MainContainer = () => {
-  const movies = useSelector((store) => store.movies?.todayTrendingMovie);
+  const movies = useSelector((store) => store.movies?.todayTrendingMovies);
 
   if (movies == null) return;
 
@@ -34,6 +34,7 @@ const MainContainer = () => {
         rating={vote_average}
         date={release_date || first_air_date}
         type={media_type}
+        mediaId={id}
       />
       <VideoBackground mediaId={id} type={media_type} />
     </div>

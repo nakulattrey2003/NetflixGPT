@@ -32,7 +32,7 @@ const MovieDetailPage = () => {
           <MovieList title={relatedTitle} movies={movies.popularMovies} />
           <MovieList
             title={todayTrendingTitle}
-            movies={movies.todayTrendingMovie}
+            movies={movies.todayTrendingMovies}
           />
           <MovieList title={topRatedTitle} movies={movies.topRatedMovies} />
           <MovieList title={upcomingTitle} movies={movies.upcomingMovies} />
