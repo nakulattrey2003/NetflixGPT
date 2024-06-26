@@ -145,7 +145,7 @@ const MovieOverview = () => {
             <div>
               <button
                 onClick={handlePlayMovie}
-                className="flex ml-4 mr-3 bg-gray-100 hover:bg-gray-300 text-black hover:text-black font-black py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded"
+                className="flex ml-4 mr-3 bg-gray-100 hover:bg-gray-400 text-black hover:text-black font-black py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded"
               >
                 <FaPlay className="mt-1 mr-2 h-2 w-2 md:h-4 md:w-4" />
                 {langArray[langKey].Play}
@@ -163,7 +163,7 @@ const MovieOverview = () => {
           </div>
           <div className="flex flex-col items-center">
             <div
-              className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-gray-600 hover:border-white z-10 hover:bg-opacity-60 hover:backdrop-blur-xl"
+              className="flex mt-2 justify-center cursor-pointer items-center border md:mt-4 py-1 px-4 md:py-2 md:px-4 text-xs md:text-base rounded w-[223px] md:w-[278px] font-bold hover:bg-gray-600 hover:border-white z-10 hover:bg-opacity-80"
               onClick={handleWatchlist}
             >
               <div className="absolute inset-0 bg-red-500 bg-opacity-20 backdrop-filter backdrop-blur-lg rounded pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"></div>
