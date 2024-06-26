@@ -131,7 +131,13 @@ const GptSearchBar = () => {
 
       console.log("A:", gptResults);
 
-      const splitMovieResults = gptResults.split(",");
+      let splitMovieResults = [];
+
+      if (gptResults) {
+        splitMovieResults = gptResults.split(",");
+      } else {
+        splitMovieResults = [searchInput];
+      }
 
       const promiseArray = splitMovieResults.map((movie) => searchMovie(movie));
 
