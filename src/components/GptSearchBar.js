@@ -92,14 +92,15 @@ const GptSearchBar = () => {
       const data = await response.json();
       const results = data.results.slice(0, 7);
 
-      const uniqueSuggestions = results.reduce((uniqueMovies, movie) => {
-        if (!uniqueMovies.includes(movie.title)) {
-          uniqueMovies.push(movie.title);
-        }
-        return uniqueMovies;
-      }, []);
+      // const uniqueSuggestions = results.reduce((uniqueMovies, movie) => {
+      //   if (!uniqueMovies.includes(movie.title)) {
+      //     uniqueMovies.push(movie.title);
+      //   }
+      //   return uniqueMovies;
+      // }, []);
 
-      return uniqueSuggestions;
+      // return uniqueSuggestions;
+      return results.map((result) => result.title || result.name);
     } catch (error) {
       toast.error("Error fetching suggestions");
       return [];
