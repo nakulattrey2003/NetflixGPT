@@ -73,10 +73,10 @@ const SeriesOverview = () => {
 
     if (isInWatchlist) {
       toast(` 👍🏼 ${series.name} is Removed From Watchlist`);
-      dispatch(removeFromWatchlist({ series, userId: user.uid }));
+      dispatch(removeFromWatchlist({ media: series, userId: user.uid }));
     } else {
       toast(` 🔥 ${series.name} is Added to the Watchlist`);
-      dispatch(addToWatchlist({ series: { ...series }, userId: user.uid }));
+      dispatch(addToWatchlist({ media: series, userId: user.uid }));
     }
 
     setIsInWatchlist(!isInWatchlist);

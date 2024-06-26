@@ -36,7 +36,7 @@ const watchlistSlice = createSlice({
     },
     clearWatchlist: (state, action) => {
       const { userId } = action.payload;
-      
+
       const watchlistKey = getWatchlistKey(userId);
 
       state.watchlistArray = [];

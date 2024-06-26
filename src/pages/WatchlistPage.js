@@ -108,11 +108,11 @@ const WatchlistPage = () => {
                     onMouseLeave={() => setHoveredMovieId(null)}
                   >
                     <MovieCard
-                      movieId={movie.id}
+                      mediaId={movie.id}
                       rating={movie.vote_average}
-                      date={movie.release_date}
+                      date={movie.release_date || movie.first_air_date}
                       language={movie.original_language}
-                      movieName={movie.title}
+                      movieName={movie.title || movie.name}
                       posterPath={movie.poster_path}
                     />
                     {/* Delete icon */}

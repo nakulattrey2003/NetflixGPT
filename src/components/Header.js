@@ -108,45 +108,49 @@ const Header = () => {
         <div className="flex flex-col md:flex-row -mt-2 md:mt-0 ml-6 w-full md:justify-between">
           <GptSearchBar />
 
-          <div className="flex">
-            <select
-              onChange={handleLanguageChange}
-              className="text-white -mt-5 md:p-2 m-1 -ml-5 md:m-4 outline-none border-none text-xs md:text-base rounded bg-transparent mr-1  md:mr-10 hover:text-red-500 hover:font-bold"
-            >
-              {SUPPORTED_LANGUAGES.map((it) => (
-                <option
-                  className="bg-black opacity-0 md:p-2 md:m-2 text-xs md:text-base text-white"
-                  key={it.identifier}
-                  value={it.identifier}
-                >
-                  {it.name}
-                </option>
-              ))}
-            </select>
-
-            <div
-              onClick={handleWatchlist}
-              className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-1 mr-1 md:mr-12 hover:font-bold hover:text-red-500"
-            >
-              {langArray[langKey].Watchlist}
-            </div>
-
-            <div
-              onClick={handleMovieSeriesChange}
-              className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-1 mr-1 md:mr-12 hover:font-bold hover:text-red-500"
-            >
-              {toggleState}
-            </div>
-
-            <UserAvatar />
-
-            <div className="m-3 flex text-xs md:text-base md:pl-8 p-2">
-              <button
-                onClick={handleLogOut}
-                className="bg-red-600 hover:bg-red-700 flex -mt-5 md:mt-0 text-white font-bold py-1 px-2 md:py-2 md:px-4 rounded"
+          <div className="flex justify-between">
+            <div className="flex">
+              <select
+                onChange={handleLanguageChange}
+                className="text-white -mt-5 md:p-2 m-1 -ml-5 md:m-4 outline-none border-none text-xs md:text-base rounded bg-transparent mr-1  md:mr-10 hover:text-red-500 hover:font-bold"
               >
-                {langArray[langKey].LogOut}
-              </button>
+                {SUPPORTED_LANGUAGES.map((it) => (
+                  <option
+                    className="bg-black opacity-0 md:p-2 md:m-2 text-xs md:text-base text-white"
+                    key={it.identifier}
+                    value={it.identifier}
+                  >
+                    {it.name}
+                  </option>
+                ))}
+              </select>
+
+              <div
+                onClick={handleWatchlist}
+                className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-1 mr-1 md:mr-12 hover:font-bold hover:text-red-500"
+              >
+                {langArray[langKey].Watchlist}
+              </div>
+
+              <div
+                onClick={handleMovieSeriesChange}
+                className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-3 mr-1 md:mr-12 hover:font-bold hover:text-red-500"
+              >
+                {toggleState}
+              </div>
+            </div>
+
+            <div className="flex">
+              <UserAvatar />
+
+              <div className="m-3 flex text-xs md:text-base md:pl-8 p-2">
+                <button
+                  onClick={handleLogOut}
+                  className="bg-red-600 hover:bg-red-700 flex -mt-5 md:mt-0 text-white font-bold py-1 px-2 md:py-2 md:px-4 rounded mr-3 md:mr-0"
+                >
+                  {langArray[langKey].LogOut}
+                </button>
+              </div>
             </div>
           </div>
         </div>
