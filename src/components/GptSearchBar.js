@@ -209,7 +209,7 @@ const GptSearchBar = () => {
     <div className="flex text-xs md:text-base items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 -ml-5 md:ml-0 w-full md:max-w-md">
       <FaSearch
         onClick={handleSearch}
-        className="text-gray-300 mr-3 cursor-pointer size-3 md:size-4 hover:text-red-500"
+        className="text-gray-300 mr-3 cursor-pointer size-3 md:size-5 hover:text-red-500"
       />
       <input
         className="outline-none bg-transparent w-full text-white placeholder-slate-300"
