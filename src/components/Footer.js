@@ -14,7 +14,7 @@ const Footer = () => {
             >
               <img
                 src="/NetflixGPT Res/Netflix Logo.png"
-                class="h-24"
+                class="h-10 md:h-24"
                 alt="Netflix Logo"
               />
             </Link>
