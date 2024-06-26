@@ -9,7 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../redux/userSlice.js";
 import GptSearchBar from "./GptSearchBar.js";
-import { SUPPORTED_LANGUAGES } from "../utils/constants.js";
+import { API_OPTIONS, SUPPORTED_LANGUAGES } from "../utils/constants.js";
 import UserAvatar from "./UserAvatar.js";
 import { changeLanguage } from "../redux/languageSlice.js";
 import { changeMediaType } from "../redux/mediaTypeSlice.js";
@@ -22,8 +22,10 @@ const Header = () => {
 
   const user = useSelector((state) => state.user);
   const langKey = useSelector((state) => state.language.lang);
+  const mediaType = useSelector((state) => state.mediaType.type);
 
   const [toggleState, setToggleState] = useState("Series");
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     if (user) {
@@ -53,6 +55,30 @@ const Header = () => {
       }
     });
   }, []); // empty dependency array to call the function only once when page reloads;
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      const apiURL =
+        mediaType === "movies"
+          ? "https://api.themoviedb.org/3/genre/movie/list"
+          : "https://api.themoviedb.org/3/genre/tv/list";
+
+      try {
+        const response = await fetch(apiURL, API_OPTIONS);
+
+        if (!response.ok) {
+          toast.error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setGenres([{ id: "", name: "Genres" }, ...data.genres]); // so that first name is genre
+      } catch (error) {
+        toast.error("Error fetching genres");
+      }
+    };
+
+    fetchGenres();
+  }, [mediaType]);
 
   const handleLogOut = () => {
     signOut(auth)
@@ -93,13 +119,20 @@ const Header = () => {
     }
   };
 
+  const handleGenreClick = (e) => {
+    const genreId = e.target.value;
+    if (genreId) {
+      navigate(`/genre/${genreId}`);
+    }
+  };
+
   return (
     <div className="absolute w-full px-2 md:px-8 md:py-2 bg-gradient-to-b from-black z-50 flex flex-col md:flex-row justify-evenly md:justify-between bg-transparent md:bg-transparent">
       {/* // bg-black is for small screen,  sm:bg-blue-100 will be for screen bigger than smaller and md:bg-green-100 will be for screen biffer than medium */}
       {/* so for small (by default what you write), sm for medium, md for large */}
       <img
         onClick={handleLogoClick}
-        className="w-20 md:w-44 mx-auto mt-1 md:mx-0"
+        className="w-24 md:w-44 mx-auto mt-1 md:mx-0"
         src="/NetflixGPT Res/Netflix Logo.png"
         alt="netflix-logo"
       ></img>
@@ -130,6 +163,26 @@ const Header = () => {
                 className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-1 mr-1 md:mr-12 hover:font-bold hover:text-red-500"
               >
                 {langArray[langKey].Watchlist}
+              </div>
+
+              <div className="relative">
+                {/* <div className="text-white hidden lg:inline mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-3 mr-1 md:mr-12 hover:font-bold hover:text-red-500">
+                  Genres
+                </div> */}
+                <select
+                  onClick={handleGenreClick}
+                  className="relative hidden lg:inline mt-6 mr-4 hover:text-red-500 hover:font-bold top-1 left-0 text-white bg-transparent rounded-md outline-none border-none text-xs md:text-base opacity-90 z-10"
+                >
+                  {genres.map((genre) => (
+                    <option
+                      className="bg-black md:p-2 md:m-2 text-xs md:text-base text-white"
+                      key={genre.id}
+                      value={genre.id}
+                    >
+                      {genre.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div

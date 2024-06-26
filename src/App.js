@@ -10,6 +10,7 @@ import WatchlistPage from "./pages/WatchlistPage.js";
 import ProtectRoute from "./utils/ProtectRoute";
 import SeriesDetailPage from "./pages/SeriesDetailPage.js";
 import SeriesBrowsePage from "./pages/SeriesBrowsePage.js";
+import GenrePage from "./pages/GenrePage.js";
 
 function App() {
   return (
@@ -53,17 +54,19 @@ function App() {
           />
           <Route
             path="/watchlist"
-            type="private"
             element={
               <ProtectRoute type="private" element={<WatchlistPage />} />
             }
           />
           <Route
             path="/series"
-            type="private"
             element={
               <ProtectRoute type="private" element={<SeriesBrowsePage />} />
             }
+          />
+          <Route
+            path="/genre/:id"
+            element={<ProtectRoute type="private" element={<GenrePage />} />}
           />
         </Routes>
       </BrowserRouter>

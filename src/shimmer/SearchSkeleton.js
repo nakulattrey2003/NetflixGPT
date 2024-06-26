@@ -6,7 +6,7 @@ const SearchSkeleton = () => {
       <div className="bg-gray-800 shadow-md">
         <div className="container mx-auto py-6 px-4">
           <div className="flex items-center justify-between">
-            <div className="text-white text-4xl font-bold">
+            <div className="text-white text-xl md:text-4xl font-bold">
               Loading Search Results...
             </div>
           </div>

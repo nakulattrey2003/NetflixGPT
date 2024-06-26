@@ -4,15 +4,18 @@ import langArray from "../utils/langConstants";
 import UserModal from "../components/UserModal.js"
 
 const UserAvatar = () => {
+
+  const user = useSelector((state) => state.user);
+  const langKey = useSelector((state) => state.language.lang);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const langKey = useSelector((state) => state.language.lang);
+  const name = user.displayName;
+  const firstName = name.split(" ")[0];
 
   const handleUserAvatarClick = () => {
     setIsModalOpen(!isModalOpen);
   };
-
-  const user = useSelector((state) => state.user);
   return (
     <div onClick={handleUserAvatarClick} className="flex cursor-pointer">
       <div className="mt-4 hidden lg:inline font-semibold text-xs md:text-base text-white pl-3 pt-3 pb-3 pr-2 hover:text-red-500">

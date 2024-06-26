@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -20,7 +20,10 @@ const Footer = () => {
             </Link>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
               <li>
-                <a href="#" class="hover:underline me-4 md:me-6">
+                <a
+                  href="https://github.com/nakulattrey2003/NetflixGPT"
+                  class="hover:underline me-4 md:me-6"
+                >
                   About
                 </a>
               </li>
@@ -35,7 +38,10 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:underline">
+                <a
+                  href="https://github.com/nakulattrey2003/NetflixGPT"
+                  class="hover:underline"
+                >
                   Contact
                 </a>
               </li>
@@ -51,11 +57,11 @@ const Footer = () => {
               >
                 NakulGPT™
               </Link>
-              . All Rights Reserved.
+              . Made by Nakul Attrey.
             </span>
             <div class="flex mt-4 sm:justify-center sm:mt-0">
               <a
-                href="#"
+                href="https://github.com/nakulattrey2003/NetflixGPT"
                 class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
@@ -74,7 +80,7 @@ const Footer = () => {
                 <span class="sr-only">Facebook page</span>
               </a>
               <a
-                href="#"
+                href="https://github.com/nakulattrey2003/NetflixGPT"
                 class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
               >
                 <svg
@@ -89,7 +95,7 @@ const Footer = () => {
                 <span class="sr-only">Discord community</span>
               </a>
               <a
-                href="#"
+                href="https://github.com/nakulattrey2003/NetflixGPT"
                 class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
               >
                 <svg
@@ -108,7 +114,7 @@ const Footer = () => {
                 <span class="sr-only">Twitter page</span>
               </a>
               <a
-                href="#"
+                href="https://github.com/nakulattrey2003/NetflixGPT"
                 class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
               >
                 <svg
@@ -127,7 +133,7 @@ const Footer = () => {
                 <span class="sr-only">GitHub account</span>
               </a>
               <a
-                href="#"
+                href="https://github.com/nakulattrey2003/NetflixGPT"
                 class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
               >
                 <svg
@@ -151,6 +157,6 @@ const Footer = () => {
       </footer>
     </div>
   );
-}
+};
 
-export default Footer
+export default Footer;
