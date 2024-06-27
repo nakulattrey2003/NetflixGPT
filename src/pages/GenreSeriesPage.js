@@ -33,10 +33,10 @@ const GenreSeriesPage = () => {
 
     return (
       <button
-        className="fixed bottom-14 right-10 bg-gray-700 hover:bg-red-500 text-white py-4 px-4 rounded-full shadow-lg"
+        className="fixed bottom-7 md:bottom-14 right-10 bg-gray-700 hover:bg-red-500 text-white py-3 md:py-4 px-3 md:px-4 rounded-full shadow-lg"
         onClick={scrollToTop}
       >
-        <FaArrowUp className="size-6" />
+        <FaArrowUp className="size-4 md:size-6" />
       </button>
     );
   };
@@ -108,13 +108,15 @@ const GenreSeriesPage = () => {
         <Header />
         <div className="flex flex-col mt-20 md:mt-0 py-10">
           <div className="flex items-center justify-between md:pl-4 ml-10 md:ml-28 md:mt-20 md:mb-20">
-            <div className="border-l-4 pl-4 border-red-500 text-white text-2xl md:text-4xl font-bold">
+            <div className="border-l-4 pl-4 border-red-500 text-white text-lg md:text-4xl font-bold">
               Series: {langArray[langKey].Genre}
             </div>
             <div className="flex items-center space-x-4 mr-10 md:mr-28">
-              <span className="text-white font-bold">Sort by:</span>
+              <span className="text-white font-bold hidden md:inline text-xs md:text-base">
+                Sort by:
+              </span>
               <select
-                className="bg-gray-800 text-gray-200 px-4 py-3 rounded-md focus:border-none"
+                className="bg-gray-800 text-gray-200 text-xs md:text-base px-1 md:px-4 py-2 md:py-3 rounded-md focus:border-none"
                 value={sortBy}
                 onChange={handleSortChange}
               >
@@ -127,7 +129,7 @@ const GenreSeriesPage = () => {
               </select>
             </div>
           </div>
-          <div className="mx-auto px-4">
+          <div className="mx-auto mt-7 md:mt-0 px-4">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-14">
               {isLoading && page === 1 ? (
                 <div>.</div>

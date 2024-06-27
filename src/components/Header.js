@@ -139,7 +139,7 @@ const Header = () => {
             <div className="flex">
               <select
                 onChange={handleLanguageChange}
-                className="text-white -mt-5 md:p-2 m-1 -ml-5 md:m-4 outline-none border-none text-xs md:text-base rounded bg-transparent mr-1  md:mr-10 hover:text-red-500 hover:font-bold"
+                className="text-white hidden lg:inline -mt-5 md:p-2 m-1 -ml-5 md:m-4 outline-none border-none text-xs md:text-base rounded bg-transparent mr-1  md:mr-10 hover:text-red-500 hover:font-bold"
               >
                 {SUPPORTED_LANGUAGES.map((it) => (
                   <option
@@ -154,7 +154,7 @@ const Header = () => {
 
               <div
                 onClick={handleWatchlist}
-                className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-1 mr-1 md:mr-12 hover:font-bold hover:text-red-500"
+                className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer -ml-3 md:ml-1 mr-1 md:mr-12 hover:font-bold hover:text-red-500"
               >
                 {langArray[langKey].Watchlist}
               </div>
