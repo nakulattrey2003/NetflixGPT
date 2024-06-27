@@ -9,6 +9,7 @@ const GenreDropdown = () => {
   const mediaType = useSelector((state) => state.mediaType.type);
 
   const [genres, setGenres] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -35,12 +36,35 @@ const GenreDropdown = () => {
   }, [mediaType]);
 
   useEffect(() => {
-    // https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&page=1&sort_by=popularity.desc&with_genres=${genreId}
-    // https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=popularity.desc&with_genres=${genreId}
-  });
+    const fetchMediaByGenre = async () => {
+      if (!selectedGenre) return;
+
+      const apiURL =
+        mediaType === "movies"
+          ? `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=1&sort_by=popularity.desc&with_genres=${selectedGenre}`
+          : `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&page=1&sort_by=popularity.desc&with_genres=${selectedGenre}`;
+
+      try {
+        const response = await fetch(apiURL, API_OPTIONS);
+
+        if (!response.ok) {
+          toast.error("Network response was not ok");
+          return;
+        }
+
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        toast.error("Error fetching media by genre");
+      }
+    };
+
+    fetchMediaByGenre();
+  }, [selectedGenre, mediaType]);
 
   const handleGenreClick = (e) => {
     const genreId = e.target.value;
+    setSelectedGenre(genreId);
     if (genreId && mediaType === "movies") {
       navigate(`/genre-movie/${genreId}`);
     } else if (genreId && mediaType === "series") {
