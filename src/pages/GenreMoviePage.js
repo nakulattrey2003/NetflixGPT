@@ -3,8 +3,11 @@ import Header from "../components/Header";
 import MovieList from "../components/MovieList";
 import Footer from "../components/Footer";
 import SearchSkeleton from "../shimmer/SearchSkeleton";
+import { useSelector } from "react-redux";
+import langArray from "../utils/langConstants";
 
 const GenreMoviePage = () => {
+  const langKey = useSelector((state) => state.language.lang);
   const [isLoading, setIsLoading] = useState(true);
 
   return (
@@ -14,8 +17,7 @@ const GenreMoviePage = () => {
         <div className="flex flex-col mt-20 md:mt-0 py-10">
           <div className="flex items-center justify-between md:pl-4 ml-10 md:ml-28 md:mt-20 md:mb-20">
             <div className="border-l-4 pl-4 border-red-500 text-white text-2xl md:text-4xl font-bold">
-              {/* {langArray[langKey].GenreResults} */}
-              Genre
+              {langArray[langKey].Genre}
             </div>
           </div>
           <div className="container mt-10 mb:mt-0 mx-auto px-4">

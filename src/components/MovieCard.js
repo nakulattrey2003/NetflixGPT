@@ -54,14 +54,14 @@ const MovieCard = ({
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black bg-opacity-40 rounded-lg"></div>
-        <div className="absolute bottom-10 left-2 text-white font-black text-sm md:text-lg p-2 w-full text-left rounded-t-lg mb-3 md:mb-0">
+        <div className="absolute bottom-10 left-2 text-white font-black text-xs md:text-lg p-2 w-full text-left rounded-t-lg mb-0">
           {uppercaseMovieName}
         </div>
-        <div className="flex absolute bottom-4 left-2 text-gray-200 font-normal text-xs md:text-sm p-2 w-full text-left rounded-t-lg">
+        <div className="flex absolute bottom-4 left-2 text-gray-200 font-normal text-[9px] md:text-sm p-2 w-full text-left rounded-t-lg">
           {langArray[langKey].Rating}: {roundedRating}
-          <GoDotFill className="size-3 m-1" />
+          <GoDotFill className="size-1 md:size-3 m-1" />
           {year}
-          <GoDotFill className="size-3 m-1" />
+          <GoDotFill className="size-1 md:size-3 m-1" />
           {uppercaseLanguage}
         </div>
       </div>

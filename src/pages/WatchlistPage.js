@@ -18,13 +18,14 @@ const WatchlistPage = () => {
 
   const [sortByYear, setSortByYear] = useState("descending");
   const [hoveredMovieId, setHoveredMovieId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Function to sort the movies by release date
   const sortMoviesByYear = (movies, order) => {
     const sortedMovies = [...movies];
     sortedMovies.sort((a, b) => {
-      const dateA = new Date(a.release_date);
-      const dateB = new Date(b.release_date);
+      const dateA = new Date(a.release_date || a.first_air_date);
+      const dateB = new Date(b.release_date || b.first_air_date);
       return order === "ascending" ? dateA - dateB : dateB - dateA;
     });
     return sortedMovies;
@@ -33,10 +34,9 @@ const WatchlistPage = () => {
   const handleClearWatchlist = () => {
     if (!watchlist || watchlist.length == 0) {
       toast.info("There is nothing to clear");
-    }
-    else{
-    toast.success("Watchlist cleared successfully!");
-    dispatch(clearWatchlist({ userId: user.uid }));
+    } else {
+      toast.success("Watchlist cleared successfully!");
+      dispatch(clearWatchlist({ userId: user.uid }));
     }
   };
 
@@ -50,6 +50,26 @@ const WatchlistPage = () => {
 
   // Check if the watchlist is empty
   const isListEmpty = sortedWatchlist.length === 0;
+
+  // Calculate pagination
+  const itemsPerPage = 8;
+
+  const totalPages = Math.ceil(sortedWatchlist.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = sortedWatchlist.slice(startIndex, endIndex);
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div className="flex flex-col md:min-h-screen">
@@ -99,39 +119,58 @@ const WatchlistPage = () => {
               </div>
             )}
             {!isListEmpty && (
-              <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-6 gap-0 md:gap-8">
-                {sortedWatchlist.map((movie) => (
-                  <div
-                    key={movie.id}
-                    className="relative"
-                    onMouseEnter={() => setHoveredMovieId(movie.id)}
-                    onMouseLeave={() => setHoveredMovieId(null)}
-                  >
-                    <MovieCard
-                      mediaId={movie.id}
-                      rating={movie.vote_average}
-                      date={movie.release_date || movie.first_air_date}
-                      language={movie.original_language}
-                      movieName={movie.title || movie.name}
-                      posterPath={movie.poster_path}
-                    />
-                    {/* Delete icon */}
-                    {hoveredMovieId === movie.id && ( // Show delete icon only when hoveredMovieId matches
-                      <button
-                        onClick={() => handleDeleteMovie(movie)}
-                        className="absolute top-2 right-7 text-2xl shadow-lg text-red-500 hover:text-white hover:bg-red-500 hover:rounded-full hover:p-3 focus:outline-none"
+              <div>
+                <div className="flex justify-center">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-4 gap-3 md:gap-20 md:mr-20">
+                    {currentItems.map((movie) => (
+                      <div
+                        key={movie.id}
+                        className="relative"
+                        onMouseEnter={() => setHoveredMovieId(movie.id)}
+                        onMouseLeave={() => setHoveredMovieId(null)}
                       >
-                        <RiDeleteBin6Fill />
-                      </button>
-                    )}
+                        <MovieCard
+                          mediaId={movie.id}
+                          rating={movie.vote_average}
+                          date={movie.release_date || movie.first_air_date}
+                          language={movie.original_language}
+                          movieName={movie.title || movie.name}
+                          posterPath={movie.poster_path}
+                        />
+                        {/* Delete icon */}
+                        {hoveredMovieId === movie.id && ( // Show delete icon only when hoveredMovieId matches
+                          <button
+                            onClick={() => handleDeleteMovie(movie)}
+                            className="absolute top-2 right-8 text-lg md:text-2xl shadow-lg text-red-500 hover:text-white hover:bg-red-500 hover:rounded-full md:hover:p-3 hover:p-2 focus:outline-none"
+                          >
+                            <RiDeleteBin6Fill />
+                          </button>
+                        )}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+                <div className="flex justify-center gap-10 -mt-4 md:mt-4">
+                  <button
+                    onClick={handlePreviousPage}
+                    className="px-2 md:px-3 py-2 text-sm md:text-base rounded-lg w-20 md:w-32 bg-gray-800 text-white hover:bg-gray-700 focus:outline-none"
+                    disabled={currentPage === 1}
+                  >
+                    Previous
+                  </button>
+                  <button
+                    onClick={handleNextPage}
+                    className="px-2 md:px-3 py-2 text-sm md:text-base rounded-lg w-20 md:w-32 bg-gray-800 text-white hover:bg-gray-700 focus:outline-none"
+                    disabled={currentPage === totalPages}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             )}
             <button
               onClick={handleClearWatchlist}
-              className="px-4 md:px-6 py-2 md:py-3 rounded-xl bg-gray-800 text-white hover:bg-gray-700 focus:outline-none"
-              style={{ position: "absolute", bottom: "40px", right: "120px" }}
+              className="px-4 md:px-6 py-2 md:py-3 ml-28 mt-8 mb-20 md:-mt-8 rounded-xl bg-gray-800 text-white hover:bg-gray-700 focus:outline-none"
             >
               {langArray[langKey].ClearAll}
             </button>

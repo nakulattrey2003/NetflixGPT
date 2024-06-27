@@ -18,7 +18,7 @@ const UserAvatar = () => {
   };
   return (
     <div onClick={handleUserAvatarClick} className="flex cursor-pointer">
-      <div className="mt-4 hidden lg:inline font-semibold text-xs md:text-base text-white pl-3 pt-3 pb-3 pr-2 hover:text-red-500">
+      <div className="mt-4 hidden md:hidden lg:inline font-semibold text-xs md:text-base text-white pl-3 pt-3 pb-3 pr-2 hover:text-red-500">
         {langArray[langKey].Howdy} {user.displayName}!
       </div>
       <div>
