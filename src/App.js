@@ -10,7 +10,8 @@ import WatchlistPage from "./pages/WatchlistPage.js";
 import ProtectRoute from "./utils/ProtectRoute";
 import SeriesDetailPage from "./pages/SeriesDetailPage.js";
 import SeriesBrowsePage from "./pages/SeriesBrowsePage.js";
-import GenrePage from "./pages/GenrePage.js";
+import GenreMoviePage from "./pages/GenreMoviePage.js";
+import GenreSeriesPage from "./pages/GenreSeriesPage.js";
 
 function App() {
   return (
@@ -65,8 +66,16 @@ function App() {
             }
           />
           <Route
-            path="/genre/:id"
-            element={<ProtectRoute type="private" element={<GenrePage />} />}
+            path="/genre-movie/:id"
+            element={
+              <ProtectRoute type="private" element={<GenreMoviePage />} />
+            }
+          />
+          <Route
+            path="/genre-series/:id"
+            element={
+              <ProtectRoute type="private" element={<GenreSeriesPage />} />
+            }
           />
         </Routes>
       </BrowserRouter>

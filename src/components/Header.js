@@ -15,6 +15,7 @@ import { changeLanguage } from "../redux/languageSlice.js";
 import { changeMediaType } from "../redux/mediaTypeSlice.js";
 import langArray from "../utils/langConstants.js";
 import { loadWatchlist } from "../redux/watchlistSlice.js";
+import GenreDropdown from "./GenreDropdown.js";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -119,13 +120,6 @@ const Header = () => {
     }
   };
 
-  const handleGenreClick = (e) => {
-    const genreId = e.target.value;
-    if (genreId) {
-      navigate(`/genre/${genreId}`);
-    }
-  };
-
   return (
     <div className="absolute w-full px-2 md:px-8 md:py-2 bg-gradient-to-b from-black z-50 flex flex-col md:flex-row justify-evenly md:justify-between bg-transparent md:bg-transparent">
       {/* // bg-black is for small screen,  sm:bg-blue-100 will be for screen bigger than smaller and md:bg-green-100 will be for screen biffer than medium */}
@@ -166,23 +160,7 @@ const Header = () => {
               </div>
 
               <div className="relative">
-                {/* <div className="text-white hidden lg:inline mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-3 mr-1 md:mr-12 hover:font-bold hover:text-red-500">
-                  Genres
-                </div> */}
-                <select
-                  onClick={handleGenreClick}
-                  className="relative hidden lg:inline mt-6 mr-4 hover:text-red-500 hover:font-bold top-1 left-0 text-white bg-transparent rounded-md outline-none border-none text-xs md:text-base opacity-90 z-10"
-                >
-                  {genres.map((genre) => (
-                    <option
-                      className="bg-black md:p-2 md:m-2 text-xs md:text-base text-white"
-                      key={genre.id}
-                      value={genre.id}
-                    >
-                      {genre.name}
-                    </option>
-                  ))}
-                </select>
+                <GenreDropdown />
               </div>
 
               <div
