@@ -158,6 +158,9 @@ const WatchlistPage = () => {
                   >
                     Previous
                   </button>
+                  <div className="text-gray-500 text-xl md:text-2xl mt-1 font-black">
+                    {currentPage}
+                  </div>
                   <button
                     onClick={handleNextPage}
                     className="px-2 md:px-3 py-2 text-sm md:text-base rounded-lg w-20 md:w-32 bg-gray-800 text-white hover:bg-gray-700 focus:outline-none"
