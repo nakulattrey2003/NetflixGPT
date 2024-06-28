@@ -1,4 +1,15 @@
-redirects:
-  - source: /.*
-    destination: /index.html
-    status: 200
+services:
+  - type: web
+    name: netflix-gpt
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    staticPublishPath: build
+    envVars:
+      - key: NODE_ENV
+        value: production
+    redirects:
+      - source: /.*
+        destination: /index.html
+        status: 200
