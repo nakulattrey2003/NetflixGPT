@@ -122,25 +122,29 @@ const WatchlistPage = () => {
               <div>
                 <div className="flex justify-center">
                   <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-4 gap-3 md:gap-20 md:mr-20">
-                    {currentItems.map((movie) => (
+                    {currentItems.map((media) => (
                       <div
-                        key={movie.id}
+                        key={media.id}
                         className="relative"
-                        onMouseEnter={() => setHoveredMovieId(movie.id)}
+                        onMouseEnter={() => setHoveredMovieId(media.id)}
                         onMouseLeave={() => setHoveredMovieId(null)}
                       >
                         <MovieCard
-                          mediaId={movie.id}
-                          rating={movie.vote_average}
-                          date={movie.release_date || movie.first_air_date}
-                          language={movie.original_language}
-                          movieName={movie.title || movie.name}
-                          posterPath={movie.poster_path}
+                          key={media.id}
+                          mediaId={media.id}
+                          rating={media.vote_average}
+                          date={media.release_date || media.first_air_date}
+                          language={media.original_language}
+                          mediaName={media.name}
+                          mediaTitle={media.title}
+                          name={media.name || media.title}
+                          posterPath={media.poster_path}
+                          type={media.media_type}
                         />
                         {/* Delete icon */}
-                        {hoveredMovieId === movie.id && ( // Show delete icon only when hoveredMovieId matches
+                        {hoveredMovieId === media.id && ( // Show delete icon only when hoveredMovieId matches
                           <button
-                            onClick={() => handleDeleteMovie(movie)}
+                            onClick={() => handleDeleteMovie(media)}
                             className="absolute top-2 right-8 text-lg md:text-2xl shadow-lg text-red-500 hover:text-white hover:bg-red-500 hover:rounded-full md:hover:p-3 hover:p-2 focus:outline-none"
                           >
                             <RiDeleteBin6Fill />

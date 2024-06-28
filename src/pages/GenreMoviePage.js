@@ -112,7 +112,9 @@ const GenreMoviePage = () => {
               Movies: {langArray[langKey].Genre}
             </div>
             <div className="flex items-center space-x-4 mr-10 md:mr-28">
-              <span className="text-white hidden md:inline text-xs md:text-base font-bold">Sort by:</span>
+              <span className="text-white hidden md:inline text-xs md:text-base font-bold">
+                Sort by:
+              </span>
               <select
                 className="bg-gray-800 text-gray-200 text-xs md:text-base px-1 md:px-4 py-2 md:py-3 rounded-md focus:border-none"
                 value={sortBy}
@@ -139,8 +141,11 @@ const GenreMoviePage = () => {
                     rating={movie.vote_average}
                     date={movie.release_date || movie.first_air_date}
                     language={movie.original_language}
-                    movieName={movie.title || movie.name}
+                    mediaName={movie.name}
+                    mediaTitle={movie.title}
+                    name={movie.name || movie.title}
                     posterPath={movie.poster_path}
+                    type={movie.media_type}
                   />
                 ))
               )}

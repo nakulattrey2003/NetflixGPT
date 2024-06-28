@@ -139,10 +139,13 @@ const GenreSeriesPage = () => {
                     key={serie.id}
                     mediaId={serie.id}
                     rating={serie.vote_average}
-                    date={serie.first_air_date}
+                    date={serie.release_date || serie.first_air_date}
                     language={serie.original_language}
-                    movieName={serie.name}
+                    mediaName={serie.name}
+                    mediaTitle={serie.title}
+                    name={serie.name || serie.title}
                     posterPath={serie.poster_path}
+                    type={serie.media_type}
                   />
                 ))
               )}
