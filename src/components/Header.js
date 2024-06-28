@@ -174,7 +174,7 @@ const Header = () => {
             <div className="flex">
               <UserAvatar />
 
-              <div className="m-3 flex text-[9px] md:text-base md:pl-8 p-2">
+              <div className="m-3 flex text-xs md:text-base md:pl-8 p-2">
                 <button
                   onClick={handleLogOut}
                   className="bg-red-600 hover:bg-red-700 flex -mt-5 md:mt-0 text-white font-bold py-1 px-2 md:py-2 md:px-4 rounded mr-3 md:mr-0"

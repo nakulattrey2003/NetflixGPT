@@ -108,7 +108,7 @@ const GenreMoviePage = () => {
         <Header />
         <div className="flex flex-col mt-20 md:mt-0 py-10">
           <div className="flex items-center justify-between md:pl-4 ml-10 md:ml-28 md:mt-20 md:mb-20">
-            <div className="border-l-4 pl-4 border-red-500 text-white text-lg md:text-4xl font-bold">
+            <div className="border-l-4 pl-4 border-red-500 text-white text-sm md:text-4xl font-bold">
               Movies: {langArray[langKey].Genre}
             </div>
             <div className="flex items-center space-x-4 mr-10 md:mr-28">

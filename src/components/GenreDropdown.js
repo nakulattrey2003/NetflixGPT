@@ -48,7 +48,7 @@ const GenreDropdown = () => {
   return (
     <select
       onChange={handleGenreClick}
-      className="relative ml-2 md:mt-6 mr-1 md:mr-4 hover:text-red-500 hover:font-bold md:top-1 left-0 text-white bg-transparent rounded-md outline-none border-none text-xs md:text-base opacity-90 z-10"
+      className="relative ml-2 md:mt-6 mr-1 md:mr-4 hover:text-red-500 hover:font-bold md:top-1 left-0 text-white bg-transparent rounded-md outline-none border-none text-xs md:text-base opacity-90 z-10 w-16 md:w-36"
     >
       {genres.map((genre) => (
         <option
