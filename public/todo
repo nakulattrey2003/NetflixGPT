@@ -1,5 +1,3 @@
 1. correct the navigation to series-detail and movie-detail
-2. add genres
-3. add infinite scrolling in genre page
-4. lazy loading the series page
-5. handling refreshing, it causes app breaking.
+2. lazy loading the series page
+3. handling refreshing, it causes app breaking.
