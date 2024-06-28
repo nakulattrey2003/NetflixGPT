@@ -14,7 +14,7 @@ const useRelatedMovies = (movieId) => {
   const getRelatedMovies = async () => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/recommendations?page=2`,
+        `https://api.themoviedb.org/3/movie/${movieId}/recommendations?page=1`,
         API_OPTIONS
       );
 
