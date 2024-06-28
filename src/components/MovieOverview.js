@@ -182,39 +182,42 @@ const MovieOverview = () => {
             <div
               onClick={handlePlayTrialer}
               style={{ width: "fit-content" }}
-              className="text-xl text-white hover:text-white hover:font-bold mt-4 -mb-7 cursor-pointer relative"
+              className="text-base md:text-xl text-white hover:text-white hover:font-bold mt-2 md:mt-4 -mb-7 cursor-pointer relative"
             >
               <p>{langArray[langKey].WatchTrailer}</p>
               <div className="absolute inset-0 bg-gray-200 rounded-lg opacity-0 hover:opacity-100 blur hover:w-full bg-opacity-50 transition-opacity duration-300 z-0"></div>
             </div>
           </div>
         </div>
-        <div className="ml-3 mb-10 flex col-span-1 row-span-1 z-10 gap-0 md:gap-4 overflow-hidden md:justify-left md:items-left md:-ml-28 mt-4 md:mt-32">
+        <div className="flex z-10 overflow-x-auto justify-center gap-2 md:gap-4 mt-4 md:mt-32 mb-10">
           {cast.cast
             // .concat()
             // .sort((a, b) => b.popularity - a.popularity)
             .slice(0, 5)
             .map((it) => (
-              <div key={it.cast_id}>
+              <div
+                key={it.cast_id}
+                className="flex flex-col items-center text-center"
+              >
                 <div className="">
                   {it.profile_path ? (
                     <img
-                      className="h-10 w-10 md:w-20 md:h-20 rounded-full object-cover"
+                      className="h-12 w-12 md:w-20 md:h-20 rounded-full object-cover"
                       src={IMG_URL + it.profile_path}
                       alt="character-dp"
                     />
                   ) : (
                     <img
-                      className="h-10 w-10 md:w-20 md:h-20 rounded-full object-cover"
+                      className="h-16 w-16 md:w-20 md:h-20 rounded-full object-cover"
                       src="https://i.pinimg.com/736x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg"
                       alt="default-character-dp"
                     />
                   )}
                 </div>
-                <div className="font-bold text-[10px] md:text-sm text-white break-words w-10 md:w-28">
+                <div className="font-bold text-[10px] md:text-sm text-white break-words w-16 md:w-28">
                   {it.name}
                 </div>
-                <div className="text-gray-300 text-[10px] md:text-sm break-words w-15 md:w-28">
+                <div className="text-gray-300 text-[10px] md:text-sm break-words w-16 md:w-28">
                   {it.character}
                 </div>
               </div>

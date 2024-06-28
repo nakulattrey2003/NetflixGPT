@@ -53,7 +53,9 @@ const MovieList = ({ title, movies }) => {
             rating={media.vote_average}
             date={media.release_date || media.first_air_date}
             language={media.original_language}
-            movieName={media.title || media.name}
+            mediaName={media.name}
+            mediaTitle={media.title}
+            name={media.name || media.title}
             posterPath={media.poster_path}
             type={media.media_type}
           />

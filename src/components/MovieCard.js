@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 const MovieCard = ({
   mediaId,
   name,
-  title,
+  mediaName,
+  mediaTitle,
   rating,
   date,
   language,
-  movieName,
   posterPath,
   type,
 }) => {
@@ -22,17 +22,19 @@ const MovieCard = ({
 
   if (!posterPath) return null;
 
-  const uppercaseMovieName = movieName.toUpperCase();
+  const uppercaseMovieName = name.toUpperCase();
   const year = date?.split("-")[0];
   const uppercaseLanguage = language.toUpperCase();
   const roundedRating = rating.toFixed(1);
 
   const handleMovieCardClick = () => {
     try {
-      if (type === "tv" || name) {
+      if (type === "tv" || mediaName) {
         navigate(`/series-detail/${mediaId}`);
-      } else {
+      } else if (type === "movie" || mediaTitle) {
         navigate(`/movie-detail/${mediaId}`);
+      } else {
+        navigate("/error");
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
