@@ -189,7 +189,7 @@ const MovieOverview = () => {
             </div>
           </div>
         </div>
-        <div className="flex z-10 overflow-x-auto justify-center gap-2 md:gap-4 mt-4 md:mt-32 mb-10">
+        <div className="flex z-10 overflow-x-auto justify-center md:justify-start md:-ml-32 gap-2 md:gap-4 mt-4 md:mt-32 mb-10">
           {cast.cast
             // .concat()
             // .sort((a, b) => b.popularity - a.popularity)
