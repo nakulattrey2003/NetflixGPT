@@ -39,7 +39,7 @@ const UserInfo = () => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-30">
       <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="relative bg-gray-800 p-4 rounded-lg shadow-lg w-1/2 md:w-5/12 h-2/3 md:h-5/6">
+      <div className="relative bg-gray-800 p-4 rounded-lg shadow-lg w-1/2 md:w-5/12 h-1/3 md:h-5/6">
         <div className="m-2 absolute text-sm md:text-3xl top-2 right-2">
           <button
             onClick={handleClose}

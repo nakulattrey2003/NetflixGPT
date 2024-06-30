@@ -15,7 +15,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import api from "../utils/api";
-import SearchSkeleton from "../shimmer/SearchSkeleton";
+import { TiPlus } from "react-icons/ti";
 
 const GptSearchBar = () => {
   const navigate = useNavigate();
@@ -31,6 +31,8 @@ const GptSearchBar = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showAPIInput, setShowAPIInput] = useState(false);
+  const [inputAPIValue, setInputAPIValue] = useState("");
 
   useEffect(() => {
     if (transcript) {
@@ -56,6 +58,14 @@ const GptSearchBar = () => {
   useEffect(() => {
     setToastWarning(langArray[langKey].Warning1);
   }, [langKey]);
+
+  const handlePlusClick = () => {
+    setShowAPIInput(!showAPIInput);
+  };
+
+  const handlePlusInputChange = (e) => {
+    setInputAPIValue(e.target.value);
+  };
 
   const searchMovie = async (mediaName) => {
     try {
@@ -92,14 +102,6 @@ const GptSearchBar = () => {
       const data = await response.json();
       const results = data.results.slice(0, 7);
 
-      // const uniqueSuggestions = results.reduce((uniqueMovies, movie) => {
-      //   if (!uniqueMovies.includes(movie.title)) {
-      //     uniqueMovies.push(movie.title);
-      //   }
-      //   return uniqueMovies;
-      // }, []);
-
-      // return uniqueSuggestions;
       return results.map((result) => result.title || result.name);
     } catch (error) {
       toast.error("Error fetching suggestions");
@@ -114,7 +116,6 @@ const GptSearchBar = () => {
     }
     try {
       setIsLoading(true);
-
       // Clear previous search results before adding new ones
       dispatch(clearGptSearchResult());
 
@@ -128,7 +129,7 @@ const GptSearchBar = () => {
 
       console.log("Q:", gptQuery);
 
-      const gptResults = await fetchResponse(gptQuery);
+      const gptResults = await fetchResponse(gptQuery, inputAPIValue);
 
       console.log("A:", gptResults);
 
@@ -164,6 +165,7 @@ const GptSearchBar = () => {
 
   const handleInputChange = async (value) => {
     setSearchInput(value);
+    setShowAPIInput(false);
     setShowSuggestions(true);
     if (value.trim().length > 0) {
       const suggestions = await fetchSuggestions(value);
@@ -205,9 +207,22 @@ const GptSearchBar = () => {
 
   return (
     <div className="flex text-xs md:text-base items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 -ml-5 md:ml-0 w-full md:max-w-md">
+      <TiPlus
+        onClick={handlePlusClick}
+        className="relative text-gray-200 mr-2 cursor-pointer size-6 md:size-8 hover:text-red-500"
+      />
+      {showAPIInput && (
+        <input
+          type="text"
+          value={inputAPIValue}
+          onChange={handlePlusInputChange}
+          className="absolute top-16 mt-2 z-20 bg-gray-800 text-gray-300 border w-64 md:w-96 border-none focus:border-none rounded-md px-3 py-2 pl-4"
+          placeholder="Enter Your Gemini Api Key..."
+        />
+      )}
       <FaSearch
         onClick={handleSearch}
-        className="text-gray-300 mr-3 cursor-pointer size-3 md:size-5 hover:text-red-500"
+        className="text-gray-300 mr-3 cursor-pointer size-4 md:size-6 hover:text-red-500"
       />
       <input
         className="outline-none bg-transparent w-full text-white placeholder-slate-300"

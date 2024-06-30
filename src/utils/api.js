@@ -6,12 +6,14 @@ const useGeminiAPI = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchResponse = async (gptQuery) => {
+  const fetchResponse = async (gptQuery, inputAPIValue) => {
     setLoading(true);
     setError(null);
 
     try {
-      const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
+      // const apiKey = inputAPIValue;
+      const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
+      const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const result = await model.generateContent(gptQuery);
