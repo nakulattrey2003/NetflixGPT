@@ -52,7 +52,7 @@ const UserInfo = () => {
           <div className="m-4 font-bold text-base md:text-3xl">
             {user.displayName}
           </div>
-          <div className="mb-8 ">
+          <div className="mb-2 md:mb-8">
             <img
               className="rounded-full h-24 w-24 md:h-60 md:w-60 object-cover"
               src={user.photoURL}

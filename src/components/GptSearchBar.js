@@ -9,13 +9,13 @@ import {
   addGptSearchResult,
   clearGptSearchResult,
 } from "../redux/gptSearchSlice";
-import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoMicOutline } from "react-icons/io5";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import api from "../utils/api";
-import { TiPlus } from "react-icons/ti";
+import { BsStars } from "react-icons/bs";
+import { RiInformationLine } from "react-icons/ri";
 
 const GptSearchBar = () => {
   const navigate = useNavigate();
@@ -207,7 +207,7 @@ const GptSearchBar = () => {
 
   return (
     <div className="flex text-xs md:text-base items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 -ml-5 md:ml-0 w-full md:max-w-md">
-      <TiPlus
+      <BsStars
         onClick={handlePlusClick}
         className="relative text-gray-200 mr-2 cursor-pointer size-6 md:size-8 hover:text-red-500"
       />
@@ -222,7 +222,7 @@ const GptSearchBar = () => {
       )}
       <FaSearch
         onClick={handleSearch}
-        className="text-gray-300 mr-3 cursor-pointer size-4 md:size-6 hover:text-red-500"
+        className="text-gray-300 mr-3 cursor-pointer size-5 md:size-6 hover:text-red-500"
       />
       <input
         className="outline-none bg-transparent w-full text-white placeholder-slate-300"
@@ -250,7 +250,7 @@ const GptSearchBar = () => {
         onMouseEnter={handleInfoMouseEnter}
         onMouseLeave={handleInfoMouseLeave}
       >
-        <IoIosInformationCircleOutline className="text-gray-300 size-4 md:size-6 cursor-pointer ml-2 hover:text-red-500" />
+        <RiInformationLine className="text-gray-300 size-4 md:size-6 cursor-pointer ml-2 hover:text-red-500" />
         {showInfoPopup && (
           <div className="absolute top-10 md:left-5 p-7 bg-gray-800 text-white rounded-lg shadow-lg md:w-[600px] z-10">
             <p>{langArray[langKey].PopupInfo}</p>
