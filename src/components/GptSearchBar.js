@@ -206,7 +206,7 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="flex text-xs md:text-base items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 -ml-5 md:ml-0 w-full md:max-w-md">
+    <div className="flex text-xs md:text-base items-center bg-transparent border-gray-300 rounded-3xl px-4 py-2 -ml-5 md:-ml-6 w-full md:max-w-md">
       <BsStars
         onClick={handlePlusClick}
         className="relative text-gray-200 mr-2 cursor-pointer size-6 md:size-8 hover:text-red-500"
