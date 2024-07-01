@@ -57,7 +57,9 @@ const Footer = () => {
               >
                 NakulGPT™
               </Link>
-              . Made by Nakul Attrey.
+              <Link to="https://github.com/nakulattrey2003/NetflixGPT">
+                . Made by Nakul Attrey.
+              </Link>
             </span>
             <div class="flex mt-4 sm:justify-center sm:mt-0">
               <a
