@@ -43,10 +43,11 @@ const GenreMoviePage = () => {
 
   useEffect(() => {
     const fetchMediaByGenre = async () => {
+      const todayDate = new Date().toISOString().split("T")[0];
       setIsFetching(true);
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&sort_by=${sortBy}&with_genres=${selectedGenre}&page=${page}`,
+          `https://api.themoviedb.org/3/discover/movie?include_adult=false&screened_theatrically=true&release_date.lte=${todayDate}&include_video=false&sort_by=${sortBy}&with_genres=${selectedGenre}&page=${page}`,
           API_OPTIONS
         );
 
@@ -122,10 +123,13 @@ const GenreMoviePage = () => {
               >
                 <option value="popularity.desc">Most Popularity</option>
                 <option value="popularity.asc">Least Popularity</option>
+                <option value="revenue.desc">Top-Grossing</option>
                 <option value="vote_average.desc">Top Rated</option>
                 <option value="vote_average.asc">Least Rated</option>
                 <option value="release_date.desc">Newest</option>
                 <option value="release_date.asc">Oldest</option>
+                <option value="title.asc">A-Z</option>
+                <option value="title.desc">Z-A</option>
               </select>
             </div>
           </div>

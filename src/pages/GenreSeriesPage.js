@@ -43,10 +43,11 @@ const GenreSeriesPage = () => {
 
   useEffect(() => {
     const fetchSeriesByGenre = async () => {
+      const todayDate = new Date().toISOString().split("T")[0];
       setIsFetching(true);
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/discover/tv?include_null_first_air_dates=false&sort_by=${sortBy}&with_genres=${selectedGenre}&page=${page}`,
+          `https://api.themoviedb.org/3/discover/tv?include_null_first_air_dates=false&screened_theatrically=true&release_date.lte=${todayDate}&sort_by=${sortBy}&with_genres=${selectedGenre}&page=${page}`,
           API_OPTIONS
         );
 
@@ -126,6 +127,8 @@ const GenreSeriesPage = () => {
                 <option value="vote_average.asc">Least Rated</option>
                 <option value="first_air_date.desc">Newest</option>
                 <option value="first_air_date.asc">Oldest</option>
+                <option value="name.asc">A-Z</option>
+                <option value="name.desc">Z-A</option>
               </select>
             </div>
           </div>
