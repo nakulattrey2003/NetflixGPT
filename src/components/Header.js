@@ -121,7 +121,7 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-full px-2 md:px-8 md:py-2 bg-gradient-to-b from-black z-50 flex flex-col md:flex-row justify-evenly md:justify-between bg-transparent md:bg-transparent">
+    <div className="absolute w-full px-2 md:px-8 md:py-2 bg-gradient-to-b from-black/80 z-50 flex flex-col md:flex-row justify-evenly md:justify-between bg-transparent md:bg-transparent">
       {/* // bg-black is for small screen,  sm:bg-blue-100 will be for screen bigger than smaller and md:bg-green-100 will be for screen biffer than medium */}
       {/* so for small (by default what you write), sm for medium, md for large */}
       <img

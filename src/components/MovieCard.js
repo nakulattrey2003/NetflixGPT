@@ -15,6 +15,7 @@ const MovieCard = ({
   language,
   posterPath,
   type,
+  number,
 }) => {
   const navigate = useNavigate();
 
@@ -44,6 +45,11 @@ const MovieCard = ({
 
   return (
     <div className="relative ml-3 mb-20 transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-150">
+      {number && (
+        <div className="absolute inset-0 left-[-10rem] md:left-[-17rem] flex items-center justify-center text-white text-[210px] md:text-[300px] font-bold opacity-80 -z-10">
+          {number}
+        </div>
+      )}
       <div
         onClick={handleMovieCardClick}
         className="cursor-pointer w-32 md:w-52"
@@ -55,7 +61,7 @@ const MovieCard = ({
             alt="Movie Card"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black bg-opacity-40 rounded-lg"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 bg-opacity-70 rounded-lg"></div>
         <div className="absolute bottom-10 left-2 text-white font-black text-xs md:text-lg p-2 w-full text-left rounded-t-lg mb-0">
           {uppercaseMovieName}
         </div>
