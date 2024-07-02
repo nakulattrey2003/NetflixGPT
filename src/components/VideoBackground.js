@@ -15,7 +15,7 @@ const VideoBackground = ({ mediaId }) => {
     <div className="w-screen">
       <iframe
         className="w-screen aspect-video"
-        src={`https://www.youtube.com/embed/${trailerKey}?&modestbranding=1&autohide=1&autoplay=1&controls=0&showinfo=0&loop=1${
+        src={`https://www.youtube.com/embed/${trailerKey}?&cc_load_policy=3&modestbranding=1&autohide=1&autoplay=1&controls=0&showinfo=0&loop=1${
           isMute ? "&mute=1" : ""
         }&playlist=${trailerKey}`}
         title="Youtube Video"
