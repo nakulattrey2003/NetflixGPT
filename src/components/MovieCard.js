@@ -46,7 +46,7 @@ const MovieCard = ({
   return (
     <div className="relative ml-3 mb-20 transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-150">
       {number && (
-        <div className="absolute inset-0 left-[-10rem] md:left-[-17rem] flex items-center justify-center text-white text-[210px] md:text-[300px] font-bold opacity-80 -z-10">
+        <div className="absolute inset-0 left-[-10rem] md:left-[-17rem] flex items-center justify-center text-white text-[210px] md:text-[300px] font-bold opacity-80 z-1">
           {number}
         </div>
       )}
