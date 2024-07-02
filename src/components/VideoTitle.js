@@ -44,7 +44,7 @@ const VideoTitle = ({ title, overview, language, rating, date, mediaId }) => {
 
   return (
     <div>
-      <div className="pt-[14%] md:pt-[30%] lg:pt-[14%] p-5 md:p-12 absolute text-gray-50 bg-gradient-to-r from-black w-screen aspect-video">
+      <div className="pt-[14%] md:pt-[30%] lg:pt-[14%] p-5 md:p-12 absolute text-gray-50 bg-gradient-to-r from-black/40 w-screen aspect-video">
         <div className="p-2 m-2 -mt-5 text-xl md:text-4xl lg:text-5xl font-black break-words w-6/12">
           {title}
         </div>
