@@ -136,6 +136,12 @@ const Header = () => {
           <GptSearchBar />
 
           <div className="flex justify-between">
+            <div
+              onClick={handleMovieSeriesChange}
+              className="text-emerald-500  mt-1 md:mt-7 text-xs md:text-lg cursor-pointer ml-3 mr-1 md:mr-3 font-bold hover:font-bold hover:text-emerald-600"
+            >
+              {toggleState}
+            </div>
             <div className="flex">
               <select
                 onChange={handleLanguageChange}
@@ -161,13 +167,6 @@ const Header = () => {
 
               <div className="relative">
                 <GenreDropdown />
-              </div>
-
-              <div
-                onClick={handleMovieSeriesChange}
-                className="text-white mt-1 md:mt-7 text-xs md:text-base cursor-pointer ml-3 mr-1 md:mr-5 hover:font-bold hover:text-red-500"
-              >
-                {toggleState}
               </div>
             </div>
 
