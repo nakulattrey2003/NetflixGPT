@@ -88,6 +88,18 @@ Login
 - 
 ![image](https://github.com/nakulattrey2003/NetflixGPT/assets/101697066/d1f6ec05-8ee5-4a3d-ba6b-5cdf318ffdf4)
 
+- Firebase
+  - Authentication
+    ![image](https://github.com/user-attachments/assets/0c1693f8-57b6-4c67-b6d9-25bcd72b0781)
+
+  - Storage
+    ![image](https://github.com/user-attachments/assets/02ceafc2-8ab1-413f-b142-75935c24ff84)
+
+  - Hosting
+    ![image](https://github.com/user-attachments/assets/8eddba97-b139-4a28-97d3-f5993cd4a8c9)
+
+
+- Screen Recording
   
 
 
