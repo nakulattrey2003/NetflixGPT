@@ -1,8 +1,6 @@
 # NetflixGPT
 Hosted URL : https://netflixgpt-2d118.web.app/   &&    https://netflixgpt-oj76.onrender.com/browse
 
-Test Gemini API: AIzaSyCJva1i2cwocrj6W_BK3pYXKR-3B5VKn2E 
-
 This project involved creating a dynamic web application using React, where I configured TailwindCSS. Additionally, I set up Firebase for authentication and storage. 
 I also incorporated TMDB API for playing movies and series,. Furthermore, I utilized the GPT search feature, implemented multilanguage support, and ensured responsiveness.
 
