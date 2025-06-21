@@ -178,8 +178,17 @@ const GptSearchBar = () => {
 
   const handleSuggestionClick = (suggestion) => {
     setSearchInput(suggestion);
+    handleSearch();
     setShowSuggestions(false);
   };
+
+  {
+    suggestions.map((item, index) => (
+      <div key={index} onClick={() => handleSuggestionClick(item)}>
+        {item}
+      </div>
+    ));
+  }
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
