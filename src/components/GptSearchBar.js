@@ -221,13 +221,24 @@ const GptSearchBar = () => {
         className="relative text-gray-200 mr-2 cursor-pointer size-6 md:size-8 hover:text-red-500"
       />
       {showAPIInput && (
-        <input
-          type="text"
-          value={inputAPIValue}
-          onChange={handlePlusInputChange}
-          className="absolute top-16 mt-2 z-20 bg-gray-800 text-gray-300 border w-64 md:w-96 border-none focus:border-none rounded-md px-3 py-2 pl-4"
-          placeholder="Enter Your Gemini Api Key..."
-        />
+        <div className="absolute top-16 z-20 w-64 md:w-96">
+          <div className="relative">
+            <input
+              type="text"
+              value={inputAPIValue}
+              onChange={handlePlusInputChange}
+              className="absolute bg-gray-800 text-gray-300 border w-48 md:w-80 border-none focus:border-none rounded-md px-3 py-2 pr-14"
+              placeholder="Enter Your Gemini Api Key..."
+            />
+
+            <button
+              onClick={handlePlusClick}
+              className="absolute right-2 bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700"
+            >
+              OK
+            </button>
+          </div>
+        </div>
       )}
       <FaSearch
         onClick={handleSearch}
