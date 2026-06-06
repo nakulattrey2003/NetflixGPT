@@ -43,7 +43,7 @@ const SeriesOverview = () => {
     if (!series) return;
 
     setIsInWatchlist(
-      !!watchlistArray.find((item) => item && item.id === series.id)
+      !!watchlistArray.find((item) => item && item.id === series.id),
     );
   }, [series]);
 
@@ -259,7 +259,7 @@ const SeriesOverview = () => {
             className="w-full h-full"
             allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            src={`https://vidsrc.icu/embed/tv/${seriesId}`}
+            src={`https://vidsrc.to/embed/tv/${seriesId}`}
           ></iframe>
           <button
             className="absolute top-4 right-4 text-white text-xl bg-black bg-opacity-50 p-2 rounded-full"
